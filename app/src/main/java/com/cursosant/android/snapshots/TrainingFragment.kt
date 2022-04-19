@@ -9,7 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.cursosant.android.snapshots.databinding.FragmentAddBinding
+import com.cursosant.android.snapshots.databinding.FragmentTrainingBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -17,12 +17,12 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
-class AddFragment : Fragment() {
+class TrainingFragment : Fragment() {
 
     private val RC_GELLERY = 18
     private val PATH_SNAPSHOT = "snapshots"
 
-    private lateinit var mBinding: FragmentAddBinding
+    private lateinit var mBinding: FragmentTrainingBinding
     private lateinit var mStorageReference: StorageReference
     private lateinit var mDatabaseReference: DatabaseReference
 
@@ -32,7 +32,7 @@ class AddFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mBinding = FragmentAddBinding.inflate(inflater, container, false)
+        mBinding = FragmentTrainingBinding.inflate(inflater, container, false)
         return mBinding.root
     }
 
@@ -84,7 +84,7 @@ class AddFragment : Fragment() {
     }
 
     private fun saveSnapshot(key: String, url: String, title: String){
-        val snapshot = Snapshot(title = title, photoUrl = url)
+        val snapshot = Atleta(title = title, photoUrl = url)
         mDatabaseReference.child(key).setValue(snapshot)
     }
 

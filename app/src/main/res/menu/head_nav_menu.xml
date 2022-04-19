@@ -3,24 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/peques"
-        android:title="@string/peques"
-        android:icon="@drawable/ic_baseline_child_care_24"
-        app:showAsAction="never"/>
-    <item
         android:id="@+id/formacion"
         android:title="@string/formacion"
         android:icon="@drawable/ic_baseline_child_care_24"
-        app:showAsAction="never"/>
-    <item
-        android:id="@+id/tecnificacion"
-        android:title="@string/tecnificacion"
-        android:icon="@drawable/ic_baseline_directions_run_24"
         app:showAsAction="never"/>
     <item
         android:id="@+id/alto_rendimiento"
         android:title="@string/alto_rendimiento"
         android:icon="@drawable/ic_baseline_directions_run_24"
         app:showAsAction="never"/>
+
 
 </menu>

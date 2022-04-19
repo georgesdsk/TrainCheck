@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "1021244129815",
-    "project_id": "snapshots-244e4",
-    "storage_bucket": "snapshots-244e4.appspot.com"
+    "project_number": "143445666636",
+    "project_id": "traincheck-481b2",
+    "storage_bucket": "traincheck-481b2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1021244129815:android:55220a448020f9d724d252",
+        "mobilesdk_app_id": "1:143445666636:android:b39e6dd6ae140134f37de9",
         "android_client_info": {
           "package_name": "com.cursosant.android.snapshots"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1021244129815-mjt7bddvmjnst74isgqrgjvor2csn30e.apps.googleusercontent.com",
+          "client_id": "143445666636-jbs8d2bblngllgav4gj0t3bchcun8n1h.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDa0z1FzUutselaSzU5lWhSC_-aAFtCI1s"
+          "current_key": "AIzaSyBcoUH2FOdD9NEujsGjAFdob2rZ_MNQn4Y"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1021244129815-mjt7bddvmjnst74isgqrgjvor2csn30e.apps.googleusercontent.com",
+              "client_id": "143445666636-jbs8d2bblngllgav4gj0t3bchcun8n1h.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

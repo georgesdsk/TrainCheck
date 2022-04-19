@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/entrenos"
+        android:title="@string/entrenos"
+        android:icon="@drawable/ic_run"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/asistencia"
+        android:title="@string/asistencia"
+        android:icon="@drawable/fui_ic_check_circle_black_128dp"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/stats"
+        android:title="@string/stats"
+        android:icon="@drawable/ic_stats"
+        app:showAsAction="never"/>
+
+
+</menu>

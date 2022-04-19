@@ -11,4 +11,7 @@
     <string name="formacion">Formacion</string>
     <string name="tecnificacion">Tecnificacion</string>
     <string name="alto_rendimiento">Alto rendimiento</string>
+    <string name="entrenos">Entrenos</string>
+    <string name="asistencia">Asistencia</string>
+    <string name="stats">Stats</string>
 </resources>

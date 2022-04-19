@@ -11,7 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.cursosant.android.snapshots.databinding.FragmentHomeBinding
+import com.cursosant.android.snapshots.databinding.FragmentAsistBinding
+
 import com.cursosant.android.snapshots.databinding.ItemSnapshotBinding
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
@@ -19,18 +20,18 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 
-class HomeFragment : Fragment() , HomeAux {
+class AsistFragment : Fragment() , HomeAux {
 
-    private lateinit var mBinding: FragmentHomeBinding
+    private lateinit var mBinding: FragmentAsistBinding
 
-    private lateinit var mFirebaseAdapter: FirebaseRecyclerAdapter<Snapshot, SnapshotHolder>
+    private lateinit var mFirebaseAdapter: FirebaseRecyclerAdapter<Atleta, SnapshotHolder>
     private lateinit var mLayoutManager: RecyclerView.LayoutManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mBinding = FragmentHomeBinding.inflate(inflater, container, false)
+        mBinding = FragmentAsistBinding.inflate(inflater, container, false)
         return mBinding.root
     }
 
@@ -40,13 +41,13 @@ class HomeFragment : Fragment() , HomeAux {
         val query = FirebaseDatabase.getInstance().reference.child("snapshots")
 
         val options =
-        FirebaseRecyclerOptions.Builder<Snapshot>().setQuery(query, {
-            val snapshot = it.getValue(Snapshot::class.java)
+        FirebaseRecyclerOptions.Builder<Atleta>().setQuery(query, {
+            val snapshot = it.getValue(Atleta::class.java)
             snapshot!!.id = it.key!!
             snapshot
         }).build()
 
-        mFirebaseAdapter = object : FirebaseRecyclerAdapter<Snapshot, SnapshotHolder>(options){
+        mFirebaseAdapter = object : FirebaseRecyclerAdapter<Atleta, SnapshotHolder>(options){
             private lateinit var mContext: Context
 
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SnapshotHolder {
@@ -57,7 +58,7 @@ class HomeFragment : Fragment() , HomeAux {
                 return SnapshotHolder(view)
             }
 
-            override fun onBindViewHolder(holder: SnapshotHolder, position: Int, model: Snapshot) {
+            override fun onBindViewHolder(holder: SnapshotHolder, position: Int, model: Atleta) {
                 val snapshot = getItem(position)
 
                 with(holder){
@@ -111,18 +112,18 @@ class HomeFragment : Fragment() , HomeAux {
         mBinding.recyclerView.smoothScrollToPosition(0)
     }
 
-    private fun deleteSnapshot(snapshot: Snapshot){
+    private fun deleteSnapshot(atleta: Atleta){
         val databaseReference = FirebaseDatabase.getInstance().reference.child("snapshots")
-        databaseReference.child(snapshot.id).removeValue()
+        databaseReference.child(atleta.id).removeValue()
     }
 
-    private fun setLike(snapshot: Snapshot, checked: Boolean){
+    private fun setLike(atleta: Atleta, checked: Boolean){
         val databaseReference = FirebaseDatabase.getInstance().reference.child("snapshots")
         if (checked){
-            databaseReference.child(snapshot.id).child("likeList")
+            databaseReference.child(atleta.id).child("likeList")
                     .child(FirebaseAuth.getInstance().currentUser!!.uid).setValue(checked)
         } else {
-            databaseReference.child(snapshot.id).child("likeList")
+            databaseReference.child(atleta.id).child("likeList")
                     .child(FirebaseAuth.getInstance().currentUser!!.uid).setValue(null)
         }
     }
@@ -130,11 +131,11 @@ class HomeFragment : Fragment() , HomeAux {
     inner class SnapshotHolder(view: View) : RecyclerView.ViewHolder(view){
         val binding = ItemSnapshotBinding.bind(view)
 
-        fun setListener(snapshot: Snapshot){
-            binding.btnDelete.setOnClickListener { deleteSnapshot(snapshot) }
+        fun setListener(atleta: Atleta){
+            binding.btnDelete.setOnClickListener { deleteSnapshot(atleta) }
 
             binding.cbLike.setOnCheckedChangeListener { compoundButton, checked ->
-                setLike(snapshot, checked)
+                setLike(atleta, checked)
             }
         }
     }

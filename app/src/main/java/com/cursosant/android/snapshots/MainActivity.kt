@@ -53,36 +53,36 @@ class MainActivity : AppCompatActivity() {
     private fun setupBottomNav(){
         mFragmentManager = supportFragmentManager
 
-        val homeFragment = HomeFragment()
-        val addFragment = AddFragment()
-        val profileFragment = ProfileFragment()
+        val asistFragment = AsistFragment()
+        val trainingFragment = TrainingFragment()
+        val statsFragment = StatsFragment()
 
-        mActiveFragment = homeFragment
+        mActiveFragment = asistFragment
 
         mFragmentManager.beginTransaction()
-            .add(R.id.hostFragment, profileFragment, ProfileFragment::class.java.name)
-            .hide(profileFragment).commit()
+            .add(R.id.hostFragment, statsFragment, StatsFragment::class.java.name)
+            .hide(statsFragment).commit()
         mFragmentManager.beginTransaction()
-            .add(R.id.hostFragment, addFragment, AddFragment::class.java.name)
-            .hide(addFragment).commit()
+            .add(R.id.hostFragment, trainingFragment, TrainingFragment::class.java.name)
+            .hide(trainingFragment).commit()
         mFragmentManager.beginTransaction()
-            .add(R.id.hostFragment, homeFragment, HomeFragment::class.java.name).commit()
+            .add(R.id.hostFragment, asistFragment, AsistFragment::class.java.name).commit()
 
         mBinding.bottomNav.setOnNavigationItemSelectedListener {
             when(it.itemId){
-                R.id. -> {
-                    mFragmentManager.beginTransaction().hide(mActiveFragment).show(homeFragment).commit()
-                    mActiveFragment = homeFragment
+                R.id.asistencia -> {
+                    mFragmentManager.beginTransaction().hide(mActiveFragment).show(asistFragment).commit()
+                    mActiveFragment = asistFragment
                     true
                 }
-                R.id.action_add -> {
-                    mFragmentManager.beginTransaction().hide(mActiveFragment).show(addFragment).commit()
-                    mActiveFragment = addFragment
+                R.id.entrenos -> {
+                    mFragmentManager.beginTransaction().hide(mActiveFragment).show(trainingFragment).commit()
+                    mActiveFragment = trainingFragment
                     true
                 }
-                R.id.action_profile -> {
-                    mFragmentManager.beginTransaction().hide(mActiveFragment).show(profileFragment).commit()
-                    mActiveFragment = profileFragment
+                R.id.stats -> {
+                    mFragmentManager.beginTransaction().hide(mActiveFragment).show(statsFragment).commit()
+                    mActiveFragment = statsFragment
                     true
                 }
                 else -> false
@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity() {
 
         mBinding.bottomNav.setOnNavigationItemReselectedListener {
             when(it.itemId){
-                R.id.action_home -> (homeFragment as HomeAux).goToTop()
+                R.id.entrenos -> (asistFragment as HomeAux).goToTop()
             }
         }
     }
