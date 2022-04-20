@@ -9,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.cursosant.android.snapshots.Entities.Atleta
+import com.cursosant.android.snapshots.Entities.Entrenamiento
 import com.cursosant.android.snapshots.databinding.FragmentTrainingBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -16,11 +18,12 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.google.type.Date
 
 class TrainingFragment : Fragment() {
 
     private val RC_GELLERY = 18
-    private val PATH_SNAPSHOT = "snapshots"
+    private val PATH_TRAININGS = "trainings"
 
     private lateinit var mBinding: FragmentTrainingBinding
     private lateinit var mStorageReference: StorageReference
@@ -44,7 +47,7 @@ class TrainingFragment : Fragment() {
         mBinding.btnSelect.setOnClickListener { openGallery() }
 
         mStorageReference = FirebaseStorage.getInstance().reference
-        mDatabaseReference = FirebaseDatabase.getInstance().reference.child(PATH_SNAPSHOT)
+        mDatabaseReference = FirebaseDatabase.getInstance().reference.child(PATH_TRAININGS)
     }
 
     private fun openGallery() {
@@ -55,7 +58,7 @@ class TrainingFragment : Fragment() {
     private fun postSnapshot() {
         mBinding.progressBar.visibility = View.VISIBLE
         val key = mDatabaseReference.push().key!!
-        val storageReference = mStorageReference.child(PATH_SNAPSHOT)
+        val storageReference = mStorageReference.child(PATH_TRAININGS)
                 .child(FirebaseAuth.getInstance().currentUser!!.uid).child(key)
         if (mPhotoSelectedUri != null) {
             storageReference.putFile(mPhotoSelectedUri!!)
@@ -71,7 +74,7 @@ class TrainingFragment : Fragment() {
                         Snackbar.make(mBinding.root, "Instantánea publicada.",
                                 Snackbar.LENGTH_SHORT).show()
                         it.storage.downloadUrl.addOnSuccessListener {
-                            saveSnapshot(key, it.toString(), mBinding.etTitle.text.toString().trim())
+                            saveTraining(key, it.toString(), mBinding.etTitle.text.toString().trim())
                             mBinding.tilTitle.visibility = View.GONE
                             mBinding.tvMessage.text = getString(R.string.post_message_title)
                         }
@@ -83,9 +86,9 @@ class TrainingFragment : Fragment() {
         }
     }
 
-    private fun saveSnapshot(key: String, url: String, title: String){
-        val snapshot = Atleta(title = title, photoUrl = url)
-        mDatabaseReference.child(key).setValue(snapshot)
+    private fun saveTraining(key: String, url: String, title: String){
+        val training = Entrenamiento(fecha = Date.getDefaultInstance(), urlEntrenamiento = url)
+        mDatabaseReference.child(key).setValue(training)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

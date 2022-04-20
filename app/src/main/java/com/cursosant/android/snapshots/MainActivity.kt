@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
 
-        setupAuth()
+        //setupAuth()
         setupBottomNav()
     }
 
