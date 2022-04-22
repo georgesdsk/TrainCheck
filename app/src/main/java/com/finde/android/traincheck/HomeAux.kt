@@ -1,4 +1,4 @@
-package com.cursosant.android.snapshots
+package com.finde.android.traincheck
 
 /****
  * Project: Snapshots

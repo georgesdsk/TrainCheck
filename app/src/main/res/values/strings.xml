@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Snapshots</string>
+    <string name="app_name">TrainCheck</string>
     <string name="home_title">Inicio</string>
     <string name="home_profile">Perfil</string>
     <string name="home_add">Crear</string>
@@ -14,4 +14,6 @@
     <string name="entrenos">Entrenos</string>
     <string name="asistencia">Asistencia</string>
     <string name="stats">Stats</string>
+    <string name="selectentrenamiento">Seleccione un entrenamiento</string>
+    <string name="post_entrenamiento">Seleccione un entrenamiento</string>
 </resources>

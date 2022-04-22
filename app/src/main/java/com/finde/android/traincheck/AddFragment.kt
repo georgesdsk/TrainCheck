@@ -1,4 +1,4 @@
-package com.cursosant.android.snapshots
+package com.finde.android.traincheck
 
 import android.app.Activity
 import android.content.Intent
@@ -9,23 +9,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.cursosant.android.snapshots.Entities.Atleta
-import com.cursosant.android.snapshots.Entities.Entrenamiento
-import com.cursosant.android.snapshots.databinding.FragmentTrainingBinding
+import com.finde.android.traincheck.Entities.Entrenamiento
+import com.finde.android.traincheck.databinding.FragmentAddBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.google.type.Date
 
-class TrainingFragment : Fragment() {
+class AddFragment : Fragment() {
 
     private val RC_GELLERY = 18
-    private val PATH_TRAININGS = "trainings"
+    private val PATH_ENTRENAMIENTOS = "entrenamientos"
 
-    private lateinit var mBinding: FragmentTrainingBinding
+    private lateinit var mBinding: FragmentAddBinding
     private lateinit var mStorageReference: StorageReference
     private lateinit var mDatabaseReference: DatabaseReference
 
@@ -35,19 +33,22 @@ class TrainingFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mBinding = FragmentTrainingBinding.inflate(inflater, container, false)
+        mBinding = FragmentAddBinding.inflate(inflater, container, false)
         return mBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mBinding.btnPost.setOnClickListener { postSnapshot() }
+        mBinding.btnPost.setOnClickListener { subirEntrenamiento() }
 
         mBinding.btnSelect.setOnClickListener { openGallery() }
 
         mStorageReference = FirebaseStorage.getInstance().reference
-        mDatabaseReference = FirebaseDatabase.getInstance().reference.child(PATH_TRAININGS)
+        mDatabaseReference = FirebaseDatabase.getInstance().reference.child(PATH_ENTRENAMIENTOS)
+        val mAuth = FirebaseAuth.getInstance()
+
+
     }
 
     private fun openGallery() {
@@ -55,11 +56,13 @@ class TrainingFragment : Fragment() {
         startActivityForResult(intent, RC_GELLERY)
     }
 
-    private fun postSnapshot() {
+    private fun subirEntrenamiento() {
         mBinding.progressBar.visibility = View.VISIBLE
         val key = mDatabaseReference.push().key!!
-        val storageReference = mStorageReference.child(PATH_TRAININGS)
-                .child(FirebaseAuth.getInstance().currentUser!!.uid).child(key)
+        val storageReference = mStorageReference.child(PATH_ENTRENAMIENTOS).child("my_training2")
+
+        //.child(FirebaseAuth.getInstance().currentUser!!.uid).child(key)
+
         if (mPhotoSelectedUri != null) {
             storageReference.putFile(mPhotoSelectedUri!!)
                     .addOnProgressListener {
@@ -71,12 +74,12 @@ class TrainingFragment : Fragment() {
                         mBinding.progressBar.visibility = View.INVISIBLE
                     }
                     .addOnSuccessListener {
-                        Snackbar.make(mBinding.root, "Instantánea publicada.",
+                        Snackbar.make(mBinding.root, "Entrenamiento publicado.",
                                 Snackbar.LENGTH_SHORT).show()
                         it.storage.downloadUrl.addOnSuccessListener {
-                            saveTraining(key, it.toString(), mBinding.etTitle.text.toString().trim())
+                            guardarEntrenamiento(key, it.toString(), mBinding.etTitle.text.toString().trim())
                             mBinding.tilTitle.visibility = View.GONE
-                            mBinding.tvMessage.text = getString(R.string.post_message_title)
+                            mBinding.tvMessage.text = getString(R.string.post_entrenamiento)
                         }
                     }
                     .addOnFailureListener{
@@ -86,9 +89,9 @@ class TrainingFragment : Fragment() {
         }
     }
 
-    private fun saveTraining(key: String, url: String, title: String){
-        val training = Entrenamiento(fecha = Date.getDefaultInstance(), urlEntrenamiento = url)
-        mDatabaseReference.child(key).setValue(training)
+    private fun guardarEntrenamiento(key: String, url: String, title: String){
+        val entrenamiento = Entrenamiento( id = key, urlEntrenamiento= url, nombre = title)// fecha = Date.getDefaultInstance(),
+        mDatabaseReference.child(key).setValue(entrenamiento)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

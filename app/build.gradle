@@ -10,7 +10,7 @@ android {
     buildToolsVersion "30.0.1"
 
     defaultConfig {
-        applicationId "com.cursosant.android.snapshots"
+        applicationId "com.cursoant.android.snapshots"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1

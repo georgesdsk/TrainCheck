@@ -1,4 +1,4 @@
-package com.cursosant.android.snapshots.Entities
+package com.cursosant.android.traincheck.Entities
 
 import com.google.firebase.database.Exclude
 

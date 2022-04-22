@@ -1,5 +1,7 @@
-package com.cursosant.android.snapshots.Entities
+package com.cursosant.android.traincheck.Entities
 
+import com.finde.android.traincheck.Entities.Atleta
+import com.finde.android.traincheck.Entities.Entrenamiento
 import com.google.firebase.database.Exclude
 
 data class Group (@get:Exclude var id: String = "",

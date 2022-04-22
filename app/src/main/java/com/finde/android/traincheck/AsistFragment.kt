@@ -1,4 +1,4 @@
-package com.cursosant.android.snapshots
+package com.finde.android.traincheck
 
 import android.content.Context
 import android.os.Bundle
@@ -7,22 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.cursosant.android.snapshots.Entities.Atleta
-import com.cursosant.android.snapshots.databinding.FragmentAsistBinding
-import com.cursosant.android.snapshots.databinding.ItemAtletaBinding
 
-import com.cursosant.android.snapshots.databinding.ItemSnapshotBinding
+import com.finde.android.traincheck.Entities.Atleta
+import com.finde.android.traincheck.databinding.FragmentAsistBinding
+import com.finde.android.traincheck.databinding.ItemAtletaBinding
+
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import com.google.type.Date
 
 class AsistFragment : Fragment() , HomeAux {
 

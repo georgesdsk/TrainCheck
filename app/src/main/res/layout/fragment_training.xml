@@ -5,37 +5,21 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="@dimen/common_padding_default"
-    tools:context=".TrainingFragment">
+    tools:context="com.finde.android.traincheck.TrainingFragment">
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        style="?android:progressBarStyleHorizontal"/>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnPost"
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Publicar"
-        android:layout_marginTop="@dimen/common_padding_min"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/progressBar"/>
+        android:background="#4CAF50"
+        android:elevation="1000dp"
+        android:src="@drawable/ic_add_photo_alternate"
+        app:backgroundTint="#4CAF50"
+        app:layout_constraintBottom_toBottomOf="@id/recyclerView"
+        app:layout_constraintEnd_toEndOf="@id/recyclerView" />
 
-    <TextView
-        android:id="@+id/tvMessage"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/post_message_title"
-        android:textAppearance="?attr/textAppearanceHeadline6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btnPost"
-        app:layout_constraintTop_toTopOf="@id/btnPost"
-        app:layout_constraintBottom_toBottomOf="@id/btnPost"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilTitle"
@@ -46,7 +30,7 @@
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnPost"
+        app:layout_constraintTop_toTopOf="@id/recyclerView"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etTitle"
@@ -54,27 +38,28 @@
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <ImageView
-        android:id="@+id/imgPhoto"
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:scaleType="centerCrop"
-        android:layout_marginTop="@dimen/common_padding_min"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:listitem="@layout/item_entrenamiento" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tilTitle"
-        app:layout_constraintDimensionRatio="H, 4:3"/>
-
-    <ImageButton
-        android:id="@+id/btnSelect"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@drawable/ic_image_search"
-        android:background="?attr/selectableItemBackground"
-        app:layout_constraintStart_toStartOf="@id/imgPhoto"
-        app:layout_constraintEnd_toEndOf="@id/imgPhoto"
-        app:layout_constraintTop_toTopOf="@id/imgPhoto"
-        app:layout_constraintBottom_toBottomOf="@id/imgPhoto"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 
 

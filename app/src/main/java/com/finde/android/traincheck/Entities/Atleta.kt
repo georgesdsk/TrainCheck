@@ -1,9 +1,6 @@
-package com.cursosant.android.snapshots.Entities
+package com.finde.android.traincheck.Entities
 
-import com.google.firebase.database.Exclude
 import com.google.firebase.database.IgnoreExtraProperties
-import com.google.type.Date
-
 
 
 @IgnoreExtraProperties
