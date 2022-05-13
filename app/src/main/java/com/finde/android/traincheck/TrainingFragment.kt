@@ -37,7 +37,6 @@ class TrainingFragment : Fragment() {
 
         mBinding.fab.setOnClickListener { postTraining() }
 
-
         mStorageReference = FirebaseStorage.getInstance().reference
         mDatabaseReference = FirebaseDatabase.getInstance().reference.child(PATH_TRAININGS)
     }
@@ -57,6 +56,12 @@ class TrainingFragment : Fragment() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(intent, RC_GELLERY)
     }
+
+    override fun onPause() {
+        super.onPause()
+        parentFragment?.fragmentManager?.fragments?.last()?.onDestroy()
+    }
+
 
 
 }

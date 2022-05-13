@@ -26,20 +26,22 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
 
-        //setupAuth()
+        setupAuth()
         setupBottomNav()
     }
 
     private fun setupAuth() {
+
         mFirebaseAuth = FirebaseAuth.getInstance()
         mAuthListener = FirebaseAuth.AuthStateListener {
             val user = it.currentUser
             if (user == null){
                 startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder()
-                        .setIsSmartLockEnabled(false)
+                       // .setIsSmartLockEnabled(false)
                         .setAvailableProviders(
                                 Arrays.asList(
                                         AuthUI.IdpConfig.EmailBuilder().build(),
@@ -67,6 +69,9 @@ class MainActivity : AppCompatActivity() {
             .hide(trainingFragment).commit()
         mFragmentManager.beginTransaction()
             .add(R.id.hostFragment, asistFragment, AsistFragment::class.java.name).commit()
+            //.hide(asistFragment)
+        //navigation component
+
 
         mBinding.bottomNav.setOnNavigationItemSelectedListener {
             when(it.itemId){
@@ -76,6 +81,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.entrenos -> {
+
                     mFragmentManager.beginTransaction().hide(mActiveFragment).show(trainingFragment).commit()
                     mActiveFragment = trainingFragment
                     true
@@ -112,7 +118,7 @@ class MainActivity : AppCompatActivity() {
             if (resultCode == RESULT_OK){
                 Toast.makeText(this, "Bienvenido...", Toast.LENGTH_SHORT).show()
             } else {
-                if (IdpResponse.fromResultIntent(data) == null){
+                if (IdpResponse.fromResultIntent(data) == null){ // si el boton de atras se ha pulsado
                     finish()
                 }
             }

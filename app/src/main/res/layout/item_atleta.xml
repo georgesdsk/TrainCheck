@@ -55,7 +55,7 @@
             android:id="@+id/cbFalta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:button="@drawable/ic_baseline_check_circle_24"
+            android:button="@drawable/common_full_open_on_phone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             />

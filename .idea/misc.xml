@@ -3,6 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Trabajos/app/src/main/res/layout/activity_main.xml" value="0.26614583333333336" />
+        <entry key="..\:/Trabajos/app/src/main/res/layout/auth_layout.xml" value="0.33" />
+        <entry key="..\:/Trabajos/app/src/main/res/layout/fragment_add.xml" value="0.29528985507246375" />
+        <entry key="..\:/Trabajos/app/src/main/res/layout/fragment_asist.xml" value="0.29528985507246375" />
+        <entry key="..\:/Trabajos/app/src/main/res/layout/fragment_stats.xml" value="0.29528985507246375" />
+        <entry key="..\:/Trabajos/app/src/main/res/layout/fragment_training.xml" value="0.21784420289855072" />
+        <entry key="..\:/Trabajos/app/src/main/res/layout/item_atleta.xml" value="0.18541666666666667" />
+        <entry key="..\:/Trabajos/app/src/main/res/layout/item_entrenamiento.xml" value="0.29528985507246375" />
+        <entry key="..\:/Trabajos/app/src/main/res/menu/botom__nav_menu.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/gsadouski/Desktop/Downloads/Snapshots/app/src/main/res/layout/activity_main.xml" value="0.20018115942028986" />
         <entry key="..\:/Users/gsadouski/Desktop/Downloads/Snapshots/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25729166666666664" />
         <entry key="..\:/Users/sadac/AndroidStudioProjects/ProyectoFinal/app/src/main/res/drawable/ic_account_circle.xml" value="0.2375" />
