@@ -1,5 +1,6 @@
 package com.finde.android.traincheck
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,22 +14,28 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 
 import com.finde.android.traincheck.Entities.Atleta
+import com.finde.android.traincheck.Entities.Entrenamiento
 import com.finde.android.traincheck.databinding.FragmentAsistBinding
 import com.finde.android.traincheck.databinding.ItemAtletaBinding
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
-class AsistFragment : Fragment() , HomeAux {
+class AsistFragment : Fragment(), HomeAux {
 
     private lateinit var mBinding: FragmentAsistBinding
-
     private lateinit var mFirebaseAdapter: FirebaseRecyclerAdapter<Atleta, AtletaHolder>
-   // private lateinit var mGridLayout: GridLayoutManager
-    private lateinit var mLayoutManager: LinearLayoutManager
+
+    // private lateinit var mGridLayout: GridLayoutManager
+    //private lateinit var mLayoutManager: LinearLayoutManager
+
+    private lateinit var mAthletsRef: DatabaseReference
+    private lateinit var mLayoutManager: RecyclerView.LayoutManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,20 +48,20 @@ class AsistFragment : Fragment() , HomeAux {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val query = FirebaseDatabase.getInstance().reference.child("atleta")
-/*
-        val options =
-        FirebaseRecyclerOptions.Builder<Atleta>().setQuery(query, {
-            val atleta = it.getValue(Atleta::class.java)
-            atleta!!.id = it.key!!
-            atleta
-        }).build()
-        */
-        val options = FirebaseRecyclerOptions.Builder<Atleta>()
-            .setQuery(query, Atleta::class.java).build()
+        setupFirebase()
+        setupAdapter()
+        setupRecyclerView()
+
+    }
+
+    private fun setupAdapter() {
+
+        val query = mAthletsRef
+
+        val options = FirebaseRecyclerOptions.Builder<Atleta>().setQuery(query, Atleta::class.java).build()
 
 
-        mFirebaseAdapter = object : FirebaseRecyclerAdapter<Atleta, AtletaHolder>(options){
+        mFirebaseAdapter = object : FirebaseRecyclerAdapter<Atleta, AtletaHolder>(options) {
             private lateinit var mContext: Context
 
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AtletaHolder {
@@ -68,20 +75,11 @@ class AsistFragment : Fragment() , HomeAux {
             override fun onBindViewHolder(holder: AtletaHolder, position: Int, model: Atleta) {
                 val atleta = getItem(position)
 
-                with(holder){
+                with(holder) {
                     setListener(atleta)
 
-                    binding.tvName.text = atleta.nombre + " "+atleta.apellidos
+                    binding.tvName.text = atleta.nombre + " " + atleta.apellidos
                     binding.cbFalta.text = atleta.id//atleta.listaFaltas.size.toString()
-                  /*
-                    FirebaseAuth.getInstance().currentUser?.let {
-                        binding.cbFalta.isChecked = true//atleta.listaFaltas.contains(Date.getDefaultInstance())
-                            /*
-                            atleta.likeList
-                                .containsKey(it.uid)
-                                */
-                    }
-                    */
 
                     Glide.with(mContext)
                         .load(atleta.photoUrl)
@@ -90,26 +88,35 @@ class AsistFragment : Fragment() , HomeAux {
                         .into(binding.imgAtleta)
                 }
             }
-
+            @SuppressLint("NotifyDataSetChanged")//error interno firebase ui 8.0.0
             override fun onDataChanged() {
                 super.onDataChanged()
                 mBinding.progressBar.visibility = View.GONE
+                notifyDataSetChanged()
             }
 
             override fun onError(error: DatabaseError) {
                 super.onError(error)
-                Toast.makeText(mContext, error.message, Toast.LENGTH_SHORT).show()
+                Snackbar.make(mBinding.root, error.message, Snackbar.LENGTH_SHORT).show()
             }
         }
 
-     //   mGridLayout = GridLayoutManager(context, 2)
+        //   mGridLayout = GridLayoutManager(context, 2)
+
+    }
+
+    private fun setupRecyclerView(){
+        mLayoutManager = LinearLayoutManager(context)
 
         mBinding.recyclerView.apply {
-            setHasFixedSize(true)
-            mLayoutManager = LinearLayoutManager(context)
-            //layoutManager = mGridLayout
+            //setHasFixedSize(true)
+            layoutManager = mLayoutManager
             adapter = mFirebaseAdapter
         }
+    }
+
+    private fun setupFirebase() {
+        mAthletsRef = FirebaseDatabase.getInstance().reference.child("atleta")
     }
 
     override fun onStart() {
@@ -126,28 +133,29 @@ class AsistFragment : Fragment() , HomeAux {
         mBinding.recyclerView.smoothScrollToPosition(0)
     }
 
-    private fun deleteAtleta(atleta: Atleta){
-        val databaseReference = FirebaseDatabase.getInstance().reference.child("atletas")
+    private fun deleteAtleta(atleta: Atleta) {
+        val databaseReference = FirebaseDatabase.getInstance().reference.child("atleta")
         databaseReference.child(atleta.id).removeValue()
     }
-//todo hacer que la falta salga siempre con un dia en especia
-    private fun setFalta(atleta: Atleta, checked: Boolean){
-        val databaseReference = FirebaseDatabase.getInstance().reference.child("atletas")
-        if (checked){
+
+    //todo hacer que la falta salga siempre con un dia en especia
+    private fun setFalta(atleta: Atleta, checked: Boolean) {
+        val databaseReference = FirebaseDatabase.getInstance().reference.child("atleta")
+        if (checked) {
             databaseReference.child(atleta.id).child("listaFaltas")
-                    .child(FirebaseAuth.getInstance().currentUser!!.uid).setValue(checked)
+                .child(FirebaseAuth.getInstance().currentUser!!.uid).setValue(checked)
         } else {
             databaseReference.child(atleta.id).child("listaFaltas")
-                    .child(FirebaseAuth.getInstance().currentUser!!.uid).setValue(null)
+                .child(FirebaseAuth.getInstance().currentUser!!.uid).setValue(null)
         }
     }
 
     //todo al hacer el click largo podamos modificar al atleta
-    inner class AtletaHolder(view: View) : RecyclerView.ViewHolder(view){
+    inner class AtletaHolder(view: View) : RecyclerView.ViewHolder(view) {
         //val binding = ItemAtletaBinding.bind(view)
         val binding = ItemAtletaBinding.bind(view)
 
-        fun setListener(atleta: Atleta){
+        fun setListener(atleta: Atleta) {
             //binding.btnDelete.setOnClickListener { deleteAtleta(atleta) }
 
             binding.cbFalta.setOnCheckedChangeListener { compoundButton, checked ->

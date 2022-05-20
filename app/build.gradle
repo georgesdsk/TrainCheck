@@ -54,6 +54,10 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.google.firebase:firebase-storage:20.0.1'
     implementation 'com.google.firebase:protolite-well-known-types:18.0.0'
+
+    implementation 'androidx.navigation:navigation-fragment:2.1.0'
+    implementation "androidx.navigation:navigation-ui-ktx:2.3.0"
+
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
     // FirebaseUI for Firebase Realtime Database

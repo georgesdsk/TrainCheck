@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
     android:padding="@dimen/common_padding_default"
     tools:context="com.finde.android.traincheck.TrainingFragment">
 
@@ -13,10 +14,10 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#4CAF50"
         android:elevation="1000dp"
+        android:layout_marginBottom="20dp"
         android:src="@drawable/ic_add_photo_alternate"
-        app:backgroundTint="#4CAF50"
+        app:backgroundTint="#673AB7"
         app:layout_constraintBottom_toBottomOf="@id/recyclerView"
         app:layout_constraintEnd_toEndOf="@id/recyclerView" />
 
@@ -48,6 +49,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="30dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         tools:listitem="@layout/item_entrenamiento" />

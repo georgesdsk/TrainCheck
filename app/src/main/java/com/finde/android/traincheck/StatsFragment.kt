@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.finde.android.traincheck.databinding.FragmentStatsBinding
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
@@ -30,7 +31,17 @@ class StatsFragment : Fragment() {
         mBinding.tvName.text = FirebaseAuth.getInstance().currentUser?.displayName
         mBinding.tvEmail.text = FirebaseAuth.getInstance().currentUser?.email
 
-        mBinding.btnLogout.setOnClickListener { singOut() }
+        mBinding.btnInicio.setOnClickListener {
+            Navigation.findNavController(mBinding.root).navigate(R.id.actionInicio)
+        }
+        mBinding.btnEncuesta.setOnClickListener{
+            Navigation.findNavController(mBinding.root).navigate(R.id.actionEncuesta)
+
+        }
+        mBinding.btnLogout.setOnClickListener{
+            singOut()
+        }
+
     }
 
     private fun singOut() {

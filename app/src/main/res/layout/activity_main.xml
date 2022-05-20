@@ -7,6 +7,9 @@
     tools:context="com.finde.android.traincheck.MainActivity"
     android:id="@+id/containerMain">
 
+
+
+    <!--
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="0dp"
@@ -15,23 +18,54 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
-
+-->
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNav2"
+        android:id="@+id/topNav"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:menu="@menu/head_nav_menu"
+        style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <FrameLayout
-        android:id="@+id/hostFragment"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        app:menu="@menu/botom__nav_menu"
+        android:elevation="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/bottomNav"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topNav"
+        app:navGraph="@navigation/my_nav" />
+
+    <!--    <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerView2"
+
+            android:layout_width="409dp"
+            android:layout_height="616dp"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginBottom="1dp"
+            app:defaultNavHost="true"
+            app:layout_constraintBottom_toTopOf="@+id/bottomNav2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bottomNav1"
+            app:navGraph="@navigation/my_nav" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.finde.android.traincheck.Entities.Entrenamiento
 import com.finde.android.traincheck.databinding.FragmentAddBinding
 import com.google.android.material.snackbar.Snackbar
@@ -34,6 +35,12 @@ class AddFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         mBinding = FragmentAddBinding.inflate(inflater, container, false)
+      /*  mBinding.tvMessage.setOnClickListener {
+            Navigation.findNavController(mBinding.root).navigate(R.id.navigateToAdd)
+
+        }
+        */
+
         return mBinding.root
     }
 

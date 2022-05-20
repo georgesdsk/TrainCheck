@@ -31,7 +31,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Tipo entrenamiento"
-            android:background="#4CAF50"
+            android:background="#2196F3"
             android:maxLines="1"
             android:ellipsize="end"
             android:paddingLeft="16dp"

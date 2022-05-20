@@ -8,7 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import com.finde.android.traincheck.databinding.FragmentTrainingBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
@@ -28,29 +32,27 @@ class TrainingFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
         mBinding = FragmentTrainingBinding.inflate(inflater, container, false)
+        mBinding.fab.setOnClickListener {
+            Navigation.findNavController(mBinding.root).navigate(R.id.navigateToAdd)
+
+        }
+
         return mBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mBinding.fab.setOnClickListener { postTraining() }
+
 
         mStorageReference = FirebaseStorage.getInstance().reference
         mDatabaseReference = FirebaseDatabase.getInstance().reference.child(PATH_TRAININGS)
     }
 
-    private fun postTraining() {
 
-        val fragment = AddFragment()
-        val fragmentManager = getParentFragmentManager()
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.addToBackStack("cesta") // todo se anade para el paso atras
-        fragmentTransaction.add(R.id.containerMain, fragment)
-        fragmentTransaction.commit()
-
-    }
 
     private fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)

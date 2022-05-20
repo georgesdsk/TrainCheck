@@ -12,4 +12,5 @@ package com.finde.android.traincheck
  ***/
 interface HomeAux {
     fun goToTop()
+
 }

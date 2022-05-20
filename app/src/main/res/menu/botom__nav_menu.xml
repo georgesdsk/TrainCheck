@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/entrenos"
+        android:id="@+id/trainingFragment"
         android:title="@string/entrenos"
         android:icon="@drawable/ic_run"
         app:showAsAction="never"/>
     <item
-        android:id="@+id/asistencia"
+        android:id="@+id/asistFragment"
         android:title="@string/asistencia"
         android:icon="@drawable/fui_ic_check_circle_black_128dp"
         app:showAsAction="never"/>
     <item
-        android:id="@+id/stats"
+        android:id="@+id/statsFragment"
         android:title="@string/stats"
         android:icon="@drawable/common_google_signin_btn_icon_dark"
         app:showAsAction="never"/>

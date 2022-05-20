@@ -6,9 +6,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.finde.android.traincheck.databinding.ActivityMainBinding
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import java.util.*
 
@@ -18,11 +22,10 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var mBinding: ActivityMainBinding
 
-    private lateinit var mActiveFragment: Fragment
-    private lateinit var mFragmentManager: FragmentManager
-
     private lateinit var mAuthListener: FirebaseAuth.AuthStateListener
     private var mFirebaseAuth: FirebaseAuth? = null
+
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,8 +33,13 @@ class MainActivity : AppCompatActivity() {
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
 
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        navController = navHostFragment.navController
+        val bottomNavigationView =findViewById<BottomNavigationView>(R.id.bottomNav)
+        setupWithNavController(bottomNavigationView, navController)
+
         setupAuth()
-        setupBottomNav()
     }
 
     private fun setupAuth() {
@@ -48,56 +56,6 @@ class MainActivity : AppCompatActivity() {
                                         AuthUI.IdpConfig.GoogleBuilder().build())
                         )
                         .build(), RC_SIGN_IN)
-            }
-        }
-    }
-
-    private fun setupBottomNav(){
-        mFragmentManager = supportFragmentManager
-
-        val asistFragment = AsistFragment()
-        val trainingFragment = TrainingFragment()
-        val statsFragment = StatsFragment()
-
-        mActiveFragment = asistFragment
-
-        mFragmentManager.beginTransaction()
-            .add(R.id.hostFragment, statsFragment, StatsFragment::class.java.name)
-            .hide(statsFragment).commit()
-        mFragmentManager.beginTransaction()
-            .add(R.id.hostFragment, trainingFragment, TrainingFragment::class.java.name)
-            .hide(trainingFragment).commit()
-        mFragmentManager.beginTransaction()
-            .add(R.id.hostFragment, asistFragment, AsistFragment::class.java.name).commit()
-            //.hide(asistFragment)
-        //navigation component
-
-
-        mBinding.bottomNav.setOnNavigationItemSelectedListener {
-            when(it.itemId){
-                R.id.asistencia -> {
-                    mFragmentManager.beginTransaction().hide(mActiveFragment).show(asistFragment).commit()
-                    mActiveFragment = asistFragment
-                    true
-                }
-                R.id.entrenos -> {
-
-                    mFragmentManager.beginTransaction().hide(mActiveFragment).show(trainingFragment).commit()
-                    mActiveFragment = trainingFragment
-                    true
-                }
-                R.id.stats -> {
-                    mFragmentManager.beginTransaction().hide(mActiveFragment).show(statsFragment).commit()
-                    mActiveFragment = statsFragment
-                    true
-                }
-                else -> false
-            }
-        }
-
-        mBinding.bottomNav.setOnNavigationItemReselectedListener {
-            when(it.itemId){
-                R.id.entrenos -> (asistFragment as HomeAux).goToTop()
             }
         }
     }
