@@ -46,8 +46,6 @@ class TrainingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
         mStorageReference = FirebaseStorage.getInstance().reference
         mDatabaseReference = FirebaseDatabase.getInstance().reference.child(PATH_TRAININGS)
     }
@@ -59,10 +57,6 @@ class TrainingFragment : Fragment() {
         startActivityForResult(intent, RC_GELLERY)
     }
 
-    override fun onPause() {
-        super.onPause()
-        parentFragment?.fragmentManager?.fragments?.last()?.onDestroy()
-    }
 
 
 

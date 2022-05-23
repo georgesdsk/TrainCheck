@@ -42,7 +42,7 @@
             />
 
         <TextView
-            android:id="@+id/tvPrecio"
+            android:id="@+id/numFaltas"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ellipsize="end"
