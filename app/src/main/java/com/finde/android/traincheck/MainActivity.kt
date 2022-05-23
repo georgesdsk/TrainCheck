@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         val bottomNavigationView =findViewById<BottomNavigationView>(R.id.bottomNav)
         setupWithNavController(bottomNavigationView, navController)
 
-        setupAuth()
+      //  setupAuth()
     }
 
     private fun setupAuth() {

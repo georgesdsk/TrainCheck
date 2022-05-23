@@ -1,13 +1,16 @@
 package com.finde.android.traincheck
 
 import android.annotation.SuppressLint
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -47,18 +50,24 @@ class AsistFragment : Fragment(), HomeAux {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setupFirebase()
+        setAthlets()
         setupAdapter()
         setupRecyclerView()
 
+    }
+
+    private fun setAthlets() {
+        var atleta = Atleta(nombre = "YO", apellidos = "Tu", id = "2", photoUrl = "https://lh3.google.com/u/0/ogw/ADea4I5WlHogjAsdRdJmumQWcb9teMIzCSVQ-9WvOFNc=s32-c-mo" )
+        mAthletsRef.child("atleta").child("ciuaqluier").setValue(atleta)
     }
 
     private fun setupAdapter() {
 
         val query = mAthletsRef
 
-        val options = FirebaseRecyclerOptions.Builder<Atleta>().setQuery(query, Atleta::class.java).build()
+        val options =
+            FirebaseRecyclerOptions.Builder<Atleta>().setQuery(query, Atleta::class.java).build()
 
 
         mFirebaseAdapter = object : FirebaseRecyclerAdapter<Atleta, AtletaHolder>(options) {
@@ -78,8 +87,9 @@ class AsistFragment : Fragment(), HomeAux {
                 with(holder) {
                     setListener(atleta)
 
-                    binding.tvName.text = atleta.nombre + " " + atleta.apellidos
+                    binding.tvName.text = atleta.nombre
                     binding.cbFalta.text = atleta.id//atleta.listaFaltas.size.toString()
+
 
                     Glide.with(mContext)
                         .load(atleta.photoUrl)
@@ -88,6 +98,7 @@ class AsistFragment : Fragment(), HomeAux {
                         .into(binding.imgAtleta)
                 }
             }
+
             @SuppressLint("NotifyDataSetChanged")//error interno firebase ui 8.0.0
             override fun onDataChanged() {
                 super.onDataChanged()
@@ -101,22 +112,24 @@ class AsistFragment : Fragment(), HomeAux {
             }
         }
 
-        //   mGridLayout = GridLayoutManager(context, 2)
+
 
     }
 
-    private fun setupRecyclerView(){
-        mLayoutManager = LinearLayoutManager(context)
+    private fun setupRecyclerView() {
+        mLayoutManager = GridLayoutManager(context, 2)
 
         mBinding.recyclerView.apply {
-            //setHasFixedSize(true)
+            setHasFixedSize(true)
             layoutManager = mLayoutManager
             adapter = mFirebaseAdapter
         }
     }
 
     private fun setupFirebase() {
-        mAthletsRef = FirebaseDatabase.getInstance().reference.child("atleta")
+        mAthletsRef =
+            FirebaseDatabase.getInstance("https://traincheck-481b2-default-rtdb.europe-west1.firebasedatabase.app/")
+                .reference.child("atleta")
     }
 
     override fun onStart() {

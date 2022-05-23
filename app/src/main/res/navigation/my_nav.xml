@@ -17,7 +17,11 @@
         android:id="@+id/asistFragment"
         android:name="com.finde.android.traincheck.AsistFragment"
         android:label="fragment_asist"
-        tools:layout="@layout/fragment_asist" />
+        tools:layout="@layout/fragment_asist" >
+        <action
+            android:id="@+id/action_asistFragment_to_inicioFragment"
+            app:destination="@id/inicioFragment" />
+    </fragment>
     <fragment
         android:id="@+id/statsFragment"
         android:name="com.finde.android.traincheck.StatsFragment"
