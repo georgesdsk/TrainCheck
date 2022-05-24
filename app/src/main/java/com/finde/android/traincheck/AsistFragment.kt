@@ -1,26 +1,22 @@
 package com.finde.android.traincheck
 
 import android.annotation.SuppressLint
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
+import android.renderscript.ScriptGroup
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-
 import com.finde.android.traincheck.Entities.Atleta
-import com.finde.android.traincheck.Entities.Entrenamiento
+import com.finde.android.traincheck.ViewModel.AtletaSeleccionado
 import com.finde.android.traincheck.databinding.FragmentAsistBinding
 import com.finde.android.traincheck.databinding.ItemAtletaBinding
-
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.android.material.snackbar.Snackbar
@@ -29,6 +25,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import java.util.*
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
 
 
 class AsistFragment : Fragment(), HomeAux {
@@ -41,7 +39,7 @@ class AsistFragment : Fragment(), HomeAux {
 
     private lateinit var mAthletsRef: DatabaseReference
     private lateinit var mLayoutManager: RecyclerView.LayoutManager
-
+    private val vmAtleta: AtletaSeleccionado by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -168,8 +166,8 @@ class AsistFragment : Fragment(), HomeAux {
     private fun setFalta(atleta: Atleta, checked: Boolean) {
 
         if (checked) {
-            mAthletsRef.child(atleta.id).child("listaFaltas")
-                .updateChildren(Date(2019,10,1))
+            /*mAthletsRef.child(atleta.id).child("listaFaltas")
+                .updateChildren(Date(2019,10,1))*/
         } else {
             mAthletsRef.child(atleta.id).child("listaFaltas")
                 .child(FirebaseAuth.getInstance().currentUser!!.uid).setValue(null)
@@ -179,11 +177,14 @@ class AsistFragment : Fragment(), HomeAux {
     //todo al hacer el click largo podamos modificar al atleta
     inner class AtletaHolder(view: View) : RecyclerView.ViewHolder(view) {
         val binding = ItemAtletaBinding.bind(view)
+        val navigation = Navigation.findNavController(mBinding.root)
 
         fun setListener(atleta: Atleta) {
             with(binding.root) {
                 setOnClickListener {
                     Toast.makeText(context, atleta.id, Toast.LENGTH_SHORT).show()
+                    vmAtleta.atletaSeleccionado = atleta
+                    navigation.navigate(R.id.actionAthletDetails)
                 }
                 setOnLongClickListener {
                     deleteAtleta(atleta)

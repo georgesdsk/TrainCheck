@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".DetailsFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/common_padding_min">
+
+
+        <TextView
+            android:id="@+id/tituloNombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/common_padding_default"
+            android:text="Nombre"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/teal_200"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tituloCategoria" />
+
+
+        <TextView
+            android:id="@+id/tvNombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/common_padding_default"
+            android:text="Francicso Franco"
+            android:textSize="20dp"
+
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            app:layout_constraintBottom_toBottomOf="@+id/tituloNombre"
+            app:layout_constraintStart_toEndOf="@id/tituloNombre" />
+
+
+        <TextView
+            android:id="@+id/tituloPrecioUnitario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/teal_200"
+
+            android:layout_margin="@dimen/common_padding_default"
+            android:layout_marginStart="28dp"
+            android:text="Faltas ultimo mes"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tituloNombre" />
+
+        <TextView
+            android:id="@+id/tvPrecioUnitario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/common_padding_default"
+            android:text="3"
+            android:textSize="20dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            app:layout_constraintBottom_toBottomOf="@+id/tituloPrecioUnitario"
+            app:layout_constraintStart_toEndOf="@+id/tituloPrecioUnitario" />
+
+
+        <TextView
+            android:id="@+id/tituloCategoria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/common_padding_default"
+            android:text="Grupo"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="#84977C"
+            android:textSize="16dp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imagen" />
+
+        <TextView
+            android:id="@+id/tvCategoria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/common_padding_default"
+            android:text="Tecnificacion"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tituloCategoria"
+            app:layout_constraintStart_toEndOf="@+id/tituloCategoria" />
+
+        <ImageView
+            android:id="@+id/imagen"
+            android:layout_width="0dp"
+            android:layout_height="300dp"
+            android:src="@mipmap/ic_launcher_round"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.core.widget.NestedScrollView>

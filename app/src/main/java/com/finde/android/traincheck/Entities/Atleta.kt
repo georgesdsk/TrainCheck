@@ -11,6 +11,7 @@ import java.util.*
 data class Atleta(@get:Exclude var id: String = "",
                   var nombre: String = "",
                   var apellidos: String = "",
+                  var grupo: String ="",
                   var photoUrl: String ="",
                   var fechaNacimiento: Date = Date(2019,8,10),
                   var tipoAsistencia: Int = 1, // de tres tipo

@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_asistFragment_to_inicioFragment"
             app:destination="@id/inicioFragment" />
+        <action
+            android:id="@+id/actionAthletDetails"
+            app:destination="@id/detailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/statsFragment"
@@ -54,4 +57,14 @@
             android:id="@+id/actionInicio"
             app:destination="@id/actionInicio" />
     </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.finde.android.traincheck.DetailsFragment"
+        android:label="fragment_atleta_detalles"
+        tools:layout="@layout/fragment_atleta_detalles" />
+    <activity
+        android:id="@+id/signInActivity"
+        android:name="com.finde.android.traincheck.Activities.Sesion.ui.login.SignInActivity"
+        android:label="activity_sign_in"
+        tools:layout="@layout/activity_sign_in" />
 </navigation>
