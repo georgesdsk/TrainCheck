@@ -33,10 +33,7 @@ class SignInActivity : AppCompatActivity() {
         mBinding.button1.setOnClickListener {
             iniciarSesion("sadachok1999@gmai.com","123456")
         }
-        mBinding.button3.setOnClickListener {
-            iniciarSesion("sadachok99@gmai.com","123456")
 
-        }
     }
 
     private fun setupReferences() {
