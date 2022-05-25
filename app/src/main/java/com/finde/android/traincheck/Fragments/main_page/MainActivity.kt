@@ -1,14 +1,15 @@
-package com.finde.android.traincheck
+package com.finde.android.traincheck.Fragments.main_page
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
+import androidx.viewpager.widget.ViewPager
 import com.finde.android.traincheck.Activities.Sesion.ui.login.SignInActivity
+import com.finde.android.traincheck.R
 import com.finde.android.traincheck.databinding.ActivityMainBinding
 import com.firebase.ui.auth.IdpResponse
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -33,6 +34,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mGruposRef: DatabaseReference
     private lateinit var mUsuariosRef: DatabaseReference
     var entrenadores = mutableListOf<String>()
+    //Vista deslizante
+    private lateinit var demoCollectionPagerAdapter: DemoCollectionPagerAdapter
+    private lateinit var viewPager: ViewPager
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,14 +45,23 @@ class MainActivity : AppCompatActivity() {
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
 
+        demoCollectionPagerAdapter = DemoCollectionPagerAdapter(supportFragmentManager)
+        viewPager = mBinding.pager
+        viewPager.adapter = demoCollectionPagerAdapter
+
+        setupNavigationBar()
+        setupReferences()
+        setupAuth()
+       // insertarGrupos() // y cambiar al entrenador
+
+    }
+
+    private fun setupNavigationBar() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.navController
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNav)
         setupWithNavController(bottomNavigationView, navController)
-        setupReferences()
-        setupAuth()
-       // insertarGrupos() // y cambiar al entrenador
 
     }
 
@@ -103,7 +117,7 @@ class MainActivity : AppCompatActivity() {
     //Analisis: cambiar el navBar, navBar superior,  boton de entrenamientos, y stas solo particulares
     private fun iniciarAlumno() {
         mBinding.bottomNav.menu.removeItem(R.id.asistFragment)
-        mBinding.topNav.visibility = View.GONE
+        //mBinding.topNav.visibility = View.GONE
     }
 
 //doble pantalla , nombre, apellido, correo, codigo, contraseña

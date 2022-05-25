@@ -1,4 +1,4 @@
-package com.finde.android.traincheck
+package com.finde.android.traincheck.Fragments.asist
 
 import android.os.Bundle
 import android.view.LayoutInflater

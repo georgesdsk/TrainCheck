@@ -1,4 +1,4 @@
-package com.finde.android.traincheck
+package com.finde.android.traincheck.Fragments.training
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,10 +9,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI
+import com.finde.android.traincheck.R
 import com.finde.android.traincheck.databinding.FragmentTrainingBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage

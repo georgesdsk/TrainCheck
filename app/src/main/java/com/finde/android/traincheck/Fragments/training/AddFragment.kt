@@ -1,4 +1,4 @@
-package com.finde.android.traincheck
+package com.finde.android.traincheck.Fragments.training
 
 import android.app.Activity
 import android.content.Intent
@@ -9,8 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import com.finde.android.traincheck.Entities.Entrenamiento
+import com.finde.android.traincheck.R
 import com.finde.android.traincheck.databinding.FragmentAddBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth

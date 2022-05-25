@@ -1,4 +1,4 @@
-package com.finde.android.traincheck
+package com.finde.android.traincheck.Fragments.main_page
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

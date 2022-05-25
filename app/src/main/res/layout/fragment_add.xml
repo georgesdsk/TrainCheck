@@ -7,7 +7,7 @@
     android:layout_marginTop="25dp"
     android:paddingHorizontal="@dimen/common_padding_default"
     android:paddingVertical="@dimen/common_padding_min"
-    tools:context="com.finde.android.traincheck.AddFragment">
+    tools:context="com.finde.android.traincheck.Fragments.training.AddFragment">
 
     <ProgressBar
         android:id="@+id/progressBar"

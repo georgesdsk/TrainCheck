@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
     android:padding="@dimen/common_padding_default"
-    tools:context="com.finde.android.traincheck.TrainingFragment">
+    tools:context="com.finde.android.traincheck.Fragments.training.TrainingFragment">
 
 
 

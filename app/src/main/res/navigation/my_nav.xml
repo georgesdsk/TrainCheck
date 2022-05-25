@@ -6,7 +6,7 @@
     app:startDestination="@id/trainingFragment">
     <fragment
         android:id="@+id/addFragment"
-        android:name="com.finde.android.traincheck.AddFragment"
+        android:name="com.finde.android.traincheck.Fragments.training.AddFragment"
         android:label="fragment_add"
         tools:layout="@layout/fragment_add" >
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/asistFragment"
-        android:name="com.finde.android.traincheck.AsistFragment"
+        android:name="com.finde.android.traincheck.Fragments.asist.AsistFragment"
         android:label="fragment_asist"
         tools:layout="@layout/fragment_asist" >
         <action
@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/statsFragment"
-        android:name="com.finde.android.traincheck.StatsFragment"
+        android:name="com.finde.android.traincheck.Fragments.stats.StatsFragment"
         android:label="fragment_stats"
         tools:layout="@layout/fragment_stats" >
         <action
@@ -36,7 +36,7 @@
     </fragment>
     <fragment
         android:id="@+id/trainingFragment"
-        android:name="com.finde.android.traincheck.TrainingFragment"
+        android:name="com.finde.android.traincheck.Fragments.training.TrainingFragment"
         android:label="fragment_training"
         tools:layout="@layout/fragment_training" >
         <action
@@ -45,12 +45,12 @@
     </fragment>
     <fragment
         android:id="@+id/encuestaFragment"
-        android:name="com.finde.android.traincheck.EncuestaFragment"
+        android:name="com.finde.android.traincheck.Fragments.stats.EncuestaFragment"
         android:label="fragment_encuesta"
         tools:layout="@layout/fragment_encuesta" />
     <fragment
         android:id="@+id/inicioFragment"
-        android:name="com.finde.android.traincheck.InicioFragment"
+        android:name="com.finde.android.traincheck.Fragments.main_page.InicioFragment"
         android:label="fragment_inicio"
         tools:layout="@layout/fragment_inicio" >
         <action
@@ -59,7 +59,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.finde.android.traincheck.DetailsFragment"
+        android:name="com.finde.android.traincheck.Fragments.asist.DetailsFragment"
         android:label="fragment_atleta_detalles"
         tools:layout="@layout/fragment_atleta_detalles" />
     <activity

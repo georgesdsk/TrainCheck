@@ -1,9 +1,8 @@
-package com.finde.android.traincheck
+package com.finde.android.traincheck.Fragments.asist
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import android.renderscript.ScriptGroup
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +26,8 @@ import com.google.firebase.database.FirebaseDatabase
 import java.util.*
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
+import com.finde.android.traincheck.HomeAux
+import com.finde.android.traincheck.R
 
 
 class AsistFragment : Fragment(), HomeAux {

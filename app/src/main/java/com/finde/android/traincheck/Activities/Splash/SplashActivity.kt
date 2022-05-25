@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.ui.AppBarConfiguration
-import com.finde.android.traincheck.MainActivity
+import com.finde.android.traincheck.Fragments.main_page.MainActivity
 
 
 class SplashActivity : AppCompatActivity() {

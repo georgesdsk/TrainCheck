@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import com.finde.android.traincheck.MainActivity
+import com.finde.android.traincheck.Fragments.main_page.MainActivity
 import com.finde.android.traincheck.R
 import com.finde.android.traincheck.databinding.ActivitySignInBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -30,7 +30,7 @@ class SignInActivity : AppCompatActivity() {
         mBinding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
         
-        mBinding.button1.setOnClickListener {
+        mBinding.loginbtn.setOnClickListener {
             iniciarSesion("sadachok1999@gmai.com","123456")
         }
 
