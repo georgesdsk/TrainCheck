@@ -55,39 +55,24 @@ class AsistFragment : Fragment(), HomeAux {
         setAthlets()
         setupAdapter()
         setupRecyclerView()
+        setListener()
     }
 
     private fun setListener(){
 
-
-        val groupObserver = Observer{}
-
-        fun onGroupChanged(any: Any?) {
-            if (any != null) {
-                val group = any as String
-                mAthletsRef = FirebaseDatabase.getInstance().reference.child("grupos").child(group)
-                mFirebaseAdapter.cleanup()
-                setAthlets()
-                setupAdapter()
-                setupRecyclerView()
-            }
-        }
-
-        grupoSeleccionado.currentGroup.observe(this, Observer{
-
-
+        grupoSeleccionado.currentGroup.observe(viewLifecycleOwner, {
+            Toast.makeText(getActivity(),grupoSeleccionado.currentGroup.value, Toast.LENGTH_SHORT  )
+            val grupo  = grupoSeleccionado.currentGroup.value!!
+            val options =
+                FirebaseRecyclerOptions.Builder<Atleta>().setQuery(mAthletsRef.child(grupo), Atleta::class.java)
+                    .build()
+            mFirebaseAdapter.updateOptions(options)
+            //mFirebaseAdapter.notifyDataSetChanged()
         })
-    }
-
-    private fun onGroupChanged(any: Any?) {
-
     }
 
 
     //como recibir el nombre del objeto al que pertenece a lo que hemos pulsado
-
-
-
 
     private fun setAthlets() {
         var atleta = Atleta(
@@ -97,7 +82,7 @@ class AsistFragment : Fragment(), HomeAux {
             fechaNacimiento = Date(2002, 9, 10),
             photoUrl = "https://definicionde.es/wp-content/uploads/2019/04/definicion-de-persona-min.jpg"
         )
-        mAthletsRef.child("ciuaqluier").setValue(atleta)
+
         var atleta2 = Atleta(
             nombre = "Juan alberto",
             apellidos = "Jimenez franco",
@@ -105,13 +90,14 @@ class AsistFragment : Fragment(), HomeAux {
             fechaNacimiento = Date(2002, 9, 10),
             photoUrl = "https://iteragrow.com/wp-content/uploads/2018/04/buyer-persona-e1545248524290.jpg"
         )
-        mAthletsRef.child("ciuaqluier2").setValue(atleta2)
+        mAthletsRef.child("Formacion").child("ciuaqluier1").setValue(atleta2)
+        mAthletsRef.child("Altorendimiento").child("ciuaqluier2").setValue(atleta)
     }
 
     private fun setupAdapter() {
-
+        val grupo  = grupoSeleccionado.currentGroup.value!!
         val options =
-            FirebaseRecyclerOptions.Builder<Atleta>().setQuery(mAthletsRef, Atleta::class.java)
+            FirebaseRecyclerOptions.Builder<Atleta>().setQuery(mAthletsRef.child(grupo), Atleta::class.java)
                 .build()
 
 

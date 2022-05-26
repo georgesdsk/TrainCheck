@@ -7,6 +7,20 @@
     android:background="@drawable/b5"
     tools:context="com.finde.android.traincheck.Fragments.main_page.InicioFragment">
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/loginbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/password"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="30dp"
+        android:backgroundTint="#45654A"
+        android:elevation="10dp"
+        android:paddingHorizontal="35dp"
+        android:text="LOG IN"
+        app:cornerRadius="30dp" />
+
     <TextView
         android:id="@+id/signin"
         android:layout_width="match_parent"
@@ -17,7 +31,7 @@
         android:layout_marginBottom="50dp"
         android:gravity="left"
         android:text="Inicio de sesion"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+
         android:textColor="#45654A"
         android:textColorHint="#45654A"
         android:textSize="35dp"
@@ -60,32 +74,37 @@
         android:textColorHint="#45654A" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/loginbtn"
+        android:id="@+id/registerbtn"
+        style="Bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/password"
+        android:layout_below="@+id/registro"
         android:layout_centerHorizontal="true"
-        android:elevation="10dp"
-        app:cornerRadius="30dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        android:backgroundTint="#45654A"
-        android:text="LOGIN" />
+        android:backgroundTint="#FFFFFF"
+        android:elevation="10dp"
+        android:paddingHorizontal="50dp"
+        android:paddingVertical="10dp"
+        android:text="Registrarse"
+        android:textColor="#45654A"
+        app:cornerRadius="15dp" />
 
     <TextView
-        android:id="@+id/forgotpass"
+        android:id="@+id/registro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/loginbtn"
+        android:layout_below="@+id/loginbtn"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        android:text="Contraseña olvidada?"
-        android:textColor="#45654A" />
+        android:text="¿No tienes una cuenta?"
+        android:textColor="#45654A"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -97,20 +116,37 @@
 
 
     <LinearLayout
+        android:id="@+id/socialicons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/socialicons"
         android:layout_alignParentBottom="true"
         android:gravity="center">
-
 
         <ImageView
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_margin="20dp"
-            android:src="@drawable/common_google_signin_btn_icon_light"/>
+            android:src="@drawable/common_google_signin_btn_icon_light" />
 
     </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/checkBox"
+
+        style="check"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/password"
+        android:layout_alignTop="@+id/loginbtn"
+        android:layout_alignBottom="@+id/loginbtn"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="-3dp"
+        android:layout_marginEnd="-18dp"
+        android:layout_marginBottom="3dp"
+        android:layout_toStartOf="@+id/loginbtn"
+        android:text="Sesion iniciada"
+        android:textColor="#45654A"
+        android:textStyle="bold" />
 
 
 </RelativeLayout>

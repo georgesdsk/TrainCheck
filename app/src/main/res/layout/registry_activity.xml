@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/b5"
+    tools:context="com.finde.android.traincheck.InicioFragment">
+
+    <TextView
+        android:id="@+id/signin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Registro atleta"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="#45654A"
+        android:textColorHint="#45654A"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/name"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/input_text"
+        android:drawableLeft="@drawable/fui_ic_mail_white_24dp"
+        android:drawablePadding="20dp"
+        android:hint="Nombre"
+        android:padding="20dp"
+        android:textColor="#45654A"
+        android:textColorHint="#45654A"
+        android:weightSum="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/signin" />
+
+    <EditText
+        android:id="@+id/surname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/input_text"
+        android:drawableLeft="@drawable/fui_ic_mail_white_24dp"
+        android:drawablePadding="20dp"
+        android:hint="Apellidos"
+        android:padding="20dp"
+        android:textColor="#45654A"
+        android:textColorHint="#45654A"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/name"
+        app:layout_constraintTop_toBottomOf="@id/signin" />
+
+
+    <EditText
+        android:id="@+id/group"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/input_text"
+        android:drawableLeft="@drawable/fui_ic_mail_white_24dp"
+        android:drawablePadding="20dp"
+        android:hint="Nº grupo"
+        android:padding="20dp"
+        android:textColor="#45654A"
+        android:textColorHint="#45654A"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/datePickerButton"
+        app:layout_constraintTop_toBottomOf="@id/name" />
+    <EditText
+        android:id="@+id/mail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/input_text"
+        android:drawableLeft="@drawable/fui_ic_mail_white_24dp"
+        android:drawablePadding="20dp"
+        android:layout_margin="10dp"
+        android:hint="Correo electrónico"
+        android:padding="20dp"
+        android:textColor="#45654A"
+        android:textColorHint="#45654A"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/datePickerButton" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/input_text"
+        android:drawableLeft="@drawable/ic_exit_to_app"
+        android:drawablePadding="20dp"
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+        android:padding="20dp"
+        android:textColor="#45654A"
+        android:textColorHint="#45654A"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mail" />
+
+    <EditText
+        android:id="@+id/password2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/input_text"
+        android:drawablePadding="20dp"
+        android:hint="Repetir contraseña "
+        android:inputType="textPassword"
+        android:padding="20dp"
+        android:textColor="#45654A"
+        android:textColorHint="#45654A"
+        app:layout_constraintStart_toEndOf="@id/password"
+        app:layout_constraintTop_toBottomOf="@id/mail"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <Button
+        android:id="@+id/datePickerButton"
+        android:drawableRight="@drawable/fui_ic_mail_white_24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Fecha nac"
+        android:textColor="#45654A"
+        android:textSize="30sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/name" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/loginbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/password2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#45654A"
+        android:text="LOGIN" />
+
+    <TextView
+        android:id="@+id/forgotpass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/loginbtn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="Contraseña olvidada?"
+        android:textColor="#45654A" />
+
+    <TextView
+        android:id="@+id/other"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/socialicons"
+        android:layout_centerHorizontal="true"
+        android:text="or sign in with" />
+
+
+    <LinearLayout
+        android:id="@+id/socialicons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="20dp"
+            android:src="@drawable/common_google_signin_btn_icon_light" />
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/editTextDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="75dp"
+        android:layout_marginEnd="127dp"
+        android:ems="10"
+        android:inputType="date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="378dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

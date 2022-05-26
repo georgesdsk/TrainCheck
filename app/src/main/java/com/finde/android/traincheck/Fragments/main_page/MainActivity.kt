@@ -20,6 +20,11 @@ import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import androidx.fragment.app.activityViewModels
+import com.finde.android.traincheck.ViewModel.FireBaseReferencies
+import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mDatabaseRef
+import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mEntrenadoresRef
+import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mFirebaseAuth
+import kotlin.math.sign
 
 
 class MainActivity : AppCompatActivity() {
@@ -29,26 +34,23 @@ class MainActivity : AppCompatActivity() {
                           Log.d(TAG, "onChildAdded:" + dataSnapshot.key!!)*/
 
     private val RC_SIGN_IN = 21
-
     private lateinit var mBinding: ActivityMainBinding
-
     private lateinit var mAuthListener: FirebaseAuth.AuthStateListener
-    private lateinit var mFirebaseAuth: FirebaseAuth
     private lateinit var navController: NavController
-    private lateinit var mDatabaseRef: DatabaseReference
-    private lateinit var mGruposRef: DatabaseReference
-    private lateinit var mUsuariosRef: DatabaseReference
     private val grupoSeleccionado: GrupoSeleccionado by viewModels<GrupoSeleccionado>()
     var entrenadores = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        grupoSeleccionado.currentGroup.value = "AltoRendimiento"
+
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
+
         setupNavigationBar()
         setupHeaderNav()
-        setupReferences()
+        FireBaseReferencies.create()
         setupAuth()
         // insertarGrupos() // y cambiar al entrenador
     }
@@ -57,26 +59,19 @@ class MainActivity : AppCompatActivity() {
         mBinding.headerNav.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 //Toast.makeText(this@MainActivity, "Seleccionado", Toast.LENGTH_SHORT).show()
+
                 when (tab?.position) {
                     0 -> {
-                        grupoSeleccionado.grupoSeleccionado = "0"
-                        Toast.makeText(this@MainActivity, "0", Toast.LENGTH_SHORT).show()
+                        grupoSeleccionado.currentGroup.value = "Formacion"
                     }
                     1 -> {
-                        grupoSeleccionado.grupoSeleccionado = "1"
-                        Toast.makeText(this@MainActivity, "Seleccionado", Toast.LENGTH_SHORT).show()
+                        grupoSeleccionado.currentGroup.value = "Altorendimiento"
                     }
                 }
             }
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-
-            }
-
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
         })
     }
 
@@ -90,40 +85,23 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    //todo como conseguir el uid
-    private fun insertarGrupos() {
-        // mFirebaseAuth.createUserWithEmailAndPassword("user@gmail.com", "user213").addOnCompleteListener {
-        mGruposRef.child("Alumnos").setValue("pof")
-        mGruposRef.child("Entrenadores").child("ponoje").setValue("kd4PRHChgMbXRrkOn6gjGEi88astO2")
-    }
-
-
-    private fun setupReferences() {
-        mFirebaseAuth = FirebaseAuth.getInstance()
-        mDatabaseRef =
-            FirebaseDatabase.getInstance("https://traincheck-481b2-default-rtdb.europe-west1.firebasedatabase.app").reference
-        mUsuariosRef = mDatabaseRef.child("Usuarios")
-        mGruposRef = mDatabaseRef.child("Grupos")
-    }
-
 
     private fun setupAuth() {
         //necesitas un listener por si sales en cualquier momento
-        var isEntrenador: Boolean = false
-        mAuthListener = FirebaseAuth.AuthStateListener {
-            val user = it.currentUser
-            if (user == null) {
-                val intent = Intent(this, SignInActivity::class.java)
-                this.startActivity(intent)
-            }
-            //esto podria ser un .get pero no funciona mGruposRef.child("Entrenadores").get(mFirebaseAuth.currentUser!!.uid)
-            // mGruposRef.child("Entrenadores").equalTo(mFirebaseAuth.currentUser!!.uid)
+        signIn()
 
-            val entrenadorListener = object : ValueEventListener {
-                override fun onDataChange(snapshots: DataSnapshot) {
-                    isEntrenador = false
+        mAuthListener = FirebaseAuth.AuthStateListener {
+            signIn()
+        }
+        //esto podria ser un .get pero no funciona mGruposRef.child("Entrenadores").get(mFirebaseAuth.currentUser!!.uid)
+        // mGruposRef.child("Entrenadores").equalTo(mFirebaseAuth.currentUser!!.uid)
+
+        val entrenadorListener = object : ValueEventListener {
+            override fun onDataChange(snapshots: DataSnapshot) {
+                var isEntrenador: Boolean = false
+                if (mFirebaseAuth.currentUser != null) {
                     for (snapshot in snapshots.children) { // ponerle un and si se ha encontradon // utilizaria lambda pero los snapshots no son string
-                        if (snapshot.getValue().toString() == mFirebaseAuth.currentUser!!.uid) {
+                        if (mFirebaseAuth.currentUser!!.uid == snapshot.getValue().toString()) {
                             isEntrenador = true
                         }
                     }
@@ -131,14 +109,22 @@ class MainActivity : AppCompatActivity() {
                         iniciarAlumno()
                     }
                 }
-
-                override fun onCancelled(error: DatabaseError) {}
             }
-            mGruposRef.child("Entrenadores").addListenerForSingleValueEvent(entrenadorListener)
+
+            override fun onCancelled(error: DatabaseError) {}
         }
 
+        mEntrenadoresRef.addListenerForSingleValueEvent(entrenadorListener)
     }
 
+
+    private fun signIn() {
+        val user = mFirebaseAuth.currentUser
+        if (user == null) {
+            val intent = Intent(this, SignInActivity::class.java)
+            this.startActivity(intent)
+        }
+    }
 
     //Analisis: cambiar el navBar, navBar superior,  boton de entrenamientos, y stas solo particulares
     private fun iniciarAlumno() {
