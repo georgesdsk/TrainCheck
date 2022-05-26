@@ -28,19 +28,19 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.finde.android.traincheck.HomeAux
 import com.finde.android.traincheck.R
+import com.finde.android.traincheck.ViewModel.GrupoSeleccionado
 
 
 class AsistFragment : Fragment(), HomeAux {
 
     private lateinit var mBinding: FragmentAsistBinding
     private lateinit var mFirebaseAdapter: FirebaseRecyclerAdapter<Atleta, AtletaHolder>
-
-    // private lateinit var mGridLayout: GridLayoutManager
-    //private lateinit var mLayoutManager: LinearLayoutManager
-
     private lateinit var mAthletsRef: DatabaseReference
     private lateinit var mLayoutManager: RecyclerView.LayoutManager
     private val vmAtleta: AtletaSeleccionado by activityViewModels()
+    private val grupoSeleccionado: GrupoSeleccionado by activityViewModels()
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,10 +55,39 @@ class AsistFragment : Fragment(), HomeAux {
         setAthlets()
         setupAdapter()
         setupRecyclerView()
+    }
+
+    private fun setListener(){
+
+
+        val groupObserver = Observer{}
+
+        fun onGroupChanged(any: Any?) {
+            if (any != null) {
+                val group = any as String
+                mAthletsRef = FirebaseDatabase.getInstance().reference.child("grupos").child(group)
+                mFirebaseAdapter.cleanup()
+                setAthlets()
+                setupAdapter()
+                setupRecyclerView()
+            }
+        }
+
+        grupoSeleccionado.currentGroup.observe(this, Observer{
+
+
+        })
+    }
+
+    private fun onGroupChanged(any: Any?) {
 
     }
 
+
     //como recibir el nombre del objeto al que pertenece a lo que hemos pulsado
+
+
+
 
     private fun setAthlets() {
         var atleta = Atleta(
@@ -191,9 +220,7 @@ class AsistFragment : Fragment(), HomeAux {
                     deleteAtleta(atleta)
                     true
                 }
-
             }
-
 
             binding.cbFalta.setOnCheckedChangeListener { compoundButton, checked ->
                 setFalta(atleta, checked)

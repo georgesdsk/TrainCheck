@@ -3,18 +3,23 @@ package com.finde.android.traincheck.Fragments.main_page
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.viewpager.widget.ViewPager
 import com.finde.android.traincheck.Activities.Sesion.ui.login.SignInActivity
 import com.finde.android.traincheck.R
+import com.finde.android.traincheck.ViewModel.GrupoSeleccionado
 import com.finde.android.traincheck.databinding.ActivityMainBinding
 import com.firebase.ui.auth.IdpResponse
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import androidx.fragment.app.activityViewModels
 
 
 class MainActivity : AppCompatActivity() {
@@ -33,28 +38,48 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mDatabaseRef: DatabaseReference
     private lateinit var mGruposRef: DatabaseReference
     private lateinit var mUsuariosRef: DatabaseReference
+    private val grupoSeleccionado: GrupoSeleccionado by viewModels<GrupoSeleccionado>()
     var entrenadores = mutableListOf<String>()
-    //Vista deslizante
-    private lateinit var demoCollectionPagerAdapter: DemoCollectionPagerAdapter
-    private lateinit var viewPager: ViewPager
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
-
-        demoCollectionPagerAdapter = DemoCollectionPagerAdapter(supportFragmentManager)
-        viewPager = mBinding.pager
-        viewPager.adapter = demoCollectionPagerAdapter
-
         setupNavigationBar()
+        setupHeaderNav()
         setupReferences()
         setupAuth()
-       // insertarGrupos() // y cambiar al entrenador
-
+        // insertarGrupos() // y cambiar al entrenador
     }
+
+    private fun setupHeaderNav() {
+        mBinding.headerNav.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                //Toast.makeText(this@MainActivity, "Seleccionado", Toast.LENGTH_SHORT).show()
+                when (tab?.position) {
+                    0 -> {
+                        grupoSeleccionado.grupoSeleccionado = "0"
+                        Toast.makeText(this@MainActivity, "0", Toast.LENGTH_SHORT).show()
+                    }
+                    1 -> {
+                        grupoSeleccionado.grupoSeleccionado = "1"
+                        Toast.makeText(this@MainActivity, "Seleccionado", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+
+            }
+
+        })
+    }
+
 
     private fun setupNavigationBar() {
         val navHostFragment =
@@ -92,20 +117,21 @@ class MainActivity : AppCompatActivity() {
                 this.startActivity(intent)
             }
             //esto podria ser un .get pero no funciona mGruposRef.child("Entrenadores").get(mFirebaseAuth.currentUser!!.uid)
-           // mGruposRef.child("Entrenadores").equalTo(mFirebaseAuth.currentUser!!.uid)
+            // mGruposRef.child("Entrenadores").equalTo(mFirebaseAuth.currentUser!!.uid)
 
             val entrenadorListener = object : ValueEventListener {
                 override fun onDataChange(snapshots: DataSnapshot) {
                     isEntrenador = false
-                    for (snapshot in snapshots.children ) { // ponerle un and si se ha encontradon // utilizaria lambda pero los snapshots no son string
-                        if (snapshot.getValue().toString() == mFirebaseAuth.currentUser!!.uid){
+                    for (snapshot in snapshots.children) { // ponerle un and si se ha encontradon // utilizaria lambda pero los snapshots no son string
+                        if (snapshot.getValue().toString() == mFirebaseAuth.currentUser!!.uid) {
                             isEntrenador = true
                         }
                     }
-                    if(isEntrenador){
+                    if (isEntrenador) {
                         iniciarAlumno()
                     }
                 }
+
                 override fun onCancelled(error: DatabaseError) {}
             }
             mGruposRef.child("Entrenadores").addListenerForSingleValueEvent(entrenadorListener)
