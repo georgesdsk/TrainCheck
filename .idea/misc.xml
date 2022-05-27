@@ -14,8 +14,11 @@
         <entry key="..\:/Trabajos/app/src/main/res/menu/botom__nav_menu.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/gsadouski/.gradle/caches/transforms-2/files-2.1/0aff48a3189570b8da48e865e4bf0187/jetified-firebase-ui-auth-7.1.1/res/drawable/fui_ic_mail_white_24dp.xml" value="0.1215" />
         <entry key="..\:/Users/gsadouski/AndroidStudioProjects/TrainCheck/app/src/main/res/drawable/rounded_edit.xml" value="0.1215" />
+        <entry key="..\:/Users/gsadouski/AndroidStudioProjects/TrainCheck/app/src/main/res/drawable/rounded_edit2.xml" value="0.246" />
+        <entry key="..\:/Users/gsadouski/AndroidStudioProjects/TrainCheck/app/src/main/res/layout/activity_main.xml" value="0.13924050632911392" />
         <entry key="..\:/Users/gsadouski/AndroidStudioProjects/TrainCheck/app/src/main/res/layout/activity_sign_in.xml" value="0.25" />
         <entry key="..\:/Users/gsadouski/AndroidStudioProjects/TrainCheck/app/src/main/res/layout/fragment_inicio.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/gsadouski/AndroidStudioProjects/TrainCheck/app/src/main/res/layout/registry_activity.xml" value="0.25" />
         <entry key="..\:/Users/gsadouski/Desktop/Downloads/Snapshots/app/src/main/res/layout/activity_main.xml" value="0.20018115942028986" />
         <entry key="..\:/Users/gsadouski/Desktop/Downloads/Snapshots/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25729166666666664" />
         <entry key="..\:/Users/sadac/AndroidStudioProjects/ProyectoFinal/app/src/main/res/drawable/ic_account_circle.xml" value="0.2375" />
@@ -53,7 +56,6 @@
         <entry key="..\:/Users/sadac/StudioProjects/ProyectoFinal/app/src/main/res/layout/inicio.xml" value="0.13732394366197184" />
         <entry key="..\:/Users/sadac/StudioProjects/ProyectoFinal/app/src/main/res/layout/item_atleta.xml" value="0.33" />
         <entry key="..\:/Users/sadac/StudioProjects/ProyectoFinal/app/src/main/res/layout/item_entrenamiento.xml" value="0.3625" />
-        <entry key="..\:/Users/sadac/StudioProjects/ProyectoFinal/app/src/main/res/layout/registry_activity.xml" value="0.3079710144927536" />
         <entry key="..\:/Users/sadac/StudioProjects/ProyectoFinal/app/src/main/res/menu/botom__nav_menu.xml" value="0.20677083333333332" />
         <entry key="..\:/Users/sadac/StudioProjects/ProyectoFinal/app/src/main/res/menu/head_nav_menu.xml" value="0.29010416666666666" />
       </map>

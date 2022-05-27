@@ -11,6 +11,7 @@ import com.finde.android.traincheck.R
 import com.finde.android.traincheck.ViewModel.FireBaseReferencies
 import com.finde.android.traincheck.ViewModel.GrupoSeleccionado
 import com.finde.android.traincheck.databinding.ActivitySignInBinding
+import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -42,12 +43,13 @@ class SignInActivity : AppCompatActivity() {
 
     }
 
+
+
+
     private fun initRegister() {
         val intent = Intent(this, RegisterActivity::class.java)
         this.startActivity(intent)
     }
-
-
 
     private fun iniciarSesion(s: String, s1: String) {
         mFirebaseAuth.signInWithEmailAndPassword(s, s1).addOnCompleteListener(this) { task ->
