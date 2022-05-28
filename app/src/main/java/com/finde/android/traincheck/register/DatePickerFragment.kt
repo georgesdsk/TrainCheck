@@ -1,4 +1,4 @@
-package com.finde.android.traincheck.Activities.Sesion.ui.login
+package com.finde.android.traincheck.register
 
 
 import android.app.DatePickerDialog

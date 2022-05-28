@@ -5,58 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/b5"
-    tools:context=".register.RegisterActivity">
-
-
-
-    <TextView
-        android:id="@+id/signin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="30dp"
-        android:gravity="left"
-        android:text="Registro"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textColor="#45654A"
-        android:textSize="35dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/headerNav"
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        app:layout_constraintTop_toBottomOf="@+id/signin"
-        android:outlineSpotShadowColor="@color/black"
-        app:tabIndicatorColor="@color/white"
-        app:tabIndicatorHeight="4dp"
-        android:backgroundTint="#45654A"
-        app:layout_constraintStart_toStartOf="parent"
-        android:outlineAmbientShadowColor="@color/black"
-        style="@style/Animation.Design.BottomSheetDialog"
-        >
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            />
-
-    </com.google.android.material.tabs.TabLayout>
-<!--
+    tools:context=".register.Register1">
 
     <EditText
         android:id="@+id/name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
+        app:helperText="tusmejrutyos"
         android:background="@drawable/rounded_edit"
+        android:maxWidth="200dp"
         android:drawableLeft="@drawable/fui_ic_mail_white_24dp"
         android:drawablePadding="20dp"
         android:hint="Nombre"
@@ -65,7 +23,7 @@
         android:textColor="#45654A"
         android:textColorHint="#45654A"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signin" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/surname"
@@ -81,7 +39,7 @@
         android:textColorHint="#45654A"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/name"
-        app:layout_constraintTop_toBottomOf="@id/signin" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <EditText
@@ -97,7 +55,7 @@
         android:textColor="#45654A"
         android:textColorHint="#45654A"
         app:layout_constraintBottom_toBottomOf="@+id/group"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/group"
         app:layout_constraintTop_toTopOf="@+id/group" />
 
     <EditText
@@ -112,7 +70,6 @@
         android:padding="20dp"
         android:textColor="#45654A"
         android:textColorHint="#45654A"
-        app:layout_constraintEnd_toStartOf="@+id/datePicker"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/name" />
 
@@ -120,15 +77,16 @@
         android:id="@+id/mail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
         android:background="@drawable/rounded_edit"
         android:drawableLeft="@drawable/fui_ic_mail_white_24dp"
         android:drawablePadding="20dp"
-        android:hint="Mail adress"
-        android:inputType="textEmailAddress"
+        android:hint="Correo electrónico"
+        android:layout_margin="20dp"
         android:padding="20dp"
         android:textColor="#45654A"
         android:textColorHint="#45654A"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/group" />
 
@@ -141,6 +99,7 @@
         android:drawableLeft="@drawable/ic_exit_to_app"
         android:drawablePadding="20dp"
         android:hint="Password"
+        app:endIconMode="clear_text"
         android:inputType="textPassword"
         android:padding="20dp"
         android:textColor="#45654A"
@@ -159,6 +118,7 @@
         android:padding="20dp"
         android:textColor="#45654A"
         android:textColorHint="#45654A"
+        app:endIconMode="clear_text"
         android:background="@drawable/rounded_edit2"
         app:layout_constraintStart_toEndOf="@id/password"
         app:layout_constraintTop_toBottomOf="@id/mail"
@@ -173,34 +133,14 @@
         android:layout_below="@id/password2"
         android:layout_centerHorizontal="true"
         android:backgroundTint="#45654A"
+        android:text="Next step"
         android:elevation="10dp"
         android:paddingHorizontal="35dp"
-        android:layout_margin="20dp"
-        android:text="Next step"
         app:cornerRadius="60dp"
-        app:layout_constraintEnd_toEndOf="@+id/password2"
-        app:layout_constraintStart_toStartOf="@+id/password2"
-        app:layout_constraintTop_toBottomOf="@+id/password2" />
-
-
-
-
--->
-
-
-
-
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/registryContainer"
-            android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:defaultNavHost="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/headerNav"
-            app:navGraph="@navigation/registry_nav" />
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password" />
 
 
 

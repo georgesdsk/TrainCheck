@@ -1,9 +1,12 @@
 package com.finde.android.traincheck.ViewModel
 
-import androidx.lifecycle.ViewModel
+
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 
 class FireBaseReferencies() {
     companion object{
@@ -11,6 +14,8 @@ class FireBaseReferencies() {
         lateinit var mFormacionRef: DatabaseReference
         lateinit var mAltoRendimientoRef: DatabaseReference
         lateinit var mEntrenadoresRef: DatabaseReference
+        lateinit var mStorageRef: StorageReference
+
         lateinit var mFirebaseAuth: FirebaseAuth
 
         fun create(){
@@ -19,6 +24,9 @@ class FireBaseReferencies() {
             mEntrenadoresRef = mDatabaseRef.child("Entrenadores")
             mFormacionRef = mDatabaseRef.child("Grupos").child("Formacion")
             mAltoRendimientoRef = mDatabaseRef.child("Grupos").child("AltoRendimiento")
+            mStorageRef = FirebaseStorage.getInstance().reference
+
+
         }
 
 

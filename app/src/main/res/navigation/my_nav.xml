@@ -52,7 +52,7 @@
         android:id="@+id/inicioFragment"
         android:name="com.finde.android.traincheck.Fragments.main_page.InicioFragment"
         android:label="fragment_inicio"
-        tools:layout="@layout/fragment_inicio" >
+        tools:layout="@layout/fragment_register1" >
         <action
             android:id="@+id/actionInicio"
             app:destination="@id/actionInicio" />
@@ -64,7 +64,7 @@
         tools:layout="@layout/fragment_atleta_detalles" />
     <activity
         android:id="@+id/signInActivity"
-        android:name="com.finde.android.traincheck.Activities.Sesion.ui.login.SignInActivity"
+        android:name="com.finde.android.traincheck.login.SignInActivity"
         android:label="activity_sign_in"
         tools:layout="@layout/activity_sign_in" />
 </navigation>

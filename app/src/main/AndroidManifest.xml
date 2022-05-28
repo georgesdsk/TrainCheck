@@ -13,14 +13,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Snapshots" >
         <activity
-            android:name=".Activities.Sesion.ui.login.SignInActivity"
+            android:name="com.finde.android.traincheck.login.SignInActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.login.LoginActivity"
+            android:name=".register.RegisterActivity"
             android:exported="false"
             android:label="@string/title_activity_login" />
         <activity
-            android:name="com.finde.android.traincheck.Activities.Splash.SplashActivity"
+            android:name="com.finde.android.traincheck.login.SplashActivity"
             android:theme="@style/SplashTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

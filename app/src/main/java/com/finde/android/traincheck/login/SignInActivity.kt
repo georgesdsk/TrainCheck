@@ -1,20 +1,15 @@
-package com.finde.android.traincheck.Activities.Sesion.ui.login
+package com.finde.android.traincheck.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.activity.viewModels
 import com.finde.android.traincheck.Fragments.main_page.MainActivity
 import com.finde.android.traincheck.R
-import com.finde.android.traincheck.ViewModel.FireBaseReferencies
-import com.finde.android.traincheck.ViewModel.GrupoSeleccionado
 import com.finde.android.traincheck.databinding.ActivitySignInBinding
-import com.google.android.material.tabs.TabLayout
+import com.finde.android.traincheck.register.RegisterActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 
 //ocultar el nombre
 class SignInActivity : AppCompatActivity() {
@@ -42,9 +37,6 @@ class SignInActivity : AppCompatActivity() {
         }
 
     }
-
-
-
 
     private fun initRegister() {
         val intent = Intent(this, RegisterActivity::class.java)

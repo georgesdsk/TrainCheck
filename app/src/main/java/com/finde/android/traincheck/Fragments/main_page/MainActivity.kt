@@ -5,12 +5,10 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
-import androidx.viewpager.widget.ViewPager
-import com.finde.android.traincheck.Activities.Sesion.ui.login.SignInActivity
+import com.finde.android.traincheck.login.SignInActivity
 import com.finde.android.traincheck.R
 import com.finde.android.traincheck.ViewModel.GrupoSeleccionado
 import com.finde.android.traincheck.databinding.ActivityMainBinding
@@ -19,11 +17,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import androidx.fragment.app.activityViewModels
 import com.finde.android.traincheck.ViewModel.FireBaseReferencies
 import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mDatabaseRef
 import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mEntrenadoresRef
 import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mFirebaseAuth
+import com.google.firebase.ktx.Firebase
 import kotlin.math.sign
 
 
@@ -77,6 +75,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun setupNavigationBar() {
+
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.navController

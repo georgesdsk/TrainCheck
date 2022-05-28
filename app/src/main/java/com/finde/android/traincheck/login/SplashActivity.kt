@@ -1,4 +1,4 @@
-package com.finde.android.traincheck.Activities.Splash
+package com.finde.android.traincheck.login
 
 import android.content.Intent
 import android.os.Bundle

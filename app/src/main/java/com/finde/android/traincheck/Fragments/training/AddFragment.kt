@@ -11,13 +11,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.finde.android.traincheck.Entities.Entrenamiento
 import com.finde.android.traincheck.R
+import com.finde.android.traincheck.ViewModel.FireBaseReferencies
 import com.finde.android.traincheck.databinding.FragmentAddBinding
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 
 class AddFragment : Fragment() {
 
@@ -25,9 +21,6 @@ class AddFragment : Fragment() {
     private val PATH_ENTRENAMIENTOS = "entrenamientos"
 
     private lateinit var mBinding: FragmentAddBinding
-    private lateinit var mStorageReference: StorageReference
-    private lateinit var mDatabaseReference: DatabaseReference
-
     private var mPhotoSelectedUri: Uri? = null
 
     override fun onCreateView(
@@ -51,11 +44,6 @@ class AddFragment : Fragment() {
 
         mBinding.btnSelect.setOnClickListener { openGallery() }
 
-        mStorageReference = FirebaseStorage.getInstance().reference
-        mDatabaseReference = FirebaseDatabase.getInstance().reference.child(PATH_ENTRENAMIENTOS)
-        val mAuth = FirebaseAuth.getInstance()
-
-
     }
 
     private fun openGallery() {
@@ -65,10 +53,19 @@ class AddFragment : Fragment() {
 
     private fun subirEntrenamiento() {
         mBinding.progressBar.visibility = View.VISIBLE
-        val key = mDatabaseReference.push().key!!
-        val storageReference = mStorageReference.child(PATH_ENTRENAMIENTOS).child("my_training2")
+        var selectGroup : String
 
-        //.child(FirebaseAuth.getInstance().currentUser!!.uid).child(key)
+        //mejorar
+        if (mBinding.rbGroups.checkedRadioButtonId==R.id.alto_rendimiento){
+            selectGroup = "Alto Rendimiento"
+        }
+        else{
+            selectGroup = "Formación"
+
+        }
+
+        val key = FireBaseReferencies.mDatabaseRef.child("Grupos").child(selectGroup).child(PATH_ENTRENAMIENTOS).push().key!!
+        val storageReference = FireBaseReferencies.mStorageRef.child(PATH_ENTRENAMIENTOS).child(key)
 
         if (mPhotoSelectedUri != null) {
             storageReference.putFile(mPhotoSelectedUri!!)
@@ -84,7 +81,7 @@ class AddFragment : Fragment() {
                         Snackbar.make(mBinding.root, "Entrenamiento publicado.",
                                 Snackbar.LENGTH_SHORT).show()
                         it.storage.downloadUrl.addOnSuccessListener {
-                            guardarEntrenamiento(key, it.toString(), mBinding.etTitle.text.toString().trim())
+                            guardarEntrenamiento(key, it.toString(), mBinding.etTitle.text.toString().trim(), selectGroup)
                             mBinding.tilTitle.visibility = View.GONE
                             mBinding.tvMessage.text = getString(R.string.post_entrenamiento)
                         }
@@ -96,9 +93,9 @@ class AddFragment : Fragment() {
         }
     }
 
-    private fun guardarEntrenamiento(key: String, url: String, title: String){
-        val entrenamiento = Entrenamiento( id = key, urlEntrenamiento= url, nombre = title)// fecha = Date.getDefaultInstance(),
-        mDatabaseReference.child(key).setValue(entrenamiento)
+    private fun guardarEntrenamiento(key: String, url: String, title: String, selectGroup: String){
+        val entrenamiento = Entrenamiento( id = key, urlEntrenamiento= url, nombre = title, group = selectGroup)// fecha = Date.getDefaultInstance(),
+        FireBaseReferencies.mDatabaseRef.child("Grupos").child(selectGroup).child(PATH_ENTRENAMIENTOS).child(key).setValue(entrenamiento)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
