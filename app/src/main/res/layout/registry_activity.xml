@@ -181,14 +181,7 @@
         app:layout_constraintEnd_toEndOf="@+id/password2"
         app:layout_constraintStart_toStartOf="@+id/password2"
         app:layout_constraintTop_toBottomOf="@+id/password2" />
-
-
-
-
 -->
-
-
-
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/registryContainer"

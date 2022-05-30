@@ -33,9 +33,6 @@ class StatsFragment : Fragment() {
         mBinding.tvEmail.text = FirebaseAuth.getInstance().currentUser?.email
         val navigation = Navigation.findNavController(mBinding.root)
 
-        mBinding.btnInicio.setOnClickListener {
-            navigation.navigate(R.id.actionInicio)
-        }
         mBinding.btnEncuesta.setOnClickListener{
             navigation.navigate(R.id.actionEncuesta)
 

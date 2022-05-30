@@ -2,15 +2,17 @@ package com.finde.android.traincheck.ViewModel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.finde.android.traincheck.Entities.UserRegister
 
 
 class RegistrationViewModel : ViewModel() {
-     lateinit var name: MutableLiveData<String>
-     lateinit var surname: MutableLiveData<String>
-     lateinit var nGroup: MutableLiveData<String>
-     lateinit var dateOfBirth: MutableLiveData<String>
-     lateinit var mail: MutableLiveData<String>
-     lateinit var password: MutableLiveData<String>
-     lateinit var password2: MutableLiveData<String>
+     var name: MutableLiveData<String> = MutableLiveData("")
+      var surname: MutableLiveData<String> = MutableLiveData("")
+      var nGroup: MutableLiveData<String> = MutableLiveData("")
+      var dateOfBirth: MutableLiveData<String> = MutableLiveData("")
+      var mail: MutableLiveData<String> = MutableLiveData("")
+      var password: MutableLiveData<String> = MutableLiveData("")
+      var password2: MutableLiveData<String> = MutableLiveData("")
+      var lateinit userRegister: UserRegister
 
 }

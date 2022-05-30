@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/b5"
     tools:context=".Fragments.stats.EncuestaFragment">
 
 
@@ -15,7 +15,6 @@
         android:layout_margin="16dp"
         android:elevation="200dp"
         android:text="Siguiente pregunta"
-        style="@style/FirebaseUI.Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,7 +29,6 @@
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:text="¿Cuanto te has esforzado hoy?"
-        android:textColor="@color/white"
         android:textSize="35dp"
         android:textStyle="bold"
         android:gravity="center"
@@ -57,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Mucho"
-            android:textColor="@color/white"
+
             android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
         <RadioButton
@@ -65,14 +63,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Bastante"
-            android:textColor="@color/white"
+
             android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
         <RadioButton
             android:id="@+id/suficiente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+
             android:text="Suficiente"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"></RadioButton>
 
@@ -80,7 +78,7 @@
             android:id="@+id/poco"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+
             android:text="Poco"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"></RadioButton>
 
@@ -89,7 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Muy poco"
-            android:textColor="@color/white"
+
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"></RadioButton>
 
 

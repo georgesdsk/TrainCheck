@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.navController
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNav)
+        val bottomNavigationView = mBinding.bottomNav //findViewById<BottomNavigationView>(R.id.bottomNav)
         setupWithNavController(bottomNavigationView, navController)
 
     }
@@ -135,7 +135,6 @@ class MainActivity : AppCompatActivity() {
 // recoger los datos de los dos fragments
 
     private fun register() {
-
         mFirebaseAuth.createUserWithEmailAndPassword("email@gmail.com", "contraseña")
             .addOnCompleteListener {
                 if (it.isSuccessful) {

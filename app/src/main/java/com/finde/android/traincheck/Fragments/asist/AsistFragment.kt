@@ -57,7 +57,7 @@ class AsistFragment : Fragment(), HomeAux {
         setupRecyclerView()
         setListener()
     }
-
+//todo
     private fun setListener(){
 
         grupoSeleccionado.currentGroup.observe(viewLifecycleOwner, {
@@ -76,18 +76,18 @@ class AsistFragment : Fragment(), HomeAux {
 
     private fun setAthlets() {
         var atleta = Atleta(
-            nombre = "Juan",
-            apellidos = "Fernandez Pastor",
+            name = "Juan",
+            surname = "Fernandez Pastor",
             id = "ciuaqluier",
-            fechaNacimiento = Date(2002, 9, 10),
+            dateBirth = Date(2002, 9, 10),
             photoUrl = "https://definicionde.es/wp-content/uploads/2019/04/definicion-de-persona-min.jpg"
         )
 
         var atleta2 = Atleta(
-            nombre = "Juan alberto",
-            apellidos = "Jimenez franco",
+            name = "Juan alberto",
+            surname = "Jimenez franco",
             id = "ciuaqluier2",
-            fechaNacimiento = Date(2002, 9, 10),
+            dateBirth = Date(2002, 9, 10),
             photoUrl = "https://iteragrow.com/wp-content/uploads/2018/04/buyer-persona-e1545248524290.jpg"
         )
         mAthletsRef.child("Formacion").child("ciuaqluier1").setValue(atleta2)
@@ -118,7 +118,7 @@ class AsistFragment : Fragment(), HomeAux {
 
                 with(holder) {
                     setListener(atleta)
-                    val completo = atleta.nombre + " " + atleta.apellidos
+                    val completo = atleta.name + " " + atleta.surname
                     binding.name.text = completo
                     Glide.with(mContext)
                         .load(atleta.photoUrl)

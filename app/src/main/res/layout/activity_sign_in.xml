@@ -130,6 +130,23 @@
 
     </LinearLayout>
 
+    <CheckBox
+        android:id="@+id/checkBox"
+
+        style="check"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/password"
+        android:layout_alignTop="@+id/loginbtn"
+        android:layout_alignBottom="@+id/loginbtn"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="-3dp"
+        android:layout_marginEnd="-18dp"
+        android:layout_marginBottom="3dp"
+        android:layout_toStartOf="@+id/loginbtn"
+        android:text="Sesion iniciada"
+        android:textColor="#45654A"
+        android:textStyle="bold" />
 
 
 </RelativeLayout>

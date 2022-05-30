@@ -11,7 +11,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.finde.android.traincheck.ViewModel.AtletaSeleccionado
 import com.finde.android.traincheck.databinding.FragmentAtletaDetallesBinding
 
-
+//todo anhadir boton atras
 
 class DetailsFragment : Fragment() {
 
@@ -31,7 +31,7 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val nombreCompleto: String = vmAtleta.atletaSeleccionado.nombre + vmAtleta.atletaSeleccionado.apellidos
+        val nombreCompleto: String = vmAtleta.atletaSeleccionado.name + vmAtleta.atletaSeleccionado.surname
 
         mBinding.tituloNombre.text = nombreCompleto
 

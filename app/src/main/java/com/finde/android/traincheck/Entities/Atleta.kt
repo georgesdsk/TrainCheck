@@ -8,14 +8,15 @@ import java.util.*
 
 
 @IgnoreExtraProperties
-data class Atleta(@get:Exclude var id: String = "",
-                  var nombre: String = "",
-                  var apellidos: String = "",
-                  var grupo: String ="",
+data class Atleta(@get:Exclude var id   : String = "",
+                  var name: String = "",
+                  var surname: String = "",
+                  var group: String ="",
+                  var mail: String = "",
                   var photoUrl: String ="",
-                  var fechaNacimiento: Date = Date(2019,8,10),
-                  var tipoAsistencia: Int = 1, // de tres tipo
-                  var listaFaltas: List<Date> = mutableListOf(),
-                  var listaStats: List<Stat> = mutableListOf(),
-                  var listaMolestias: List<Injury> = mutableListOf()
+                  var dateBirth: Date = Date(2019,8,10),
+                  var asistType: Int = 1, // de tres tipo
+                  var listAbsence: List<Date> = mutableListOf(),
+                  var listStats: List<Stat> = mutableListOf(),
+                  var injuryList: List<Injury> = mutableListOf()
 )

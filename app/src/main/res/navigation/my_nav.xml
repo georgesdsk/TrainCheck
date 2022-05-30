@@ -19,9 +19,6 @@
         android:label="fragment_asist"
         tools:layout="@layout/fragment_asist" >
         <action
-            android:id="@+id/action_asistFragment_to_inicioFragment"
-            app:destination="@id/inicioFragment" />
-        <action
             android:id="@+id/actionAthletDetails"
             app:destination="@id/detailsFragment" />
     </fragment>
@@ -48,15 +45,7 @@
         android:name="com.finde.android.traincheck.Fragments.stats.EncuestaFragment"
         android:label="fragment_encuesta"
         tools:layout="@layout/fragment_encuesta" />
-    <fragment
-        android:id="@+id/inicioFragment"
-        android:name="com.finde.android.traincheck.Fragments.main_page.InicioFragment"
-        android:label="fragment_inicio"
-        tools:layout="@layout/fragment_register1" >
-        <action
-            android:id="@+id/actionInicio"
-            app:destination="@id/actionInicio" />
-    </fragment>
+
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.finde.android.traincheck.Fragments.asist.DetailsFragment"
