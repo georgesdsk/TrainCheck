@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.finde.android.traincheck.R
+import com.finde.android.traincheck.ViewModel.GrupoSeleccionado
 import com.finde.android.traincheck.databinding.FragmentStatsBinding
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
@@ -40,6 +41,8 @@ class StatsFragment : Fragment() {
         mBinding.btnLogout.setOnClickListener{
             singOut()
         }
+
+        Toast.makeText(context, Toast.LENGTH_LONG).show()
 
     }
 

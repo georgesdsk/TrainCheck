@@ -90,8 +90,44 @@ class AsistFragment : Fragment(), HomeAux {
             dateBirth = Date(2002, 9, 10),
             photoUrl = "https://iteragrow.com/wp-content/uploads/2018/04/buyer-persona-e1545248524290.jpg"
         )
+        var atleta3 = Atleta(
+            name = "Juan",
+            surname = "Fernandez Pastor",
+            id = "ciuaqluier",
+            dateBirth = Date(2002, 9, 10),
+            photoUrl = "https://definicionde.es/wp-content/uploads/2019/04/definicion-de-persona-min.jpg"
+        )
+
+        var atleta4 = Atleta(
+            name = "Juan alberto",
+            surname = "Jimenez franco",
+            id = "ciuaqluier2",
+            dateBirth = Date(2002, 9, 10),
+            photoUrl = "https://iteragrow.com/wp-content/uploads/2018/04/buyer-persona-e1545248524290.jpg"
+        )
+        var atleta5 = Atleta(
+            name = "Juan",
+            surname = "Fernandez Pastor",
+            id = "ciuaqluier",
+            dateBirth = Date(2002, 9, 10),
+            photoUrl = "https://definicionde.es/wp-content/uploads/2019/04/definicion-de-persona-min.jpg"
+        )
+
+        var atleta6= Atleta(
+            name = "Juan alberto",
+            surname = "Jimenez franco",
+            id = "ciuaqluier2",
+            dateBirth = Date(2002, 9, 10),
+            photoUrl = "https://iteragrow.com/wp-content/uploads/2018/04/buyer-persona-e1545248524290.jpg"
+        )
         mAthletsRef.child("Formacion").child("ciuaqluier1").setValue(atleta2)
-        mAthletsRef.child("Altorendimiento").child("ciuaqluier2").setValue(atleta)
+        mAthletsRef.child("Altorendimiento").child("ciuaqluier3").setValue(atleta)
+        mAthletsRef.child("Formacion").child("ciuaqluier4").setValue(atleta2)
+        mAthletsRef.child("Altorendimiento").child("ciuaqluier5").setValue(atleta)
+        mAthletsRef.child("Formacion").child("ciuaqluier6").setValue(atleta2)
+        mAthletsRef.child("Altorendimiento").child("ciuaqluier7").setValue(atleta)
+        mAthletsRef.child("Formacion").child("ciuaqluier8").setValue(atleta2)
+        mAthletsRef.child("Altorendimiento").child("ciuaqluier9").setValue(atleta)
     }
 
     private fun setupAdapter() {

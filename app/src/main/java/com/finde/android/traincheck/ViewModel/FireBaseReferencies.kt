@@ -23,12 +23,10 @@ class FireBaseReferencies() {
             mFirebaseAuth = FirebaseAuth.getInstance()
             mDatabaseRef =  FirebaseDatabase.getInstance("https://traincheck-481b2-default-rtdb.europe-west1.firebasedatabase.app").reference
             mEntrenadoresRef = mDatabaseRef.child("Entrenadores")
-            mGruposRef = mDatabaseRef.child("Grupo")
+            mGruposRef = mDatabaseRef.child("Grupos")
             mFormacionRef = mDatabaseRef.child("Grupos").child("Formacion")
             mAltoRendimientoRef = mDatabaseRef.child("Grupos").child("AltoRendimiento")
             mStorageRef = FirebaseStorage.getInstance().reference
-
-
         }
 
 

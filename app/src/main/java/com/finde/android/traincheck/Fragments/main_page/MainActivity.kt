@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
+import com.cursosant.android.traincheck.Entities.Group
 import com.finde.android.traincheck.login.SignInActivity
 import com.finde.android.traincheck.R
 import com.finde.android.traincheck.ViewModel.GrupoSeleccionado
@@ -21,6 +22,7 @@ import com.finde.android.traincheck.ViewModel.FireBaseReferencies
 import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mDatabaseRef
 import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mEntrenadoresRef
 import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mFirebaseAuth
+import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mGruposRef
 import com.google.firebase.ktx.Firebase
 import kotlin.math.sign
 
@@ -42,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         grupoSeleccionado.currentGroup.value = "AltoRendimiento"
-
+        FireBaseReferencies.create()
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
 
@@ -50,6 +52,7 @@ class MainActivity : AppCompatActivity() {
         setupHeaderNav()
         FireBaseReferencies.create()
         setupAuth()
+        Toast.makeText(this, grupoSeleccionado.currentGroup.toString(), Toast.LENGTH_SHORT).show()
         // insertarGrupos() // y cambiar al entrenador
     }
 
@@ -87,24 +90,19 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupAuth() {
         //necesitas un listener por si sales en cualquier momento
-        signIn()
-
-        mAuthListener = FirebaseAuth.AuthStateListener {
-            signIn()
-        }
-        //esto podria ser un .get pero no funciona mGruposRef.child("Entrenadores").get(mFirebaseAuth.currentUser!!.uid)
-        // mGruposRef.child("Entrenadores").equalTo(mFirebaseAuth.currentUser!!.uid)
-
         val entrenadorListener = object : ValueEventListener {
             override fun onDataChange(snapshots: DataSnapshot) {
                 var isEntrenador: Boolean = false
                 if (mFirebaseAuth.currentUser != null) {
                     for (snapshot in snapshots.children) { // ponerle un and si se ha encontradon // utilizaria lambda pero los snapshots no son string
-                        if (mFirebaseAuth.currentUser!!.uid == snapshot.getValue().toString()) {
+                        if (mFirebaseAuth.currentUser!!.uid == snapshot.key) {
                             isEntrenador = true
                         }
                     }
                     if (isEntrenador) {
+                        signIn()
+                    }
+                    else{
                         iniciarAlumno()
                     }
                 }
@@ -114,6 +112,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         mEntrenadoresRef.addListenerForSingleValueEvent(entrenadorListener)
+
+        mAuthListener = FirebaseAuth.AuthStateListener {
+            signIn()
+        }
+
     }
 
 
@@ -128,7 +131,33 @@ class MainActivity : AppCompatActivity() {
     //Analisis: cambiar el navBar, navBar superior,  boton de entrenamientos, y stas solo particulares
     private fun iniciarAlumno() {
         mBinding.bottomNav.menu.removeItem(R.id.asistFragment)
+        mBinding.headerNav.visibility = TabLayout.GONE
+        //encontra su grupo
+        findGroup()
+        signIn()
         //mBinding.topNav.visibility = View.GONE
+    }
+
+    private fun findGroup(){
+        val gruposListener = object : ValueEventListener {
+            override fun onDataChange(snapshots: DataSnapshot) {
+                for (snapshot in snapshots.children) {
+                    val group = snapshot.getValue(Group::class.java)
+                    for(athlet in group!!.listaAtletas)
+                    {
+                        if(athlet.id == mFirebaseAuth.currentUser!!.uid)
+                        {
+                            grupoSeleccionado.currentGroup.value = group.name
+                        }
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {}
+        }
+        mGruposRef.addListenerForSingleValueEvent(gruposListener)
+
+
     }
 
 //doble pantalla , nombre, apellido, correo, codigo, contraseña

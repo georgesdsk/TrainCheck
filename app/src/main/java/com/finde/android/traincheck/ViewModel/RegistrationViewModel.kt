@@ -13,6 +13,6 @@ class RegistrationViewModel : ViewModel() {
       var mail: MutableLiveData<String> = MutableLiveData("")
       var password: MutableLiveData<String> = MutableLiveData("")
       var password2: MutableLiveData<String> = MutableLiveData("")
-      var lateinit userRegister: UserRegister
+      //var lateinit userRegister: UserRegister
 
 }
