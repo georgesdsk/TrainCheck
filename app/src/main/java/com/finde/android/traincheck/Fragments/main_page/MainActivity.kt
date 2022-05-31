@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        grupoSeleccionado.currentGroup.value = "AltoRendimiento"
+        grupoSeleccionado.currentGroup.value = "Formacion"
         FireBaseReferencies.create()
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
                         grupoSeleccionado.currentGroup.value = "Formacion"
                     }
                     1 -> {
-                        grupoSeleccionado.currentGroup.value = "Altorendimiento"
+                        grupoSeleccionado.currentGroup.value = "Alto Rendimiento"
                     }
                 }
             }

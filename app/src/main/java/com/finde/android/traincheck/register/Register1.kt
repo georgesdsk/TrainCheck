@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.text.set
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
@@ -40,6 +41,7 @@ class Register1 : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupOnclickListeners()
         setupEditText()
+        setupInputText()
         registrationViewModel
         mBinding.name.text.toString()
     }
@@ -47,81 +49,62 @@ class Register1 : Fragment() {
     private fun setupEditText() {
         // error de que l veiwmodole no esta iniciado
 
-
-        mBinding.name.doOnTextChanged { text, start, before, count ->
-            registrationViewModel.name.postValue(text.toString())
-        }
-
-   /*     mBinding.surname.doOnTextChanged { text, start, before, count ->
-            registrationViewModel.surname.postValue(text as String?)
-        }
-        mBinding.group.doOnTextChanged { text, start, before, count ->
-            registrationViewModel.nGroup.postValue(text as String?)
-        }
-        mBinding.datePicker.doOnTextChanged { text, start, before, count ->
-            registrationViewModel.dateOfBirth.postValue(text as String?)
-        }
-        mBinding.password.doOnTextChanged { text, start, before, count ->
-            registrationViewModel.password.postValue(text as String?)
-        }*/
-
-
-
         mBinding.buttonNext.setOnClickListener {
-            // registrationViewModel.name.postValue(mBinding.name.text.toString())
-
-            registrationViewModel.surname.postValue(mBinding.surname.text.toString())
-            registrationViewModel.nGroup.postValue(mBinding.group.text.toString())
-            registrationViewModel.mail.postValue(mBinding.mail.text.toString())
-            registrationViewModel.password.postValue(mBinding.password.text.toString())
-            registrationViewModel.password2.postValue(mBinding.password2.text.toString())
-            val navigation = Navigation.findNavController(mBinding.root).navigate(R.id.action_register1_to_register2)
+            passToNextFragment()
         }
         mBinding.datePicker.setOnClickListener {
             setupDatePickerEditText()
         }
     }
-        // val image = mBinding.photo.text
-        // val date = mBinding.group.text
 
-    /*    if (registrationViewModel.name.value!!.isEmpty() || registrationViewModel.surname.value!!.isEmpty() ||
-            registrationViewModel.nGroup.value!!.isEmpty() || registrationViewModel.mail.value!!.isEmpty() ||
-            registrationViewModel.password.value!!.isEmpty() || registrationViewModel.password2.value!!.isEmpty()
-        ) {
-            Toast.makeText(context, "All data is required", Toast.LENGTH_SHORT).show()
-        } else {
-            if (password == password2) {
-                FireBaseReferencies.mFirebaseAuth.createUserWithEmailAndPassword(
-                    mail.toString(),
-                    password.toString()
-                ).addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d(ContentValues.TAG, "createUserWithEmail:success")
+    private fun passToNextFragment() {
+        setupInputText()
+        Navigation.findNavController(mBinding.root).navigate(R.id.action_register1_to_register2)
+    }
 
-                        //createUserOnDatabase(name, surname, numGroup, mail, mFirebaseAuth.currentUser!!.uid)
-                        reload()
+    private fun setupInputText() {
+        var name =  mBinding.name.text.toString()
+        var surname =  mBinding.surname.text.toString()
+        var group =  mBinding.group.text.toString()
+        var mail =  mBinding.mail.text.toString()
+        var password =  mBinding.password.text.toString()
+        var password2 =  mBinding.password2.text.toString()
 
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Log.w(ContentValues.TAG, "createUserWithEmail:failure", task.exception)
-                        Toast.makeText(
-                            baseContext, "Authentication failed.",
-                            Toast.LENGTH_SHORT
-                        ).show()
-
-                    }
-                }
-            }
-        }*/
-        /*if (TextUtils.isEmpty(mBinding.name.text)) {
-            mBinding.name.setError("");
-            return;
+        if (name.isNotEmpty()){
+            registrationViewModel.name.postValue(name)
+        }else{
+            mBinding.name.setText(registrationViewModel.name.value.toString())
         }
 
+        if (surname.isNotEmpty()){
+            registrationViewModel.surname.postValue(surname)
+        }else{
+            mBinding.surname.setText(registrationViewModel.surname.value.toString())
         }
-        */
+        if (group.isNotEmpty()){
+            registrationViewModel.nGroup.postValue(group)
+        }else{
+            mBinding.group.setText(registrationViewModel.nGroup.value.toString())
+        }
+        if (mail.isNotEmpty()){
+            registrationViewModel.mail.postValue(mail)
+        }else{
+            mBinding.mail.setText(registrationViewModel.mail.value.toString())
+        }
 
+        if (password.isNotEmpty()){
+            registrationViewModel.password.postValue(password)
+        }else{
+            mBinding.password.setText(registrationViewModel.password.value.toString())
+        }
+        if (password2.isNotEmpty()){
+            registrationViewModel.password2.postValue(password2)
+        }else{
+            mBinding.password2.setText(registrationViewModel.password2.value.toString())
+        }
+
+
+    }
 
 
     private fun setupDatePickerEditText() {

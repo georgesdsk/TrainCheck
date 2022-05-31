@@ -64,16 +64,9 @@ class Register2 : Fragment() {
         )
         checkAthlet(atleta, password, password2)
 
-        /*        if (checkAthlet(atleta, password, password2)) {
-                    createUser(atleta, password!!)
-                 }
-                 checkGroup(Atleta(group = "Formación"), "123456")
-          //createUser(Atleta(group = "Formación"), )*/
-
-
     }
 
-    private fun checkAthlet(atleta: Atleta, password: String?, password2: String?): Boolean {
+    private fun checkAthlet(atleta: Atleta, password: String?, password2: String?)  {
         var check = false
         if (atleta.name.isEmpty() || atleta.surname.isEmpty() ||
             atleta.group.isEmpty() || atleta.mail.isEmpty() ||
@@ -92,7 +85,6 @@ class Register2 : Fragment() {
                 ).show()
             }
         }
-        return check;
     }
 
     // muy acoplado, pero no deja esperar hasta un onDataChange, asi que el codigo sigue y no deja comprobar

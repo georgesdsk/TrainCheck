@@ -8,17 +8,19 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.finde.android.traincheck.Entities.Entrenamiento
 import com.finde.android.traincheck.R
 import com.finde.android.traincheck.ViewModel.FireBaseReferencies
 import com.finde.android.traincheck.databinding.FragmentAddBinding
 import com.google.android.material.snackbar.Snackbar
+import java.text.DateFormat.getDateInstance
+import java.util.*
 
 class AddFragment : Fragment() {
 
     private val RC_GELLERY = 18
-    private val PATH_ENTRENAMIENTOS = "entrenamientos"
 
     private lateinit var mBinding: FragmentAddBinding
     private var mPhotoSelectedUri: Uri? = null
@@ -30,7 +32,6 @@ class AddFragment : Fragment() {
         mBinding = FragmentAddBinding.inflate(inflater, container, false)
       /*  mBinding.tvMessage.setOnClickListener {
             Navigation.findNavController(mBinding.root).navigate(R.id.navigateToAdd)
-
         }
         */
 
@@ -39,7 +40,6 @@ class AddFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         mBinding.btnPost.setOnClickListener { subirEntrenamiento() }
 
         mBinding.btnSelect.setOnClickListener { openGallery() }
@@ -57,15 +57,15 @@ class AddFragment : Fragment() {
 
         //mejorar
         if (mBinding.rbGroups.checkedRadioButtonId==R.id.alto_rendimiento){
-            selectGroup = "Alto Rendimiento"
+            selectGroup = "AltoRendimiento"
         }
         else{
-            selectGroup = "Formación"
+            selectGroup = "Formacion"
 
         }
 
-        val key = FireBaseReferencies.mDatabaseRef.child("Grupos").child(selectGroup).child(PATH_ENTRENAMIENTOS).push().key!!
-        val storageReference = FireBaseReferencies.mStorageRef.child(PATH_ENTRENAMIENTOS).child(key)
+        val key = FireBaseReferencies.mDatabaseRef.child("Grupos").child(selectGroup).child("Entrenamientos").push().key!!
+        val storageReference = FireBaseReferencies.mStorageRef.child("Entrenamientos").child(key)
 
         if (mPhotoSelectedUri != null) {
             storageReference.putFile(mPhotoSelectedUri!!)
@@ -94,9 +94,12 @@ class AddFragment : Fragment() {
     }
 
     private fun guardarEntrenamiento(key: String, url: String, title: String, selectGroup: String){
-        val entrenamiento = Entrenamiento( id = key, urlEntrenamiento= url, nombre = title, group = selectGroup)// fecha = Date.getDefaultInstance(),
-        FireBaseReferencies.mDatabaseRef.child("Grupos").child(selectGroup).child(PATH_ENTRENAMIENTOS).child(key).setValue(entrenamiento)
+        val entrenamiento = Entrenamiento( id = key, urlEntrenamiento = url, nombre = title, group = selectGroup, fecha = Date())// ,
+        FireBaseReferencies.mDatabaseRef.child("Grupos").child(selectGroup).child("Entrenamientos").child(key).setValue(entrenamiento)
+
     }
+
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
