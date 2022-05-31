@@ -42,7 +42,6 @@ class StatsFragment : Fragment() {
             singOut()
         }
 
-        Toast.makeText(context, Toast.LENGTH_LONG).show()
 
     }
 

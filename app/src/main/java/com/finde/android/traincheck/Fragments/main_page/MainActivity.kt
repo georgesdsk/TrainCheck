@@ -50,7 +50,6 @@ class MainActivity : AppCompatActivity() {
 
         setupNavigationBar()
         setupHeaderNav()
-        FireBaseReferencies.create()
         setupAuth()
         Toast.makeText(this, grupoSeleccionado.currentGroup.toString(), Toast.LENGTH_SHORT).show()
         // insertarGrupos() // y cambiar al entrenador
@@ -70,7 +69,6 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
-
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
             override fun onTabReselected(tab: TabLayout.Tab?) {}
         })
@@ -107,7 +105,6 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
-
             override fun onCancelled(error: DatabaseError) {}
         }
 
@@ -156,8 +153,6 @@ class MainActivity : AppCompatActivity() {
             override fun onCancelled(error: DatabaseError) {}
         }
         mGruposRef.addListenerForSingleValueEvent(gruposListener)
-
-
     }
 
 //doble pantalla , nombre, apellido, correo, codigo, contraseña
@@ -171,10 +166,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }
     }
-
+//todo quitar y anhadir los listeners
     override fun onResume() {
         super.onResume()
         mFirebaseAuth.addAuthStateListener(mAuthListener)
+
     }
 
     override fun onPause() {

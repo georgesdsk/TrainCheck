@@ -154,8 +154,6 @@ class Register2 : Fragment() {
         return true
     }
 
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupOnclickListeners()

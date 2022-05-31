@@ -26,8 +26,10 @@ import com.google.firebase.database.FirebaseDatabase
 import java.util.*
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
+import com.finde.android.traincheck.Entities.Entrenamiento
 import com.finde.android.traincheck.HomeAux
 import com.finde.android.traincheck.R
+import com.finde.android.traincheck.ViewModel.FireBaseReferencies
 import com.finde.android.traincheck.ViewModel.GrupoSeleccionado
 
 
@@ -69,65 +71,6 @@ class AsistFragment : Fragment(), HomeAux {
             mFirebaseAdapter.updateOptions(options)
             //mFirebaseAdapter.notifyDataSetChanged()
         })
-    }
-
-
-    //como recibir el nombre del objeto al que pertenece a lo que hemos pulsado
-
-    private fun setAthlets() {
-        var atleta = Atleta(
-            name = "Juan",
-            surname = "Fernandez Pastor",
-            id = "ciuaqluier",
-            dateBirth = Date(2002, 9, 10),
-            photoUrl = "https://definicionde.es/wp-content/uploads/2019/04/definicion-de-persona-min.jpg"
-        )
-
-        var atleta2 = Atleta(
-            name = "Juan alberto",
-            surname = "Jimenez franco",
-            id = "ciuaqluier2",
-            dateBirth = Date(2002, 9, 10),
-            photoUrl = "https://iteragrow.com/wp-content/uploads/2018/04/buyer-persona-e1545248524290.jpg"
-        )
-        var atleta3 = Atleta(
-            name = "Juan",
-            surname = "Fernandez Pastor",
-            id = "ciuaqluier",
-            dateBirth = Date(2002, 9, 10),
-            photoUrl = "https://definicionde.es/wp-content/uploads/2019/04/definicion-de-persona-min.jpg"
-        )
-
-        var atleta4 = Atleta(
-            name = "Juan alberto",
-            surname = "Jimenez franco",
-            id = "ciuaqluier2",
-            dateBirth = Date(2002, 9, 10),
-            photoUrl = "https://iteragrow.com/wp-content/uploads/2018/04/buyer-persona-e1545248524290.jpg"
-        )
-        var atleta5 = Atleta(
-            name = "Juan",
-            surname = "Fernandez Pastor",
-            id = "ciuaqluier",
-            dateBirth = Date(2002, 9, 10),
-            photoUrl = "https://definicionde.es/wp-content/uploads/2019/04/definicion-de-persona-min.jpg"
-        )
-
-        var atleta6= Atleta(
-            name = "Juan alberto",
-            surname = "Jimenez franco",
-            id = "ciuaqluier2",
-            dateBirth = Date(2002, 9, 10),
-            photoUrl = "https://iteragrow.com/wp-content/uploads/2018/04/buyer-persona-e1545248524290.jpg"
-        )
-        mAthletsRef.child("Formacion").child("ciuaqluier1").setValue(atleta2)
-        mAthletsRef.child("Altorendimiento").child("ciuaqluier3").setValue(atleta)
-        mAthletsRef.child("Formacion").child("ciuaqluier4").setValue(atleta2)
-        mAthletsRef.child("Altorendimiento").child("ciuaqluier5").setValue(atleta)
-        mAthletsRef.child("Formacion").child("ciuaqluier6").setValue(atleta2)
-        mAthletsRef.child("Altorendimiento").child("ciuaqluier7").setValue(atleta)
-        mAthletsRef.child("Formacion").child("ciuaqluier8").setValue(atleta2)
-        mAthletsRef.child("Altorendimiento").child("ciuaqluier9").setValue(atleta)
     }
 
     private fun setupAdapter() {
@@ -225,6 +168,67 @@ class AsistFragment : Fragment(), HomeAux {
                 .child(FirebaseAuth.getInstance().currentUser!!.uid).setValue(null)
         }
     }
+
+
+    //como recibir el nombre del objeto al que pertenece a lo que hemos pulsado
+
+    private fun setAthlets() {
+        var atleta = Atleta(
+            name = "Juan",
+            surname = "Fernandez Pastor",
+            id = "ciuaqluier",
+            dateBirth = Date(2002, 9, 10),
+            photoUrl = "https://definicionde.es/wp-content/uploads/2019/04/definicion-de-persona-min.jpg"
+        )
+
+        var atleta2 = Atleta(
+            name = "Juan alberto",
+            surname = "Jimenez franco",
+            id = "ciuaqluier2",
+            dateBirth = Date(2002, 9, 10),
+            photoUrl = "https://iteragrow.com/wp-content/uploads/2018/04/buyer-persona-e1545248524290.jpg"
+        )
+        var atleta3 = Atleta(
+            name = "Juan",
+            surname = "Fernandez Pastor",
+            id = "ciuaqluier",
+            dateBirth = Date(2002, 9, 10),
+            photoUrl = "https://definicionde.es/wp-content/uploads/2019/04/definicion-de-persona-min.jpg"
+        )
+
+        var atleta4 = Atleta(
+            name = "Juan alberto",
+            surname = "Jimenez franco",
+            id = "ciuaqluier2",
+            dateBirth = Date(2002, 9, 10),
+            photoUrl = "https://iteragrow.com/wp-content/uploads/2018/04/buyer-persona-e1545248524290.jpg"
+        )
+        var atleta5 = Atleta(
+            name = "Juan",
+            surname = "Fernandez Pastor",
+            id = "ciuaqluier",
+            dateBirth = Date(2002, 9, 10),
+            photoUrl = "https://definicionde.es/wp-content/uploads/2019/04/definicion-de-persona-min.jpg"
+        )
+
+        var atleta6= Atleta(
+            name = "Juan alberto",
+            surname = "Jimenez franco",
+            id = "ciuaqluier2",
+            dateBirth = Date(2002, 9, 10),
+            photoUrl = "https://iteragrow.com/wp-content/uploads/2018/04/buyer-persona-e1545248524290.jpg"
+        )
+        mAthletsRef.child("Formacion").child("ciuaqluier1").setValue(atleta2)
+        mAthletsRef.child("Altorendimiento").child("ciuaqluier3").setValue(atleta)
+        mAthletsRef.child("Formacion").child("ciuaqluier4").setValue(atleta2)
+        mAthletsRef.child("Altorendimiento").child("ciuaqluier5").setValue(atleta)
+        mAthletsRef.child("Formacion").child("ciuaqluier6").setValue(atleta2)
+        mAthletsRef.child("Altorendimiento").child("ciuaqluier7").setValue(atleta)
+        mAthletsRef.child("Formacion").child("ciuaqluier8").setValue(atleta2)
+        mAthletsRef.child("Altorendimiento").child("ciuaqluier9").setValue(atleta)
+
+    }
+
 
     //todo al hacer el click largo podamos modificar al atleta
     inner class AtletaHolder(view: View) : RecyclerView.ViewHolder(view) {
