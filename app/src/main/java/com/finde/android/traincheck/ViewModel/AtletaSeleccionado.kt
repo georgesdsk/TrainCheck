@@ -8,6 +8,4 @@ import kotlinx.coroutines.launch
 
 class AtletaSeleccionado : ViewModel() {
      var atletaSeleccionado: Atleta = Atleta()
-
-
 }

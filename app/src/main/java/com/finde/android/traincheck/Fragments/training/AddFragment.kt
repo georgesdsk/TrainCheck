@@ -13,8 +13,10 @@ import androidx.fragment.app.Fragment
 import com.finde.android.traincheck.Entities.Entrenamiento
 import com.finde.android.traincheck.R
 import com.finde.android.traincheck.ViewModel.FireBaseReferencies
+import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mDatabaseRef
 import com.finde.android.traincheck.databinding.FragmentAddBinding
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.database.DatabaseReference
 import java.text.DateFormat.getDateInstance
 import java.util.*
 
@@ -51,6 +53,8 @@ class AddFragment : Fragment() {
         startActivityForResult(intent, RC_GELLERY)
     }
 
+
+    //todo generalizarlo con el metodo de subida de imagen
     private fun subirEntrenamiento() {
         mBinding.progressBar.visibility = View.VISIBLE
         var selectGroup : String
@@ -96,7 +100,6 @@ class AddFragment : Fragment() {
     private fun guardarEntrenamiento(key: String, url: String, title: String, selectGroup: String){
         val entrenamiento = Entrenamiento( id = key, urlEntrenamiento = url, nombre = title, group = selectGroup, fecha = Date())// ,
         FireBaseReferencies.mDatabaseRef.child("Grupos").child(selectGroup).child("Entrenamientos").child(key).setValue(entrenamiento)
-
     }
 
 

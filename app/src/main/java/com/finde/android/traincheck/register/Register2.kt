@@ -1,8 +1,11 @@
 package com.finde.android.traincheck.register
 
+import android.app.Activity
 import android.content.ContentValues
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -25,9 +28,13 @@ import com.google.firebase.database.ValueEventListener
 
 //async
 import androidx.lifecycle.*
+import com.finde.android.traincheck.Entities.Entrenamiento
+import com.finde.android.traincheck.ViewModel.FireBaseReferencies
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import java.util.*
 
 //import com.finde.android.traincheck.register.Register2.Callback as Callback1
 
@@ -35,6 +42,11 @@ class Register2 : Fragment() {
 
     private lateinit var mBinding: FragmentRegister2Binding
     private val registrationViewModel: RegistrationViewModel by activityViewModels()
+    private val RC_GELLERY = 18
+    private var mPhotoSelectedUri: Uri? = null
+    private var key: String? = null
+
+    //todo rcgallery
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,10 +60,6 @@ class Register2 : Fragment() {
     }
 
     private fun registAthlet() {
-        /*  var name = registrationViewModel.name.value
-          var surname = registrationViewModel.surname.value
-          var nGroup = registrationViewModel.nGroup.value
-          var mail = registrationViewModel.mail.value*/
 
         var password = registrationViewModel.password.value
         var password2 = registrationViewModel.password2.value
@@ -60,7 +68,8 @@ class Register2 : Fragment() {
             name = registrationViewModel.name.value.toString(),
             surname = registrationViewModel.surname.value.toString(),
             group = registrationViewModel.nGroup.value.toString(),
-            mail = registrationViewModel.mail.value.toString()
+            mail = registrationViewModel.mail.value.toString(),
+            photoUrl = key.toString()
         )
         checkAthlet(atleta, password, password2)
 
@@ -149,7 +158,65 @@ class Register2 : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupOnclickListeners()
+        mBinding.imgPhoto.setOnClickListener { subirFoto() }
+        mBinding.btnSelect.setOnClickListener { openGallery() }
     }
+
+
+    private fun openGallery() {
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(intent, RC_GELLERY)
+    }
+
+
+    //todo generalizarlo con el metodo de subida de imagen
+    private fun subirFoto() {
+        mBinding.progressBar.visibility = View.VISIBLE
+
+        key = FireBaseReferencies.mDatabaseRef.child("Fotos").push().key!!
+        val storageReference = FireBaseReferencies.mStorageRef.child("Fotos").child(key.toString())
+
+        if (mPhotoSelectedUri != null) {
+            storageReference.putFile(mPhotoSelectedUri!!)
+                .addOnProgressListener {
+                    val progress = (100 * it.bytesTransferred/it.totalByteCount).toDouble()
+                    mBinding.progressBar.progress = progress.toInt()
+                    mBinding.progreso.text = "$progress%"
+                }
+                .addOnCompleteListener{
+                    mBinding.progressBar.visibility = View.INVISIBLE
+                }
+                .addOnSuccessListener {
+                    Snackbar.make(mBinding.root, "Foto publicado.",
+                        Snackbar.LENGTH_SHORT).show()
+                    it.storage.downloadUrl.addOnSuccessListener {
+                        //guardarFoto(key, it.toString(), mBinding.etTitle.text.toString().trim(), selectGroup)
+                        mBinding.progreso.text ="Perfecto"
+                    }
+                }
+                .addOnFailureListener{
+                    Snackbar.make(mBinding.root, "No se pudo subir, intente más tarde.",
+                        Snackbar.LENGTH_SHORT).show()
+                }
+        }
+    }
+
+  /*  private fun guardarFoto(key: String, url: String, title: String, selectGroup: String){
+        FireBaseReferencies.mDatabaseRef.child("Grupos").child(selectGroup).child("Fotos").child(key).setValue(Foto)
+    }*/
+
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK){
+            if (requestCode == RC_GELLERY){
+                mPhotoSelectedUri = data?.data
+                mBinding.imgPhoto.setImageURI(mPhotoSelectedUri)
+            }
+        }
+    }
+
 
     private fun reload() {
         val intent = Intent(requireActivity(), MainActivity::class.java)
@@ -159,7 +226,16 @@ class Register2 : Fragment() {
     private fun setupOnclickListeners() {
         val navigation = Navigation.findNavController(mBinding.root)
         mBinding.backButton.setOnClickListener { navigation.navigate(R.id.action_register2_to_register1) }
-        mBinding.buttonNext.setOnClickListener { registAthlet() }
+        mBinding.buttonNext.setOnClickListener {
+            if(!key.isNullOrBlank()){
+                registAthlet()
+            }else{
+                Snackbar.make(mBinding.root, "Suba una foro anteriormente",
+                    Snackbar.LENGTH_SHORT).show()
+            }
+
+         }
+
     }
 
 

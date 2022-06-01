@@ -6,14 +6,24 @@
     android:layout_height="match_parent"
     android:background="@drawable/b5"
     tools:context=".register.Register2">
-
+    
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    
     <TextView
         android:id="@+id/textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
         android:gravity="left"
-        android:text="Sube una imagen de tu cara"
+        android:text="Selecciona la foto de perfil"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="#45654A"
         android:textSize="20dp"
@@ -27,8 +37,8 @@
         android:id="@+id/imgPhoto"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/rounded_edit"
+        android:layout_margin="40dp"
+        android:background="@drawable/rounded_edit2"
         android:scaleType="centerCrop"
         app:layout_constraintDimensionRatio="H, 4:3"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,6 +61,21 @@
 
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnPost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="#45654A"
+        android:layout_marginTop="30dp"
+        android:elevation="10dp"
+        android:paddingHorizontal="35dp"
+        android:text="btnPost image"
+        app:cornerRadius="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgPhoto" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/back_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -62,22 +87,7 @@
         android:text="Back"
         app:cornerRadius="60dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/upload" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/upload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:backgroundTint="#45654A"
-        android:elevation="10dp"
-        android:paddingHorizontal="35dp"
-        android:text="Upload image"
-        app:cornerRadius="60dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgPhoto" />
-
+        app:layout_constraintTop_toBottomOf="@+id/btnPost" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_next"
@@ -86,12 +96,26 @@
         android:layout_margin="20dp"
         android:backgroundTint="#45654A"
         android:elevation="10dp"
-        android:maxWidth="150dp"
         android:paddingHorizontal="20dp"
         android:text="Next step"
         app:cornerRadius="60dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/upload" />
+        app:layout_constraintTop_toBottomOf="@+id/btnPost" />
+
+    <TextView
+        android:id="@+id/progreso"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:gravity="left"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="#45654A"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/back_button" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
