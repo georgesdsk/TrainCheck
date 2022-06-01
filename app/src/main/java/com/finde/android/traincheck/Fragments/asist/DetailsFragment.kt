@@ -31,12 +31,12 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val nombreCompleto: String = vmAtleta.atletaSeleccionado.name + vmAtleta.atletaSeleccionado.surname
+        val nombreCompleto: String = vmAtleta.athletSeleccionado.name + vmAtleta.athletSeleccionado.surname
 
         mBinding.tituloNombre.text = nombreCompleto
 
         Glide.with(this)
-            .load(vmAtleta.atletaSeleccionado.photoUrl)
+            .load(vmAtleta.athletSeleccionado.photoUrl)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .centerCrop()
             .into(mBinding.imagen)

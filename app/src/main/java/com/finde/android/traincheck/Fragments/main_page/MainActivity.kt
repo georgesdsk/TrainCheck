@@ -9,22 +9,21 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.cursosant.android.traincheck.Entities.Group
+import com.finde.android.traincheck.Entities.Athlet
 import com.finde.android.traincheck.login.SignInActivity
 import com.finde.android.traincheck.R
 import com.finde.android.traincheck.ViewModel.GrupoSeleccionado
 import com.finde.android.traincheck.databinding.ActivityMainBinding
 import com.firebase.ui.auth.IdpResponse
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.finde.android.traincheck.ViewModel.FireBaseReferencies
+import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mAtletasRef
 import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mDatabaseRef
 import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mEntrenadoresRef
 import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mFirebaseAuth
 import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mGruposRef
-import com.google.firebase.ktx.Firebase
-import kotlin.math.sign
 
 
 class MainActivity : AppCompatActivity() {
@@ -43,14 +42,17 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        grupoSeleccionado.currentGroup.value = "Formacion"
+
         FireBaseReferencies.create()
+
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
 
+        setupAuth()
+        findGroup()
         setupNavigationBar()
         setupHeaderNav()
-        setupAuth()
+
         Toast.makeText(this, grupoSeleccionado.currentGroup.toString(), Toast.LENGTH_SHORT).show()
         // insertarGrupos() // y cambiar al entrenador
     }
@@ -65,7 +67,7 @@ class MainActivity : AppCompatActivity() {
                         grupoSeleccionado.currentGroup.value = "Formacion"
                     }
                     1 -> {
-                        grupoSeleccionado.currentGroup.value = "Alto Rendimiento"
+                        grupoSeleccionado.currentGroup.value = "AltoRendimiento"
                     }
                 }
             }
@@ -98,6 +100,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                     if (isEntrenador) {
+                        grupoSeleccionado.currentGroup.value = "Formacion"
                         signIn()
                     }
                     else{
@@ -135,12 +138,13 @@ class MainActivity : AppCompatActivity() {
         //mBinding.topNav.visibility = View.GONE
     }
 
+/*    //necesitas saber a que gurpo pertenece el atleta que inicia sesion todo mejor ponerl a los atletas fuera y el grupo como atributo
     private fun findGroup(){
         val gruposListener = object : ValueEventListener {
             override fun onDataChange(snapshots: DataSnapshot) {
                 for (snapshot in snapshots.children) {
                     val group = snapshot.getValue(Group::class.java)
-                    for(athlet in group!!.listaAtletas)
+                    for(athlet in group!!.listaAthlets)
                     {
                         if(athlet.id == mFirebaseAuth.currentUser!!.uid)
                         {
@@ -150,22 +154,31 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
+
             override fun onCancelled(error: DatabaseError) {}
         }
         mGruposRef.addListenerForSingleValueEvent(gruposListener)
-    }
+    }*/
 
-//doble pantalla , nombre, apellido, correo, codigo, contraseña
-// recoger los datos de los dos fragments
+    private fun findGroup() {
+        val athletsListener = object : ValueEventListener {
+            override fun onDataChange(snapshots: DataSnapshot) {
+                for (snapshot in snapshots.children) {
+                    val athlet = snapshot.getValue(Athlet::class.java)
 
-    private fun register() {
-        mFirebaseAuth.createUserWithEmailAndPassword("email@gmail.com", "contraseña")
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
-                    mDatabaseRef
+                        if(athlet!!.id == mFirebaseAuth.currentUser!!.uid)
+                        {
+                            grupoSeleccionado.currentGroup.value = athlet.group
+                        }
                 }
             }
+
+            override fun onCancelled(error: DatabaseError) {}
+        }
+        mAtletasRef.addListenerForSingleValueEvent(athletsListener)
     }
+
+
 //todo quitar y anhadir los listeners
     override fun onResume() {
         super.onResume()

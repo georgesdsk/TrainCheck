@@ -8,10 +8,10 @@ import java.util.*
 
 
 @IgnoreExtraProperties
-data class Atleta(@get:Exclude var id   : String = "",
+data class Athlet(@get:Exclude var id   : String = "",
                   var name: String = "",
                   var surname: String = "",
-                  var group: String ="",
+                  var group: String ="Formacion",
                   var mail: String = "a@a.com",
                   var photoUrl: String ="",
                   var dateBirth: Date = Date(2019,8,10),

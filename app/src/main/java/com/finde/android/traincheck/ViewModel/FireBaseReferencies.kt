@@ -12,6 +12,7 @@ class FireBaseReferencies() {
     companion object{
         lateinit var mDatabaseRef: DatabaseReference
         lateinit var mGruposRef: DatabaseReference
+        lateinit var mAtletasRef: DatabaseReference
         lateinit var mFormacionRef: DatabaseReference
         lateinit var mAltoRendimientoRef: DatabaseReference
         lateinit var mEntrenadoresRef: DatabaseReference
@@ -24,6 +25,7 @@ class FireBaseReferencies() {
             mDatabaseRef =  FirebaseDatabase.getInstance("https://traincheck-481b2-default-rtdb.europe-west1.firebasedatabase.app").reference
             mEntrenadoresRef = mDatabaseRef.child("Entrenadores")
             mGruposRef = mDatabaseRef.child("Grupos")
+            mAtletasRef = mDatabaseRef.child("Atletas")
             mFormacionRef = mDatabaseRef.child("Grupos").child("Formacion")
             mAltoRendimientoRef = mDatabaseRef.child("Grupos").child("AltoRendimiento")
             mStorageRef = FirebaseStorage.getInstance().reference

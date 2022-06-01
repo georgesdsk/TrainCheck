@@ -182,14 +182,14 @@ class TrainingFragment : Fragment() {
 
                 )
             )
-        FireBaseReferencies.mGruposRef.child(grupoSeleccionado.currentGroup.value!!)
+        FireBaseReferencies.mGruposRef.child("AltoRendimiento")
             .child("Entrenamientos")
             .child("ciuaqluier3").setValue(
                 Entrenamiento(
                     urlEntrenamiento = "https://www.adslzone.net/app/uploads-adslzone.net/2019/04/borrar-fondo-imagen.jpg",
                     fecha = Date()            )
             )
-        FireBaseReferencies.mGruposRef.child(grupoSeleccionado.currentGroup.value!!)
+        FireBaseReferencies.mGruposRef.child("Formacion")
             .child("Entrenamientos")
             .child("ciuaqluier4").setValue(
                 Entrenamiento(

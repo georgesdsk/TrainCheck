@@ -14,7 +14,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
-import com.finde.android.traincheck.Entities.Atleta
+import com.finde.android.traincheck.Entities.Athlet
 import com.finde.android.traincheck.Fragments.main_page.MainActivity
 import com.finde.android.traincheck.R
 import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mFirebaseAuth
@@ -27,14 +27,8 @@ import com.google.firebase.database.ValueEventListener
 
 
 //async
-import androidx.lifecycle.*
-import com.finde.android.traincheck.Entities.Entrenamiento
 import com.finde.android.traincheck.ViewModel.FireBaseReferencies
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
-import java.util.*
 
 //import com.finde.android.traincheck.register.Register2.Callback as Callback1
 
@@ -64,7 +58,7 @@ class Register2 : Fragment() {
         var password = registrationViewModel.password.value
         var password2 = registrationViewModel.password2.value
 
-        val atleta = Atleta(
+        val atleta = Athlet(
             name = registrationViewModel.name.value.toString(),
             surname = registrationViewModel.surname.value.toString(),
             group = registrationViewModel.nGroup.value.toString(),
@@ -75,17 +69,17 @@ class Register2 : Fragment() {
 
     }
 
-    private fun checkAthlet(atleta: Atleta, password: String?, password2: String?)  {
+    private fun checkAthlet(athlet: Athlet, password: String?, password2: String?)  {
         var check = false
-        if (atleta.name.isEmpty() || atleta.surname.isEmpty() ||
-            atleta.group.isEmpty() || atleta.mail.isEmpty() ||
+        if (athlet.name.isEmpty() || athlet.surname.isEmpty() ||
+            athlet.group.isEmpty() || athlet.mail.isEmpty() ||
             password!!.isEmpty() || password2!!.isEmpty()
         ) {
             Toast.makeText(context, "All data is required", Toast.LENGTH_SHORT).show()
         } else {
             if (password == password2) { // check the group
-                if (checkMail(atleta.mail)) {
-                    checkGroup(atleta, password)
+                if (checkMail(athlet.mail)) {
+                    checkGroup(athlet, password)
                 }
             } else {
                 Toast.makeText(
@@ -98,7 +92,7 @@ class Register2 : Fragment() {
 
     // muy acoplado, pero no deja esperar hasta un onDataChange, asi que el codigo sigue y no deja comprobar
     // si el grupo existe o no
-    private fun checkGroup(atleta: Atleta, password: String) {
+    private fun checkGroup(athlet: Athlet, password: String) {
 
         val gruposListener = object : ValueEventListener {
             override fun onDataChange(snapshots: DataSnapshot) {
@@ -106,9 +100,9 @@ class Register2 : Fragment() {
                 if (snapshots.exists()) {
                     var grupos = snapshots.children
                     grupos.find { grupo ->
-                        if (grupo.key == atleta.group) {
+                        if (grupo.key == athlet.group) {
                             exists = true
-                            createUser(atleta, password)
+                            createUser(athlet, password)
                         }
                         exists
                     }
@@ -126,12 +120,12 @@ class Register2 : Fragment() {
     }
 
 
-    private fun createUser(atleta: Atleta, password: String) {
-        mFirebaseAuth.createUserWithEmailAndPassword(atleta.mail, password)
+    private fun createUser(athlet: Athlet, password: String) {
+        mFirebaseAuth.createUserWithEmailAndPassword(athlet.mail, password)
             .addOnCompleteListener(requireActivity()) { task ->
             if (task.isSuccessful) {
                 Log.d(ContentValues.TAG, "createUserWithEmail:success")
-                createUserOnDatabase(atleta, mFirebaseAuth.currentUser!!.uid)
+                createUserOnDatabase(athlet, mFirebaseAuth.currentUser!!.uid)
             } else {
                 // If sign in fails, display a message to the user.
                 Log.w(ContentValues.TAG, "createUserWithEmail:failure", task.exception)
@@ -143,8 +137,8 @@ class Register2 : Fragment() {
         }
     }
 
-    private fun createUserOnDatabase(atleta: Atleta, uid: String) {
-        mGruposRef.child(atleta.group).child(uid).setValue(atleta).addOnSuccessListener {
+    private fun createUserOnDatabase(athlet: Athlet, uid: String) {
+        mGruposRef.child(athlet.group).child("Atletas").child(uid).setValue(athlet).addOnSuccessListener {
             Toast.makeText(requireActivity(), "User created", Toast.LENGTH_SHORT).show()
             reload()
         }
@@ -158,8 +152,8 @@ class Register2 : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupOnclickListeners()
-        mBinding.imgPhoto.setOnClickListener { subirFoto() }
         mBinding.btnSelect.setOnClickListener { openGallery() }
+        mBinding.btnPost.setOnClickListener { subirFoto() }
     }
 
 

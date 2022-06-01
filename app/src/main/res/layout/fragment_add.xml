@@ -92,7 +92,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/common_padding_min"
-        android:background="@color/common_google_signin_btn_text_dark_default"
+        android:background="@drawable/rounded_edit"
         android:importantForAccessibility="no"
         android:scaleType="centerCrop"
         app:layout_constraintDimensionRatio="H, 4:3"
@@ -109,10 +109,9 @@
         android:src="@drawable/ic_image_search"
         app:layout_constraintBottom_toBottomOf="@id/imgPhoto"
         app:layout_constraintEnd_toEndOf="@id/imgPhoto"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/imgPhoto"
         app:layout_constraintTop_toTopOf="@id/imgPhoto"
-        app:layout_constraintVertical_bias="0.0" />
+      />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
