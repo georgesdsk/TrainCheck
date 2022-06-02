@@ -27,7 +27,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.DatabaseError
 import java.text.SimpleDateFormat
 import java.util.*
-
+//todo meter el delete cuando ingrese nuevos entrenamientos
 class TrainingFragment : Fragment() {
 
     private val RC_GELLERY = 18
@@ -36,28 +36,22 @@ class TrainingFragment : Fragment() {
     private lateinit var mFirebaseAdapter: FirebaseRecyclerAdapter<Entrenamiento, TrainingFragment.TrainingHolder>
     private lateinit var mLayoutManager: RecyclerView.LayoutManager
     private val grupoSeleccionado: GrupoSeleccionado by activityViewModels()
+    private val selectedTraining: sel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-
         mBinding = FragmentTrainingBinding.inflate(inflater, container, false)
-        mBinding.fab.setOnClickListener {
-            Navigation.findNavController(mBinding.root).navigate(R.id.navigateToAdd)
-        }
-
-        setListener()
-        setupAdapter()
-        setExample()
-        setupRecyclerView()
-
         return mBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setListener()
+        setupAdapter()
+        //setExample()
+        setupRecyclerView()
     }
 
     private fun setListener() {
@@ -73,10 +67,18 @@ class TrainingFragment : Fragment() {
             mFirebaseAdapter.updateOptions(options)
             //mFirebaseAdapter.notifyDataSetChanged()
         })
+        mBinding.fab.setOnClickListener {
+            Navigation.findNavController(mBinding.root).navigate(R.id.navigateToAdd)
+        }
+
+
     }
 
     private fun setupAdapter() {
+
         val grupo = grupoSeleccionado.currentGroup.value!!
+        Toast.makeText(activity, grupo, Toast.LENGTH_SHORT).show()
+
         val options =
             FirebaseRecyclerOptions.Builder<Entrenamiento>().setQuery(
                 mGruposRef.child(grupo).child("Entrenamientos"),
@@ -206,9 +208,9 @@ class TrainingFragment : Fragment() {
         fun setListener(entrenamiento: Entrenamiento) {
             with(binding.root) {
                 setOnClickListener {
-                    Toast.makeText(context, entrenamiento.id, Toast.LENGTH_SHORT).show()
 
-                    navigation.navigate(R.id.actionAthletDetails)
+
+
                 }
                 setOnLongClickListener {
                     deleteEntrenamiento(entrenamiento)

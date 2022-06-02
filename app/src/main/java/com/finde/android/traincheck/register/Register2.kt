@@ -38,6 +38,7 @@ class Register2 : Fragment() {
     private val registrationViewModel: RegistrationViewModel by activityViewModels()
     private val RC_GELLERY = 18
     private var mPhotoSelectedUri: Uri? = null
+
     private var key: String? = null
 
     //todo rcgallery

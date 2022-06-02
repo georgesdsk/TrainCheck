@@ -8,7 +8,7 @@ import java.text.DateFormat
 
 @IgnoreExtraProperties
 data class Entrenamiento(
-    @get:Exclude var id: String = "",
+    var id: String = "",
     var urlEntrenamiento: String = "",
     var nombre: String = "",
     var group: String = "",

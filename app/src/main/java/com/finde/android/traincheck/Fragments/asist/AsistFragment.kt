@@ -51,7 +51,6 @@ class AsistFragment : Fragment(), HomeAux {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setAthlets()
         setupAdapter()
         setupRecyclerView()
         setListener()
@@ -163,65 +162,8 @@ class AsistFragment : Fragment(), HomeAux {
 
     //como recibir el nombre del objeto al que pertenece a lo que hemos pulsado
 
-    private fun setAthlets() {
-        var atleta = Athlet(
-            name = "Juan",
-            surname = "Fernandez Pastor",
-            id = "ciuaqluier",
-            group = "AltoRendimiento",
-            dateBirth = Date(2002, 9, 10),
-            photoUrl = "https://definicionde.es/wp-content/uploads/2019/04/definicion-de-persona-min.jpg"
-        )
 
-        var atleta2 = Athlet(
-            name = "Juan alberto",
-            surname = "Jimenez franco",
-            id = "ciuaqluier2",
-            dateBirth = Date(2002, 9, 10),
-            photoUrl = "https://iteragrow.com/wp-content/uploads/2018/04/buyer-persona-e1545248524290.jpg"
-        )
-        var atleta3 = Athlet(
-            name = "Juan",
-            surname = "Fernandez Pastor",
-            id = "ciuaqluier",
-            dateBirth = Date(2002, 9, 10),
-            photoUrl = "https://definicionde.es/wp-content/uploads/2019/04/definicion-de-persona-min.jpg"
-        )
 
-        var atleta4 = Athlet(
-            name = "Juan alberto",
-            surname = "Jimenez franco",
-            id = "ciuaqluier2",
-            dateBirth = Date(2002, 9, 10),
-            photoUrl = "https://iteragrow.com/wp-content/uploads/2018/04/buyer-persona-e1545248524290.jpg"
-        )
-        var atleta5 = Athlet(
-            name = "Juan",
-            surname = "Fernandez Pastor",
-            id = "ciuaqluier",
-            group = "AltoRendimiento",
-            dateBirth = Date(2002, 9, 10),
-            photoUrl = "https://definicionde.es/wp-content/uploads/2019/04/definicion-de-persona-min.jpg"
-        )
-
-        var atleta6= Athlet(
-            name = "Juan alberto",
-            surname = "Jimenez franco",
-            id = "ciuaqluier2",
-            group = "AltoRendimiento",
-            dateBirth = Date(2002, 9, 10),
-            photoUrl = "https://iteragrow.com/wp-content/uploads/2018/04/buyer-persona-e1545248524290.jpg"
-        )
-        FireBaseReferencies.mAtletasRef.child("ciuaqluier1").setValue(atleta2)
-        FireBaseReferencies.mAtletasRef.child("ciuaqluier3").setValue(atleta)
-        FireBaseReferencies.mAtletasRef.child("ciuaqluier4").setValue(atleta2)
-        FireBaseReferencies.mAtletasRef.child("ciuaqluier5").setValue(atleta)
-        FireBaseReferencies.mAtletasRef.child("ciuaqluier6").setValue(atleta2)
-        FireBaseReferencies.mAtletasRef.child("ciuaqluier7").setValue(atleta)
-        FireBaseReferencies.mAtletasRef.child("ciuaqluier8").setValue(atleta2)
-        FireBaseReferencies.mAtletasRef.child("ciuaqluier9").setValue(atleta)
-
-    }
 
 
     //todo al hacer el click largo podamos modificar al atleta

@@ -33,7 +33,7 @@ class SignInActivity : AppCompatActivity() {
 
         mBinding.loginbtn
             .setOnClickListener {
-            iniciarSesion("sadachok1999@gmai.com","123456")
+            iniciarSesion(mBinding.username.text.toString(), mBinding.password.text.toString()  )
         }
 
     }

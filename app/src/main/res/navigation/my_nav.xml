@@ -39,6 +39,10 @@
         <action
             android:id="@+id/navigateToAdd"
             app:destination="@id/addFragment" />
+        <action
+            android:id="@+id/action_trainingFragment_to_trainingDetailsFragment"
+            app:destination="@id/trainingDetailsFragment"
+            app:enterAnim="@anim/fui_slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/encuestaFragment"
@@ -56,4 +60,8 @@
         android:name="com.finde.android.traincheck.login.SignInActivity"
         android:label="activity_sign_in"
         tools:layout="@layout/activity_sign_in" />
+    <fragment
+        android:id="@+id/trainingDetailsFragment"
+        android:name="com.finde.android.traincheck.Fragments.training.TrainingDetailsFragment"
+        android:label="TrainingDetailsFragment" />
 </navigation>

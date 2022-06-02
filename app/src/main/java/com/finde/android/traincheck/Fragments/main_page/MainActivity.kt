@@ -24,6 +24,7 @@ import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mDat
 import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mEntrenadoresRef
 import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mFirebaseAuth
 import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mGruposRef
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -37,6 +38,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mAuthListener: FirebaseAuth.AuthStateListener
     private lateinit var navController: NavController
     private val grupoSeleccionado: GrupoSeleccionado by viewModels<GrupoSeleccionado>()
+    var isEntrenador: Boolean = false
     var entrenadores = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,13 +49,17 @@ class MainActivity : AppCompatActivity() {
 
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
-
+        //setAthlets()
         setupAuth()
-        findGroup()
+        signIn()
+        if(!isEntrenador){
+            findGroup()
+        }
         setupNavigationBar()
         setupHeaderNav()
 
-        Toast.makeText(this, grupoSeleccionado.currentGroup.toString(), Toast.LENGTH_SHORT).show()
+
+        Toast.makeText(this, grupoSeleccionado.currentGroup.value, Toast.LENGTH_SHORT).show()
         // insertarGrupos() // y cambiar al entrenador
     }
 
@@ -71,6 +77,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
+
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
             override fun onTabReselected(tab: TabLayout.Tab?) {}
         })
@@ -82,7 +89,8 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.navController
-        val bottomNavigationView = mBinding.bottomNav //findViewById<BottomNavigationView>(R.id.bottomNav)
+        val bottomNavigationView =
+            mBinding.bottomNav //findViewById<BottomNavigationView>(R.id.bottomNav)
         setupWithNavController(bottomNavigationView, navController)
 
     }
@@ -92,7 +100,7 @@ class MainActivity : AppCompatActivity() {
         //necesitas un listener por si sales en cualquier momento
         val entrenadorListener = object : ValueEventListener {
             override fun onDataChange(snapshots: DataSnapshot) {
-                var isEntrenador: Boolean = false
+
                 if (mFirebaseAuth.currentUser != null) {
                     for (snapshot in snapshots.children) { // ponerle un and si se ha encontradon // utilizaria lambda pero los snapshots no son string
                         if (mFirebaseAuth.currentUser!!.uid == snapshot.key) {
@@ -102,14 +110,15 @@ class MainActivity : AppCompatActivity() {
                     if (isEntrenador) {
                         grupoSeleccionado.currentGroup.value = "Formacion"
                         signIn()
-                    }
-                    else{
+                    } else {
                         iniciarAlumno()
                     }
                 }
             }
+
             override fun onCancelled(error: DatabaseError) {}
         }
+
 
         mEntrenadoresRef.addListenerForSingleValueEvent(entrenadorListener)
 
@@ -138,38 +147,15 @@ class MainActivity : AppCompatActivity() {
         //mBinding.topNav.visibility = View.GONE
     }
 
-/*    //necesitas saber a que gurpo pertenece el atleta que inicia sesion todo mejor ponerl a los atletas fuera y el grupo como atributo
-    private fun findGroup(){
-        val gruposListener = object : ValueEventListener {
-            override fun onDataChange(snapshots: DataSnapshot) {
-                for (snapshot in snapshots.children) {
-                    val group = snapshot.getValue(Group::class.java)
-                    for(athlet in group!!.listaAthlets)
-                    {
-                        if(athlet.id == mFirebaseAuth.currentUser!!.uid)
-                        {
-                            grupoSeleccionado.currentGroup.value = group.name
-                        }
-                    }
-                }
-            }
-
-
-            override fun onCancelled(error: DatabaseError) {}
-        }
-        mGruposRef.addListenerForSingleValueEvent(gruposListener)
-    }*/
-
+    //me hace el find antes de iniciar sesion
     private fun findGroup() {
         val athletsListener = object : ValueEventListener {
             override fun onDataChange(snapshots: DataSnapshot) {
                 for (snapshot in snapshots.children) {
                     val athlet = snapshot.getValue(Athlet::class.java)
-
-                        if(athlet!!.id == mFirebaseAuth.currentUser!!.uid)
-                        {
-                            grupoSeleccionado.currentGroup.value = athlet.group
-                        }
+                    if (athlet!!.id == mFirebaseAuth.currentUser!!.uid) {
+                        grupoSeleccionado.currentGroup.value = athlet.group
+                    }
                 }
             }
 
@@ -179,7 +165,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-//todo quitar y anhadir los listeners
+    //todo quitar y anhadir los listeners
     override fun onResume() {
         super.onResume()
         mFirebaseAuth.addAuthStateListener(mAuthListener)
@@ -203,4 +189,68 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun setAthlets() {
+
+
+        var atleta = Athlet(
+            name = "Maria",
+            surname = "Fernandez Pastor",
+            id = FireBaseReferencies.mAtletasRef.push().key!!,
+            group = "AltoRendimiento",
+            dateBirth = Date(2002, 9, 10),
+            photoUrl = "https://socialtools.me/wp-content/uploads/2016/04/foto-de-perfil.jpg"
+        )
+
+        var atleta2 = Athlet(
+            name = "Juan ",
+            surname = "Jimenez franco",
+            id = FireBaseReferencies.mAtletasRef.push().key!!,
+            dateBirth = Date(2002, 9, 10),
+            photoUrl = "https://iteragrow.com/wp-content/uploads/2018/04/buyer-persona-e1545248524290.jpg"
+        )
+        var atleta3 = Athlet(
+            name = "Juan",
+            surname = "Fernandez Pastor",
+            id = FireBaseReferencies.mAtletasRef.push().key!!,
+            dateBirth = Date(2002, 9, 10),
+            photoUrl = "https://definicionde.es/wp-content/uploads/2019/04/definicion-de-persona-min.jpg"
+        )
+
+        var atleta4 = Athlet(
+            name = "Juan alberto",
+            surname = "Jimenez franco",
+            id = FireBaseReferencies.mAtletasRef.push().key!!,
+            dateBirth = Date(2002, 9, 10),
+            photoUrl = "https://pymstatic.com/44253/conversions/xavier-molina-medium.jpg"
+        )
+        var atleta5 = Athlet(
+            name = "Juan",
+            surname = "Fernandez Pastor",
+            id = FireBaseReferencies.mAtletasRef.push().key!!,
+            group = "AltoRendimiento",
+            dateBirth = Date(2002, 9, 10),
+            photoUrl = "https://dam.muyinteresante.com.mx/wp-content/uploads/2018/05/fotos-de-perfil-son-mejor-elegidas-por-personas-extranas-afirma-estudio.jpg"
+        )
+
+        var atleta6 = Athlet(
+            name = "Juan alberto",
+            surname = "Jimenez franco",
+            id = FireBaseReferencies.mAtletasRef.push().key!!,
+            group = "AltoRendimiento",
+            dateBirth = Date(2002, 9, 10),
+            photoUrl = "https://cdn.eldeforma.com/wp-content/uploads/2020/01/images-1-6.jpg"
+        )
+        FireBaseReferencies.mAtletasRef.child(atleta.id).setValue(atleta)
+        FireBaseReferencies.mAtletasRef.child(atleta2.id).setValue(atleta2)
+        FireBaseReferencies.mAtletasRef.child(atleta3.id).setValue(atleta3)
+        FireBaseReferencies.mAtletasRef.child(atleta4.id).setValue(atleta4)
+        FireBaseReferencies.mAtletasRef.child(atleta5.id).setValue(atleta5)
+        FireBaseReferencies.mAtletasRef.child(atleta6.id).setValue(atleta6)
+        FireBaseReferencies.mAtletasRef.child(atleta.id).setValue(atleta)
+        FireBaseReferencies.mAtletasRef.child(atleta2.id).setValue(atleta2)
+
+    }
+
+
 }

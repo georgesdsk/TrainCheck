@@ -8,7 +8,7 @@ import java.util.*
 
 
 @IgnoreExtraProperties
-data class Athlet(@get:Exclude var id   : String = "",
+data class Athlet( var id   : String = "",
                   var name: String = "",
                   var surname: String = "",
                   var group: String ="Formacion",
