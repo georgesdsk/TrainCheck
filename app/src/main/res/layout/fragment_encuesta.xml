@@ -28,21 +28,22 @@
         android:layout_margin="16dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
+        android:gravity="center"
         android:text="¿Cuanto te has esforzado hoy?"
         android:textSize="35dp"
         android:textStyle="bold"
-        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.13" />
+        app:layout_constraintVertical_bias="0.147" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#05020000"
+
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
@@ -54,7 +55,7 @@
             android:id="@+id/mucho"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mucho"
+            android:text="5"
 
             android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
@@ -62,7 +63,7 @@
             android:id="@+id/bastante"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bastante"
+            android:text="4"
 
             android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
@@ -70,8 +71,7 @@
             android:id="@+id/suficiente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-            android:text="Suficiente"
+            android:text="3"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"></RadioButton>
 
         <RadioButton
@@ -79,14 +79,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:text="Poco"
+            android:text="2"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"></RadioButton>
 
         <RadioButton
             android:id="@+id/muyPoco"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Muy poco"
+            android:text="1"
 
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"></RadioButton>
 

@@ -50,7 +50,7 @@ class TrainingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setListener()
         setupAdapter()
-        //setExample()
+        setExample()
         setupRecyclerView()
     }
 
@@ -171,32 +171,33 @@ class TrainingFragment : Fragment() {
         Toast.makeText(this.context, grupoSeleccionado.currentGroup.value!!, Toast.LENGTH_SHORT)
             .show()
         FireBaseReferencies.mGruposRef.child(grupoSeleccionado.currentGroup.value!!)
-            .child("Entrenamientos")
-            .child("ciuaqluier1").setValue(
+            .child("Formacion")
+            .child("ciuaqluier7").setValue(
                 Entrenamiento(
-                    urlEntrenamiento = "https://www.adslzone.net/app/uploads-adslzone.net/2019/04/borrar-fondo-imagen.jpg"
+                    urlEntrenamiento = "https://www.efdeportes.com/efd142/planificacion-anual-para-entrenamiento-02.jpg",
+                    fecha = Date()
                 )
             )
         FireBaseReferencies.mGruposRef.child(grupoSeleccionado.currentGroup.value!!)
-            .child("Entrenamientos")
-            .child("ciuaqluier2").setValue(
+            .child("Formacion")
+            .child("ciuaqluier8").setValue(
                 Entrenamiento(
-                    urlEntrenamiento = "https://www.adslzone.net/app/uploads-adslzone.net/2019/04/borrar-fondo-imagen.jpg"
-
+                    urlEntrenamiento = "https://www.monografias.com/docs114/plan-entrenamiento-escrito-del-equipo-medio-fondo/image013.jpg",
+                    fecha = Date()
                 )
             )
-        FireBaseReferencies.mGruposRef.child("AltoRendimiento")
+        FireBaseReferencies.mGruposRef.child("Formacion")
             .child("Entrenamientos")
-            .child("ciuaqluier3").setValue(
+            .child("ciuaqluier9").setValue(
                 Entrenamiento(
-                    urlEntrenamiento = "https://www.adslzone.net/app/uploads-adslzone.net/2019/04/borrar-fondo-imagen.jpg",
+                    urlEntrenamiento = "https://image.slidesharecdn.com/cfakepathplanificaciondelentrenamientodeportivo-100503094337-phpapp01/95/slide-3-1024.jpg",
                     fecha = Date()            )
             )
         FireBaseReferencies.mGruposRef.child("Formacion")
             .child("Entrenamientos")
-            .child("ciuaqluier4").setValue(
+            .child("ciuaqluier10").setValue(
                 Entrenamiento(
-                    urlEntrenamiento = "https://www.adslzone.net/app/uploads-adslzone.net/2019/04/borrar-fondo-imagen.jpg",
+                    urlEntrenamiento = "https://www.monografias.com/trabajos96/estructura-y-planificacion-del-entrenamiento-deportivo/img6.png",
                     fecha = Date()            )
             )
     }

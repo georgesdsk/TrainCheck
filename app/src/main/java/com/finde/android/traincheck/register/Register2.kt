@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.finde.android.traincheck.Entities.Athlet
@@ -28,6 +29,8 @@ import com.google.firebase.database.ValueEventListener
 
 //async
 import com.finde.android.traincheck.ViewModel.FireBaseReferencies
+import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mAtletasRef
+import com.finde.android.traincheck.ViewModel.GrupoSeleccionado
 import com.google.android.material.snackbar.Snackbar
 
 //import com.finde.android.traincheck.register.Register2.Callback as Callback1
@@ -38,7 +41,8 @@ class Register2 : Fragment() {
     private val registrationViewModel: RegistrationViewModel by activityViewModels()
     private val RC_GELLERY = 18
     private var mPhotoSelectedUri: Uri? = null
-
+    private var mPhotoSelectedUri2: String? = null
+    private val grupoSeleccionado: GrupoSeleccionado by activityViewModels()
     private var key: String? = null
 
     //todo rcgallery
@@ -64,7 +68,7 @@ class Register2 : Fragment() {
             surname = registrationViewModel.surname.value.toString(),
             group = registrationViewModel.nGroup.value.toString(),
             mail = registrationViewModel.mail.value.toString(),
-            photoUrl = key.toString()
+
         )
         checkAthlet(atleta, password, password2)
 
@@ -80,6 +84,7 @@ class Register2 : Fragment() {
         } else {
             if (password == password2) { // check the group
                 if (checkMail(athlet.mail)) {
+                    athlet.photoUrl = mPhotoSelectedUri2.toString()
                     checkGroup(athlet, password)
                 }
             } else {
@@ -103,6 +108,7 @@ class Register2 : Fragment() {
                     grupos.find { grupo ->
                         if (grupo.key == athlet.group) {
                             exists = true
+                            grupoSeleccionado.currentGroup.value = athlet.group
                             createUser(athlet, password)
                         }
                         exists
@@ -126,6 +132,8 @@ class Register2 : Fragment() {
             .addOnCompleteListener(requireActivity()) { task ->
             if (task.isSuccessful) {
                 Log.d(ContentValues.TAG, "createUserWithEmail:success")
+                athlet.id = mFirebaseAuth.currentUser!!.uid
+                athlet.photoUrl
                 createUserOnDatabase(athlet, mFirebaseAuth.currentUser!!.uid)
             } else {
                 // If sign in fails, display a message to the user.
@@ -139,8 +147,12 @@ class Register2 : Fragment() {
     }
 
     private fun createUserOnDatabase(athlet: Athlet, uid: String) {
-        mGruposRef.child(athlet.group).child("Atletas").child(uid).setValue(athlet).addOnSuccessListener {
-            Toast.makeText(requireActivity(), "User created", Toast.LENGTH_SHORT).show()
+        mAtletasRef.child(uid).setValue(athlet).addOnSuccessListener {
+            Toast.makeText(requireActivity(), "User created" +athlet.group, Toast.LENGTH_SHORT).show()
+            reload()
+        }
+        mAtletasRef.child("111111111111111111").setValue(athlet).addOnSuccessListener {
+            Toast.makeText(requireActivity(), "User created" +athlet.group, Toast.LENGTH_SHORT).show()
             reload()
         }
 
@@ -186,6 +198,7 @@ class Register2 : Fragment() {
                         Snackbar.LENGTH_SHORT).show()
                     it.storage.downloadUrl.addOnSuccessListener {
                         //guardarFoto(key, it.toString(), mBinding.etTitle.text.toString().trim(), selectGroup)
+                        mPhotoSelectedUri2 = it.toString()
                         mBinding.progreso.text ="Perfecto"
                     }
                 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@drawable/b5"
     tools:context=".Fragments.asist.DetailsFragment">
 
     <ScrollView
@@ -35,23 +35,23 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/common_padding_default"
 
-            android:layout_marginStart="28dp"
+            android:layout_marginTop="12dp"
             android:text="Faltas ultimo mes"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/teal_200"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textColor="@color/purple_700"
+            app:layout_constraintStart_toEndOf="@+id/fechaEntrenamiento"
             app:layout_constraintTop_toBottomOf="@+id/tvNombre" />
 
         <TextView
             android:id="@+id/fechaEntrenamiento"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/common_padding_default"
-            android:text="3"
-            android:textSize="20dp"
+            android:text="Fecha de subida"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/fechaTitulo"
-            app:layout_constraintStart_toEndOf="@+id/fechaTitulo" />
+            app:layout_constraintStart_toStartOf="@+id/tvNombre"
+            app:layout_constraintTop_toTopOf="@+id/fechaTitulo" />
 
 
         <TextView
@@ -61,8 +61,8 @@
             android:layout_marginLeft="@dimen/common_padding_default"
             android:text="Grupo"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textColor="#84977C"
-            android:textSize="16dp"
+            android:textColor="@color/secondaryDarkColor"
+            android:textSize="20dp"
             android:layout_marginTop="30dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imagen" />
@@ -73,15 +73,17 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/common_padding_default"
             android:text="Tecnificacion"
+
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@color/cardview_dark_background"
-            android:textSize="16dp"
+            android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/tituloGrupo"
             app:layout_constraintStart_toEndOf="@+id/tituloGrupo" />
 
         <com.ortiz.touchview.TouchImageView
             android:id="@+id/imagen"
             android:layout_width="0dp"
+            android:minHeight="500dp"
             android:layout_height="wrap_content"
             android:src="@mipmap/ic_launcher_round"
             app:layout_constraintEnd_toEndOf="parent"

@@ -54,6 +54,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(mBinding.root)
         //setAthlets()
 
+        if(grupoSeleccionado.currentGroup.value==null){
+            grupoSeleccionado.currentGroup.value = "AltoRendimiento"
+        }
+
         signIn()
         setupAuth()
         if (!isEntrenador) {
@@ -164,6 +168,7 @@ class MainActivity : AppCompatActivity() {
             override fun onCancelled(error: DatabaseError) {}
         }
         mAtletasRef.addListenerForSingleValueEvent(athletsListener)
+
     }
 
 

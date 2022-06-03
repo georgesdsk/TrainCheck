@@ -168,13 +168,6 @@ class AsistFragment : Fragment(), HomeAux {
         }
     }
 
-
-    //como recibir el nombre del objeto al que pertenece a lo que hemos pulsado
-
-
-
-
-
     //todo al hacer el click largo podamos modificar al atleta
     inner class AtletaHolder(view: View) : RecyclerView.ViewHolder(view) {
         val binding = ItemAtletaBinding.bind(view)

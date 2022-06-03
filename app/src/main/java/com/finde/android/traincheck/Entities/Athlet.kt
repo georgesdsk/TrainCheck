@@ -17,6 +17,6 @@ data class Athlet( var id   : String = "",
                   var dateBirth: Date = Date(2019,8,10),
                   var asistType: Int = 1, // de tres tipo
                   var listAbsence: Map<String, Date> = mapOf(),
-                  var listStats: Map<String, Date> = mapOf(),
+                  var listStats: Map<String, List<String>> = mapOf(),
                   var injuryList: Map<String, Date> = mapOf()
 )

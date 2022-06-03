@@ -48,7 +48,11 @@
         android:id="@+id/encuestaFragment"
         android:name="com.finde.android.traincheck.Fragments.stats.EncuestaFragment"
         android:label="fragment_encuesta"
-        tools:layout="@layout/fragment_encuesta" />
+        tools:layout="@layout/fragment_encuesta" >
+        <action
+            android:id="@+id/action_encuestaFragment_to_statsFragment"
+            app:destination="@id/statsFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/detailsFragment"

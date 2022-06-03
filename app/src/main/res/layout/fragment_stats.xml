@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/b5"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.finde.android.traincheck.Fragments.stats.StatsFragment">
 
@@ -10,13 +11,27 @@
         android:id="@+id/btnLogout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="144dp"
+        android:layout_marginBottom="100dp"
         android:text="Cerrar sesión"
         app:icon="@drawable/ic_exit_to_app"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:layout_width="500dp"
+        android:layout_height="400dp"
+        android:cropToPadding="true"
+        android:scaleType="fitCenter"
+        android:layout_marginBottom="50dp"
+        android:background="@color/fui_transparent"
+        android:src="@drawable/img"
+        app:layout_constraintBottom_toTopOf="@+id/tvEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </ImageButton>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnEncuesta"
@@ -25,42 +40,32 @@
         android:layout_margin="20dp"
         android:text="Realizar encuesta"
         app:icon="@drawable/fui_ic_anonymous_white_24dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnLogout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnInicio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Demo Inicio de sesion"
-        app:icon="@drawable/ic_exit_to_app"
-        app:layout_constraintBottom_toTopOf="@+id/btnLogout"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tvName"
+        android:layout_margin="15dp"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?attr/textAppearanceHeadline5"
-        tools:text="nombre completo"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tvEmail"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/btnInicio"/>
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="nombre completo" />
 
     <TextView
         android:id="@+id/tvEmail"
+        android:layout_margin="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?attr/textAppearanceSubtitle1"
-        tools:text="email@dominio.com"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnEncuesta"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvName"/>
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="email@dominio.com" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
