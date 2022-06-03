@@ -9,7 +9,12 @@ import com.finde.android.traincheck.Fragments.main_page.MainActivity
 import com.finde.android.traincheck.R
 import com.finde.android.traincheck.databinding.ActivitySignInBinding
 import com.finde.android.traincheck.register.RegisterActivity
+import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
 //ocultar el nombre
 class SignInActivity : AppCompatActivity() {
@@ -33,8 +38,10 @@ class SignInActivity : AppCompatActivity() {
 
         mBinding.loginbtn
             .setOnClickListener {
-            iniciarSesion(mBinding.username.text.toString(), mBinding.password.text.toString()  )
-        }
+
+                    iniciarSesion(mBinding.username.text.toString(), mBinding.password.text.toString())
+
+            }
 
     }
 
@@ -43,20 +50,26 @@ class SignInActivity : AppCompatActivity() {
         this.startActivity(intent)
     }
 
-    private fun iniciarSesion(s: String, s1: String) {
-        mFirebaseAuth.signInWithEmailAndPassword(s, s1).addOnCompleteListener(this) { task ->
+
+    private  fun iniciarSesion(s: String, s1: String) {
+
+        mFirebaseAuth.signInWithEmailAndPassword(s, s1).addOnCompleteListener() { task ->
             if (task.isSuccessful) {
                 Log.d("TAG", "signInWithEmail:success")
                 reload()
             } else {
                 Log.w("TAG", "signInWithEmail:failure", task.exception)
-                Toast.makeText(baseContext, "Authentication failed.",
-                    Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    baseContext, "Authentication failed.",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
 
-    private fun reload (){
+
+
+    private fun reload() {
         val intent = Intent(this, MainActivity::class.java)
         this.startActivity(intent)
     }

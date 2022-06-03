@@ -30,6 +30,7 @@ import com.finde.android.traincheck.HomeAux
 import com.finde.android.traincheck.R
 import com.finde.android.traincheck.ViewModel.FireBaseReferencies
 import com.finde.android.traincheck.ViewModel.GrupoSeleccionado
+import java.text.SimpleDateFormat
 
 
 class AsistFragment : Fragment(), HomeAux {
@@ -39,7 +40,7 @@ class AsistFragment : Fragment(), HomeAux {
     private lateinit var mLayoutManager: RecyclerView.LayoutManager
     private val vmAtleta: AtletaSeleccionado by activityViewModels()
     private val grupoSeleccionado: GrupoSeleccionado by activityViewModels()
-
+    private val format = SimpleDateFormat("dd-MM-yyyy")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -90,10 +91,16 @@ class AsistFragment : Fragment(), HomeAux {
 
             override fun onBindViewHolder(holder: AtletaHolder, position: Int, model: Athlet) {
                 val atleta = getItem(position)
+                var miss: Boolean = false
+                //todo hacer la consulta mas queña
+                if( model.listAbsence.containsKey(format.format(Date()))) {
+                    miss = true
+                }
 
                 with(holder) {
                     setListener(atleta)
                     val completo = atleta.name + " " + atleta.surname
+                    binding.cbFalta.isChecked = miss
                     binding.name.text = completo
                     Glide.with(mContext)
                         .load(atleta.photoUrl)
@@ -150,12 +157,14 @@ class AsistFragment : Fragment(), HomeAux {
     //todo hacer que la falta salga siempre con un dia en especia
     private fun setFalta(athlet: Athlet, checked: Boolean) {
 
-        if (checked) {
 
+        if (checked) {
+            FireBaseReferencies.mAtletasRef.child(athlet.id).child("listAbsence").child(format.format(Date())).setValue(Date())
 
         } else {
             FireBaseReferencies.mAtletasRef.child(athlet.id).child("listAbsence")
-                .setValue(Date())
+                .child(format.format(Date())).removeValue()
+
         }
     }
 

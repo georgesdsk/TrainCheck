@@ -23,7 +23,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@color/teal_200"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tituloCategoria" />
+            app:layout_constraintTop_toBottomOf="@+id/tituloGrupo" />
 
 
         <TextView
@@ -40,7 +40,7 @@
 
 
         <TextView
-            android:id="@+id/tituloPrecioUnitario"
+            android:id="@+id/fechaTitulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/teal_200"
@@ -53,19 +53,19 @@
             app:layout_constraintTop_toBottomOf="@+id/tituloNombre" />
 
         <TextView
-            android:id="@+id/tvPrecioUnitario"
+            android:id="@+id/fechaEntrenamiento"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/common_padding_default"
             android:text="3"
             android:textSize="20dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            app:layout_constraintBottom_toBottomOf="@+id/tituloPrecioUnitario"
-            app:layout_constraintStart_toEndOf="@+id/tituloPrecioUnitario" />
+            app:layout_constraintBottom_toBottomOf="@+id/fechaTitulo"
+            app:layout_constraintStart_toEndOf="@+id/fechaTitulo" />
 
 
         <TextView
-            android:id="@+id/tituloCategoria"
+            android:id="@+id/tituloGrupo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/common_padding_default"
@@ -78,7 +78,7 @@
             app:layout_constraintTop_toBottomOf="@+id/imagen" />
 
         <TextView
-            android:id="@+id/tvCategoria"
+            android:id="@+id/grupo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/common_padding_default"
@@ -86,8 +86,8 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@color/cardview_dark_background"
             android:textSize="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/tituloCategoria"
-            app:layout_constraintStart_toEndOf="@+id/tituloCategoria" />
+            app:layout_constraintBottom_toBottomOf="@+id/tituloGrupo"
+            app:layout_constraintStart_toEndOf="@+id/tituloGrupo" />
 
         <ImageView
             android:id="@+id/imagen"

@@ -24,6 +24,9 @@ import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mDat
 import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mEntrenadoresRef
 import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mFirebaseAuth
 import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mGruposRef
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.util.*
 
 
@@ -50,13 +53,15 @@ class MainActivity : AppCompatActivity() {
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
         //setAthlets()
-        setupAuth()
+
         signIn()
-        if(!isEntrenador){
+        setupAuth()
+        if (!isEntrenador) {
             findGroup()
         }
         setupNavigationBar()
         setupHeaderNav()
+        findGroup()
 
 
         Toast.makeText(this, grupoSeleccionado.currentGroup.value, Toast.LENGTH_SHORT).show()
@@ -109,28 +114,25 @@ class MainActivity : AppCompatActivity() {
                     }
                     if (isEntrenador) {
                         grupoSeleccionado.currentGroup.value = "Formacion"
-                        signIn()
+
                     } else {
                         iniciarAlumno()
                     }
                 }
             }
-
             override fun onCancelled(error: DatabaseError) {}
         }
-
-
         mEntrenadoresRef.addListenerForSingleValueEvent(entrenadorListener)
 
         mAuthListener = FirebaseAuth.AuthStateListener {
             signIn()
         }
-
     }
 
 
     private fun signIn() {
         val user = mFirebaseAuth.currentUser
+
         if (user == null) {
             val intent = Intent(this, SignInActivity::class.java)
             this.startActivity(intent)
@@ -196,7 +198,7 @@ class MainActivity : AppCompatActivity() {
         var atleta = Athlet(
             name = "Maria",
             surname = "Fernandez Pastor",
-            id = FireBaseReferencies.mAtletasRef.push().key!!,
+            id = "BzgUCsXvQgY04GByJzoPfM2La832",
             group = "AltoRendimiento",
             dateBirth = Date(2002, 9, 10),
             photoUrl = "https://socialtools.me/wp-content/uploads/2016/04/foto-de-perfil.jpg"
@@ -205,14 +207,14 @@ class MainActivity : AppCompatActivity() {
         var atleta2 = Athlet(
             name = "Juan ",
             surname = "Jimenez franco",
-            id = FireBaseReferencies.mAtletasRef.push().key!!,
+            id = "b76taXe0sdfAh2MMZBFwi6DN7Ch1",
             dateBirth = Date(2002, 9, 10),
             photoUrl = "https://iteragrow.com/wp-content/uploads/2018/04/buyer-persona-e1545248524290.jpg"
         )
         var atleta3 = Athlet(
             name = "Juan",
             surname = "Fernandez Pastor",
-            id = FireBaseReferencies.mAtletasRef.push().key!!,
+            id = "7JWFPG1QeEd3DDaAJ9UlceScGHi1",
             dateBirth = Date(2002, 9, 10),
             photoUrl = "https://definicionde.es/wp-content/uploads/2019/04/definicion-de-persona-min.jpg"
         )
@@ -220,14 +222,14 @@ class MainActivity : AppCompatActivity() {
         var atleta4 = Athlet(
             name = "Juan alberto",
             surname = "Jimenez franco",
-            id = FireBaseReferencies.mAtletasRef.push().key!!,
+            id = "Hezl97qqbPNPFPSAdG93FWRlhhB3",
             dateBirth = Date(2002, 9, 10),
             photoUrl = "https://pymstatic.com/44253/conversions/xavier-molina-medium.jpg"
         )
         var atleta5 = Athlet(
             name = "Juan",
             surname = "Fernandez Pastor",
-            id = FireBaseReferencies.mAtletasRef.push().key!!,
+            id = "BwUe4AhTQGfknuDumtQKV8bA9Kq1",
             group = "AltoRendimiento",
             dateBirth = Date(2002, 9, 10),
             photoUrl = "https://dam.muyinteresante.com.mx/wp-content/uploads/2018/05/fotos-de-perfil-son-mejor-elegidas-por-personas-extranas-afirma-estudio.jpg"
@@ -236,7 +238,7 @@ class MainActivity : AppCompatActivity() {
         var atleta6 = Athlet(
             name = "Juan alberto",
             surname = "Jimenez franco",
-            id = FireBaseReferencies.mAtletasRef.push().key!!,
+            id = "kd4PRHCMbXRrkOn6gjGEi88astO2",
             group = "AltoRendimiento",
             dateBirth = Date(2002, 9, 10),
             photoUrl = "https://cdn.eldeforma.com/wp-content/uploads/2020/01/images-1-6.jpg"

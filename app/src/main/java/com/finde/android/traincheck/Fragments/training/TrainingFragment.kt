@@ -19,6 +19,7 @@ import com.finde.android.traincheck.R
 import com.finde.android.traincheck.ViewModel.FireBaseReferencies
 import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mGruposRef
 import com.finde.android.traincheck.ViewModel.GrupoSeleccionado
+import com.finde.android.traincheck.ViewModel.SelectedTraining
 import com.finde.android.traincheck.databinding.FragmentTrainingBinding
 import com.finde.android.traincheck.databinding.ItemEntrenamientoBinding
 import com.firebase.ui.database.FirebaseRecyclerAdapter
@@ -30,13 +31,12 @@ import java.util.*
 //todo meter el delete cuando ingrese nuevos entrenamientos
 class TrainingFragment : Fragment() {
 
-    private val RC_GELLERY = 18
-    private val PATH_TRAININGS = "trainings"
+
     private lateinit var mBinding: FragmentTrainingBinding
     private lateinit var mFirebaseAdapter: FirebaseRecyclerAdapter<Entrenamiento, TrainingFragment.TrainingHolder>
     private lateinit var mLayoutManager: RecyclerView.LayoutManager
     private val grupoSeleccionado: GrupoSeleccionado by activityViewModels()
-    private val selectedTraining: sel by activityViewModels()
+    private val selectedTraining: SelectedTraining by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,6 +68,7 @@ class TrainingFragment : Fragment() {
             //mFirebaseAdapter.notifyDataSetChanged()
         })
         mBinding.fab.setOnClickListener {
+
             Navigation.findNavController(mBinding.root).navigate(R.id.navigateToAdd)
         }
 
@@ -208,9 +209,8 @@ class TrainingFragment : Fragment() {
         fun setListener(entrenamiento: Entrenamiento) {
             with(binding.root) {
                 setOnClickListener {
-
-
-
+                    selectedTraining.selectedTraining = entrenamiento
+                    navigation.navigate(R.id.action_trainingFragment_to_trainingDetailsFragment)
                 }
                 setOnLongClickListener {
                     deleteEntrenamiento(entrenamiento)

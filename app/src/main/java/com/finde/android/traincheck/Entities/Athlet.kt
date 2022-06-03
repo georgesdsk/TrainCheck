@@ -16,7 +16,7 @@ data class Athlet( var id   : String = "",
                   var photoUrl: String ="",
                   var dateBirth: Date = Date(2019,8,10),
                   var asistType: Int = 1, // de tres tipo
-                  var listAbsence: List<Date> = mutableListOf(),
-                  var listStats: List<Stat> = mutableListOf(),
-                  var injuryList: List<Injury> = mutableListOf()
+                  var listAbsence: Map<String, Date> = mapOf(),
+                  var listStats: Map<String, Date> = mapOf(),
+                  var injuryList: Map<String, Date> = mapOf()
 )
