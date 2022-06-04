@@ -7,10 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.finde.android.traincheck.Fragments.main_page.MainActivity
 import com.finde.android.traincheck.R
 import com.finde.android.traincheck.ViewModel.GrupoSeleccionado
+import com.finde.android.traincheck.ViewModel.VmEstadisticas
 import com.finde.android.traincheck.databinding.FragmentStatsBinding
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
@@ -19,7 +21,7 @@ import com.google.firebase.auth.FirebaseAuth
 class StatsFragment : Fragment() {
 
     private lateinit var mBinding: FragmentStatsBinding
-
+    private val vmEstadisticas: VmEstadisticas by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,15 +39,15 @@ class StatsFragment : Fragment() {
         val navigation = Navigation.findNavController(mBinding.root)
 
         mBinding.btnEncuesta.setOnClickListener{
-
-
             navigation.navigate(R.id.action_statsFragment_to_graphicsFragment)
 
         }
         mBinding.btnLogout.setOnClickListener{
             singOut()
         }
-        mBinding.stats.setOnClickListener {  }
+        mBinding.stats.setOnClickListener { navigation.navigate(R.id.action_statsFragment_to_graphicsFragment) }
+
+        mBinding.cardView2.setOnClickListener { navigation.navigate(R.id.action_statsFragment_to_resultsGraphFragment) }
 
 
     }

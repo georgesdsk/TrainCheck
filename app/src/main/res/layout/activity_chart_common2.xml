@@ -50,7 +50,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_medium"
-                        android:text="Esfuerzo promedio"
+                        android:text="Resultados promedios"
                         android:textColor="@color/secondaryTextColor"
                         android:textSize="18dp">
                     </TextView>

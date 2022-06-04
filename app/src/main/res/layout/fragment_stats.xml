@@ -3,14 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/b5"
+    android:background="@drawable/b51"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.finde.android.traincheck.Fragments.stats.StatsFragment">
 
     <ImageButton
         android:id="@+id/imageButton"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_margin="10dp"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
         android:background="@color/fui_transparent"
         android:cropToPadding="true"
         android:scaleType="fitCenter"
@@ -18,71 +19,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></ImageButton>
-
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/stats"
-        android:layout_width="160dp"
-        android:layout_height="100dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="40dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnLogout"
-        android:layout_marginLeft="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:strokeColor="@color/cardview_shadow_start_color"
-        android:backgroundTint="@color/primaryLightColor"
-        >
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_medium"
-                android:text="Ver estadisticas"
-                android:layout_margin="10dp"
-
-                android:textColor="@color/secondaryTextColor"
-                android:textSize="15dp"
-                >
-
-            </TextView>
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="160dp"
-        android:layout_height="100dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="40dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnLogout"
-        android:layout_marginLeft="30dp"
-        app:layout_constraintStart_toEndOf="@id/stats"
-        app:strokeColor="@color/cardview_shadow_start_color"
-        android:backgroundTint="@color/primaryDarkColor"
-        >
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_medium"
-                android:text="Estadisticas"
-                android:layout_margin="10dp"
-
-                android:textColor="@color/secondaryTextColor"
-                android:textSize="18dp"
-                >
-
-            </TextView>
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-    </androidx.cardview.widget.CardView>
-
 
     <TextView
         android:id="@+id/tvName"
@@ -107,18 +43,169 @@
         app:layout_constraintTop_toBottomOf="@+id/tvName"
         tools:text="email@dominio.com" />
 
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:layout_width="0dp"
+        android:layout_height="350dp"
+        android:layout_marginTop="40dp"
+        android:scrollbarAlwaysDrawHorizontalTrack="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvEmail">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/esfuerzo"
+                android:layout_width="160dp"
+                android:layout_height="100dp"
+                android:backgroundTint="@color/primaryDarkColor"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="40dp"
+                app:layout_constraintEnd_toStartOf="@+id/resultados"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/resultados">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Esfuerzo"
+                        android:textColor="@color/secondaryTextColor"
+                        android:textSize="15dp">
+
+                    </TextView>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/resultados"
+                android:layout_width="160dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="30dp"
+                android:backgroundTint="@color/secondaryDarkColor"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="40dp"
+                app:layout_constraintStart_toEndOf="@id/stats"
+                app:layout_constraintTop_toTopOf="parent"
+                app:strokeColor="@color/primaryColor">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Resultados"
+
+                        android:textColor="@color/secondaryTextColor"
+                        android:textSize="15dp">
+
+                    </TextView>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/stats"
+                android:layout_width="160dp"
+                android:layout_height="100dp"
+                android:layout_margin="30dp"
+                android:layout_marginTop="3dp"
+                android:backgroundTint="@color/primaryLightColor"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="40dp"
+                app:layout_constraintEnd_toStartOf="@+id/cardView2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/esfuerzo"
+                app:strokeColor="@color/cardview_shadow_start_color">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Motivación"
+                        android:textColor="@color/secondaryTextColor"
+
+                        android:textSize="15dp">
+
+                    </TextView>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView2"
+                android:layout_width="160dp"
+                android:layout_height="100dp"
+                android:layout_margin="30dp"
+                android:layout_marginTop="3dp"
+                android:backgroundTint="@color/primaryColor"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="40dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/resultados"
+                app:strokeColor="@color/cardview_shadow_start_color">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Cansancio"
+                        android:textColor="@color/secondaryTextColor"
+                        android:textSize="15dp">
+
+                    </TextView>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </HorizontalScrollView>
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnLogout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="160dp"
         android:text="Cerrar sesión"
         app:icon="@drawable/ic_exit_to_app"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent" />
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnEncuesta"
@@ -126,11 +213,13 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:text="Realizar encuesta"
+        android:visibility="gone"
         app:icon="@drawable/fui_ic_anonymous_white_24dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnLogout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnLogout" />
+        app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

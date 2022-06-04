@@ -23,7 +23,7 @@ import com.finde.android.traincheck.ViewModel.FireBaseReferencies
 import com.finde.android.traincheck.ViewModel.GrupoSeleccionado
 import com.finde.android.traincheck.ViewModel.TriggerDatosCargados
 import com.finde.android.traincheck.ViewModel.VmEstadisticas
-import com.finde.android.traincheck.databinding.ActivityChartCommonBinding
+import com.finde.android.traincheck.databinding.ActivityChartCommon2Binding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -33,9 +33,9 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 
-class GraphicsFragment : Fragment() {
+class ResultsGraphFragment : Fragment() {
 
-    private lateinit var mBinding: ActivityChartCommonBinding
+    private lateinit var mBinding: ActivityChartCommon2Binding
     private val grupoSeleccionado: GrupoSeleccionado by viewModels()
     private val datosCargados: TriggerDatosCargados by viewModels()
     private val vmEstadisticas: VmEstadisticas by viewModels()
@@ -57,7 +57,7 @@ class GraphicsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        mBinding = ActivityChartCommonBinding.inflate(inflater, container, false)
+        mBinding = ActivityChartCommon2Binding.inflate(inflater, container, false)
         cartesian = AnyChart.column()
 
         return mBinding.root
@@ -91,8 +91,6 @@ class GraphicsFragment : Fragment() {
             snapshots.children.forEach {
                 val atleta = it.getValue(Athlet::class.java)
                 if (atleta != null) {
-
-
                     if (atleta.group == "Formacion") {
                         formacion.add(atleta)
                     } else {
@@ -100,8 +98,6 @@ class GraphicsFragment : Fragment() {
 
                     }
                 }
-
-
                 datosCargados.datosCargados.postValue(true)
             }
         }
@@ -145,7 +141,7 @@ class GraphicsFragment : Fragment() {
 
         //vamos a mostrar solo una grafica
         mapaSumatorio.forEach() { key, value ->
-            val dataEntry = ValueDataEntry(key,value[0])
+            val dataEntry = ValueDataEntry(key,value[1])
             data.add(dataEntry)
         }
 
@@ -184,8 +180,8 @@ class GraphicsFragment : Fragment() {
             val fechaInsertar = fecha.minusDays(i.toLong())
 
             //var fechaFormateada = fecha.format(formatters)
-            mapaSumatorio[fechaInsertar.toString()] = arrayListOf(Random().nextInt(6-1)+1,Random().nextInt(6-1)+1,Random().nextInt(6-1)+1,Random().nextInt(6-1)+1,Random().nextInt(6-1)+1 )
-
+            mapaSumatorio[fechaInsertar.toString()] = arrayListOf()
+            //Random().nextInt(6-1)+1,Random().nextInt(6-1)+1,Random().nextInt(6-1)+1,Random().nextInt(6-1)+1,Random().nextInt(6-1)+1
         }
         return mapaSumatorio
     }

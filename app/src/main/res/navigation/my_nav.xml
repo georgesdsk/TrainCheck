@@ -33,6 +33,9 @@
         <action
             android:id="@+id/action_statsFragment_to_graphicsFragment"
             app:destination="@id/graphicsFragment" />
+        <action
+            android:id="@+id/action_statsFragment_to_resultsGraphFragment"
+            app:destination="@id/resultsGraphFragment" />
     </fragment>
     <fragment
         android:id="@+id/trainingFragment"
@@ -78,4 +81,8 @@
         tools:layout="@layout/activity_chart_common" >
 
     </fragment>
+    <fragment
+        android:id="@+id/resultsGraphFragment"
+        android:name="com.finde.android.traincheck.Fragments.stats.ResultsGraphFragment"
+        android:label="ResultsGraphFragment" />
 </navigation>
