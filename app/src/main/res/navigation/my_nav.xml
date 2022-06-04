@@ -30,6 +30,9 @@
         <action
             android:id="@+id/actionEncuesta"
             app:destination="@id/encuestaFragment" />
+        <action
+            android:id="@+id/action_statsFragment_to_graphicsFragment"
+            app:destination="@id/graphicsFragment" />
     </fragment>
     <fragment
         android:id="@+id/trainingFragment"
@@ -68,4 +71,11 @@
         android:id="@+id/trainingDetailsFragment"
         android:name="com.finde.android.traincheck.Fragments.training.TrainingDetailsFragment"
         android:label="TrainingDetailsFragment" />
+    <fragment
+        android:id="@+id/graphicsFragment"
+        android:name="com.finde.android.traincheck.Fragments.stats.GraphicsFragment"
+        android:label="GraphicsFragment"
+        tools:layout="@layout/activity_chart_common" >
+
+    </fragment>
 </navigation>

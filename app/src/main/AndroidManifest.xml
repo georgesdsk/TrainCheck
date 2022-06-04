@@ -13,8 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Snapshots" >
         <activity
+            android:name="com.finde.android.traincheck.Fragments.stats.ColumnCharActivity"
+            android:exported="false" />
+        <activity
             android:name="com.finde.android.traincheck.login.SignInActivity"
             android:exported="false" />
+
         <activity
             android:name=".register.RegisterActivity"
             android:exported="false"
@@ -30,6 +34,10 @@
         </activity>
         <activity android:name=".Fragments.main_page.MainActivity" >
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

@@ -213,6 +213,7 @@ class MainActivity : AppCompatActivity() {
             name = "Juan ",
             surname = "Jimenez franco",
             id = "b76taXe0sdfAh2MMZBFwi6DN7Ch1",
+            group = "AltoRendimiento",
             dateBirth = Date(2002, 9, 10),
             photoUrl = "https://iteragrow.com/wp-content/uploads/2018/04/buyer-persona-e1545248524290.jpg"
         )
@@ -220,6 +221,7 @@ class MainActivity : AppCompatActivity() {
             name = "Juan",
             surname = "Fernandez Pastor",
             id = "7JWFPG1QeEd3DDaAJ9UlceScGHi1",
+            group = "Formacion",
             dateBirth = Date(2002, 9, 10),
             photoUrl = "https://definicionde.es/wp-content/uploads/2019/04/definicion-de-persona-min.jpg"
         )
@@ -228,6 +230,7 @@ class MainActivity : AppCompatActivity() {
             name = "Juan alberto",
             surname = "Jimenez franco",
             id = "Hezl97qqbPNPFPSAdG93FWRlhhB3",
+            group = "Formacion",
             dateBirth = Date(2002, 9, 10),
             photoUrl = "https://pymstatic.com/44253/conversions/xavier-molina-medium.jpg"
         )
@@ -243,7 +246,7 @@ class MainActivity : AppCompatActivity() {
         var atleta6 = Athlet(
             name = "Juan alberto",
             surname = "Jimenez franco",
-            id = "kd4PRHCMbXRrkOn6gjGEi88astO2",
+            id = "ItbcuhEjEzdZGGjFu8pjACMLdUz1",
             group = "AltoRendimiento",
             dateBirth = Date(2002, 9, 10),
             photoUrl = "https://cdn.eldeforma.com/wp-content/uploads/2020/01/images-1-6.jpg"

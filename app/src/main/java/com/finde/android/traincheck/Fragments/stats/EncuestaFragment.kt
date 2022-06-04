@@ -27,7 +27,7 @@ class EncuestaFragment : Fragment() {
     var listaRespuestas = listOf("mucho", "bastante", "suficiente", "poco", "muyPoco")
     var respondido = mutableListOf<String>()
     var contador: Int = 0
-    private val format = SimpleDateFormat("dd-MM-yyyy")
+    private val format = SimpleDateFormat("yyyy-MM-dd")
     private lateinit var mBinding: FragmentEncuestaBinding
 
 

@@ -31,7 +31,14 @@ import com.google.firebase.database.ValueEventListener
 import com.finde.android.traincheck.ViewModel.FireBaseReferencies
 import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mAtletasRef
 import com.finde.android.traincheck.ViewModel.GrupoSeleccionado
+import com.google.android.gms.auth.api.Auth
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.UserProfileChangeRequest
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 
 //import com.finde.android.traincheck.register.Register2.Callback as Callback1
 
@@ -144,18 +151,36 @@ class Register2 : Fragment() {
                 ).show()
             }
         }
+
     }
 
     private fun createUserOnDatabase(athlet: Athlet, uid: String) {
+        //Añadir las cosas en la base de datos general
         mAtletasRef.child(uid).setValue(athlet).addOnSuccessListener {
-            Toast.makeText(requireActivity(), "User created" +athlet.group, Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireActivity(), "User created" + athlet.group, Toast.LENGTH_SHORT)
+                .show()
             reload()
         }
-        mAtletasRef.child("111111111111111111").setValue(athlet).addOnSuccessListener {
-            Toast.makeText(requireActivity(), "User created" +athlet.group, Toast.LENGTH_SHORT).show()
-            reload()
-        }
+        //Añadir las cosas en la base de datos de auth
+        mFirebaseAuth.currentUser?.let { user ->
+            val profileUpdates = UserProfileChangeRequest.Builder()
+                .setDisplayName(athlet.name + " " + athlet.surname)
+                .setPhotoUri(Uri.parse(athlet.photoUrl))
+                .setDisplayName(athlet.name + " " + athlet.surname)
+                .build()
 
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    user.updateProfile(profileUpdates).await()
+                    withContext(Dispatchers.Main) {
+                    }
+                } catch (e: Exception) {
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(requireContext(), e.message, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        }
     }
 
     private fun checkMail(mail: String): Boolean {

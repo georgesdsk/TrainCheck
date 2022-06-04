@@ -1,8 +1,5 @@
 package com.finde.android.traincheck.Entities
 
-import com.cursosant.android.traincheck.Entities.Injury
-import com.cursosant.android.traincheck.Entities.Stat
-import com.google.firebase.database.Exclude
 import com.google.firebase.database.IgnoreExtraProperties
 import java.util.*
 
@@ -17,6 +14,6 @@ data class Athlet( var id   : String = "",
                   var dateBirth: Date = Date(2019,8,10),
                   var asistType: Int = 1, // de tres tipo
                   var listAbsence: Map<String, Date> = mapOf(),
-                  var listStats: Map<String, List<String>> = mapOf(),
+                  var listStats: Map<String, List<Int>> = mapOf(),
                   var injuryList: Map<String, Date> = mapOf()
 )

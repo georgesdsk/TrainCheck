@@ -77,6 +77,8 @@ class AsistFragment : Fragment(), HomeAux {
                 .build()
 
 
+
+
         mFirebaseAdapter = object : FirebaseRecyclerAdapter<Athlet, AtletaHolder>(options) {
             private lateinit var mContext: Context
 
