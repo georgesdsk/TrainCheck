@@ -61,7 +61,7 @@
             android:layout_height="match_parent">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/esfuerzo"
+                android:id="@+id/esfuerzoa"
                 android:layout_width="160dp"
                 android:layout_height="100dp"
                 android:backgroundTint="@color/primaryDarkColor"
