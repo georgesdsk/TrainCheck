@@ -30,7 +30,7 @@
             android:layout_height="match_parent">
 
             <androidx.cardview.widget.CardView
-                android:layout_margin="20dp"
+                android:layout_margin="10dp"
                 android:id="@+id/cardView"
                 android:layout_width="350dp"
                 android:layout_height="35dp"
@@ -47,6 +47,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center">
                     <TextView
+                        android:id="@+id/textView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_medium"
@@ -62,7 +63,7 @@
                 android:layout_marginTop="10dp"
                 android:id="@+id/barChart"
                 android:layout_width="match_parent"
-                android:layout_height="600dp"
+                android:layout_height="570dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

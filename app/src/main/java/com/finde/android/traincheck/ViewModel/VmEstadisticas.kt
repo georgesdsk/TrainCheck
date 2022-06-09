@@ -6,5 +6,6 @@ import com.finde.android.traincheck.Entities.Entrenamiento
 import java.util.HashMap
 
 class VmEstadisticas: ViewModel() {
+    lateinit var name: String
     var mapaSumatorio : MutableLiveData<HashMap<String, List<Int>>> = MutableLiveData()
 }

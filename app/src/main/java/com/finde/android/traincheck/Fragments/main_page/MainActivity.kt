@@ -50,13 +50,13 @@ class MainActivity : AppCompatActivity() {
         //setAthlets()
 
         FireBaseReferencies.create()
-
+        signIn()
         if(grupoSeleccionado.currentGroup.value==null){
             grupoSeleccionado.currentGroup.value = "AltoRendimiento"
         }
 
-        signIn()
-        setupAuthListeners()
+
+
         if (!isEntrenador) {
             UserType.type = "Atleta"
             findGroup()
@@ -64,6 +64,7 @@ class MainActivity : AppCompatActivity() {
         setupNavigationBar()
         setupHeaderNav()
         findGroup()
+        setupAuthListeners()
 
 
         Toast.makeText(this, grupoSeleccionado.currentGroup.value, Toast.LENGTH_SHORT).show()
@@ -158,7 +159,7 @@ class MainActivity : AppCompatActivity() {
             override fun onDataChange(snapshots: DataSnapshot) {
                 for (snapshot in snapshots.children) {
                     val athlet = snapshot.getValue(Athlet::class.java)
-                    if (athlet!!.id == mFirebaseAuth.currentUser!!.uid) {
+                    if ( mFirebaseAuth.currentUser?.uid!= null && athlet!!.id == mFirebaseAuth.currentUser!!.uid) {
                         grupoSeleccionado.currentGroup.value = athlet.group
                     }
                 }

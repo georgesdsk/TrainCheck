@@ -12,6 +12,10 @@
         <entry key="..\:/Trabajos/app/src/main/res/layout/item_atleta.xml" value="0.18541666666666667" />
         <entry key="..\:/Trabajos/app/src/main/res/layout/item_entrenamiento.xml" value="0.29528985507246375" />
         <entry key="..\:/Trabajos/app/src/main/res/menu/botom__nav_menu.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/gsadouski/AndroidStudioProjects/TrainCheck/app/src/main/res/drawable/esfuerzo_icon.xml" value="0.135" />
+        <entry key="..\:/Users/gsadouski/AndroidStudioProjects/TrainCheck/app/src/main/res/layout/activity_chart_common.xml" value="0.16621376811594202" />
+        <entry key="..\:/Users/gsadouski/AndroidStudioProjects/TrainCheck/app/src/main/res/layout/activity_chart_common2.xml" value="0.16621376811594202" />
+        <entry key="..\:/Users/gsadouski/AndroidStudioProjects/TrainCheck/app/src/main/res/layout/fragment_stats.xml" value="0.25181159420289856" />
         <entry key="..\:/Users/gsadouski/Desktop/Downloads/Snapshots/app/src/main/res/layout/activity_main.xml" value="0.20018115942028986" />
         <entry key="..\:/Users/gsadouski/Desktop/Downloads/Snapshots/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25729166666666664" />
         <entry key="..\:/Users/sadac/AndroidStudioProjects/ProyectoFinal/app/src/main/res/drawable/ic_account_circle.xml" value="0.2375" />
@@ -28,24 +32,6 @@
         <entry key="..\:/Users/sadac/AndroidStudioProjects/TrainCheck/app/src/main/res/layout/fragment_add.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/sadac/AndroidStudioProjects/TrainCheck/app/src/main/res/layout/fragment_asist.xml" value="0.2648648648648649" />
         <entry key="..\:/Users/sadac/AndroidStudioProjects/TrainCheck/app/src/main/res/layout/item_snapshot.xml" value="0.3026041666666667" />
-        <entry key="..\:/Users/sadac/Desktop/TrainCheck/app/src/main/res/drawable/ic_add_photo_alternate.xml" value="0.3585" />
-        <entry key="..\:/Users/sadac/Desktop/TrainCheck/app/src/main/res/drawable/ic_home.xml" value="0.2435" />
-        <entry key="..\:/Users/sadac/Desktop/TrainCheck/app/src/main/res/layout/activity_chart_common.xml" value="0.25" />
-        <entry key="..\:/Users/sadac/Desktop/TrainCheck/app/src/main/res/layout/activity_chart_common2.xml" value="0.3625" />
-        <entry key="..\:/Users/sadac/Desktop/TrainCheck/app/src/main/res/layout/activity_main.xml" value="0.3625" />
-        <entry key="..\:/Users/sadac/Desktop/TrainCheck/app/src/main/res/layout/activity_sign_in.xml" value="0.3625" />
-        <entry key="..\:/Users/sadac/Desktop/TrainCheck/app/src/main/res/layout/fragment_add.xml" value="0.3625" />
-        <entry key="..\:/Users/sadac/Desktop/TrainCheck/app/src/main/res/layout/fragment_asist.xml" value="0.3625" />
-        <entry key="..\:/Users/sadac/Desktop/TrainCheck/app/src/main/res/layout/fragment_atleta_detalles.xml" value="0.3625" />
-        <entry key="..\:/Users/sadac/Desktop/TrainCheck/app/src/main/res/layout/fragment_encuesta.xml" value="0.3625" />
-        <entry key="..\:/Users/sadac/Desktop/TrainCheck/app/src/main/res/layout/fragment_register2.xml" value="0.3151041666666667" />
-        <entry key="..\:/Users/sadac/Desktop/TrainCheck/app/src/main/res/layout/fragment_stats.xml" value="0.3625" />
-        <entry key="..\:/Users/sadac/Desktop/TrainCheck/app/src/main/res/layout/fragment_training.xml" value="0.3625" />
-        <entry key="..\:/Users/sadac/Desktop/TrainCheck/app/src/main/res/layout/fragment_training_details.xml" value="0.3625" />
-        <entry key="..\:/Users/sadac/Desktop/TrainCheck/app/src/main/res/layout/item_atleta.xml" value="0.3625" />
-        <entry key="..\:/Users/sadac/Desktop/TrainCheck/app/src/main/res/layout/item_entrenamiento.xml" value="0.3625" />
-        <entry key="..\:/Users/sadac/Desktop/TrainCheck/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2435" />
-        <entry key="..\:/Users/sadac/Desktop/TrainCheck/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2435" />
         <entry key="..\:/Users/sadac/StudioProjects/ProyectoFinal/app/src/main/res/drawable/splash_background.xml" value="0.2535" />
         <entry key="..\:/Users/sadac/StudioProjects/ProyectoFinal/app/src/main/res/layout/activity_main.xml" value="0.19479166666666667" />
         <entry key="..\:/Users/sadac/StudioProjects/ProyectoFinal/app/src/main/res/layout/fragment_add.xml" value="0.20677083333333332" />

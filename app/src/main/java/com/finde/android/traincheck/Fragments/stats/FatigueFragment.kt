@@ -33,27 +33,12 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 
-class ResultsGraphFragment : Fragment() {
+class FatigueFragment : Fragment() {
 
     private lateinit var mBinding: ActivityChartCommon2Binding
-    private val grupoSeleccionado: GrupoSeleccionado by viewModels()
-    private val datosCargados: TriggerDatosCargados by viewModels()
     private val vmEstadisticas: VmEstadisticas by activityViewModels()
-
-    private lateinit var cartesian: Cartesian
-    // private val data: MutableList<DataEntry> = ArrayList<DataEntry>()
-
-
-    private val map: MutableMap<String, List<String>> = HashMap<String, List<String>>()
-    private val formacion: MutableCollection<Athlet> = arrayListOf()
     private var fechas: MutableList<String> = arrayListOf()
-    private val altoRendimiento: MutableCollection<Athlet> = arrayListOf()
-
     private lateinit var barChart: BarChart
-
-    private lateinit var anyChartView2: AnyChartView
-    private var mapaSumatorio = HashMap<String, List<Int>>()
-    private var statsType: Int = 0
 
     var formatters: DateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
 
@@ -64,7 +49,7 @@ class ResultsGraphFragment : Fragment() {
     ): View? {
 
         mBinding = ActivityChartCommon2Binding.inflate(inflater, container, false)
-      //  cartesian = AnyChart.column()
+
 
         return mBinding.root
 
@@ -74,35 +59,9 @@ class ResultsGraphFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        selectStatsType()
+
         barChart = mBinding.barChart
-
-        val formacion: MutableCollection<Athlet> = arrayListOf()
-        val altoRendimiento: MutableCollection<Athlet> = arrayListOf()
-        //paintGraphics()
-        selectStatsType()
         paintAltoRendimineto()
-        // loadList()
-
-    }
-
-    private fun selectStatsType() {
-        mBinding.textView.text = vmEstadisticas.name
-        //when by vmEstadisticas.statsType.value
-        when (vmEstadisticas.name) {
-            "Esfuerzo" -> {
-                statsType = 0
-            }
-            "Resultados" -> {
-                statsType = 1
-            }
-            "Motivacion" -> {
-                statsType = 2
-            }
-            "Cansancio" -> {
-                statsType = 3
-            }
-        }
     }
 
     // El dataEntry solo puede tener un key como float, y mas tarde se le puede asociar un nombre String, asi que hay que guardar todos los string en una lista
@@ -110,11 +69,11 @@ class ResultsGraphFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.N)
     private fun paintAltoRendimineto() {
         val data: MutableList<BarEntry> = ArrayList<BarEntry>()
-        var cont : Int =0
+        var cont: Int = 0
         vmEstadisticas.mapaSumatorio.value!!.forEach() { key, value ->
             fechas.add(key)
             cont += 1
-            val dataEntry = BarEntry(cont.toFloat(), value[statsType].toFloat())
+            val dataEntry = BarEntry(cont.toFloat(), value[2].toFloat())
             data.add(dataEntry)
         }
 
@@ -176,7 +135,7 @@ class ResultsGraphFragment : Fragment() {
 
         // below line is to group bars
         // and add spacing to it.
-       // todo barChart.groupBars(0f, groupSpace, barSpace)
+        // todo barChart.groupBars(0f, groupSpace, barSpace)
 
         //draw chart
         barChart.invalidate()

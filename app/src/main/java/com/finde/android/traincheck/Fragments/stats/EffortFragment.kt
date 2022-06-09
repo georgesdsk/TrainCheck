@@ -33,7 +33,7 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 
-class ResultsGraphFragment : Fragment() {
+class EffortFragment : Fragment() {
 
     private lateinit var mBinding: ActivityChartCommon2Binding
     private val grupoSeleccionado: GrupoSeleccionado by viewModels()
@@ -51,9 +51,9 @@ class ResultsGraphFragment : Fragment() {
 
     private lateinit var barChart: BarChart
 
+
     private lateinit var anyChartView2: AnyChartView
     private var mapaSumatorio = HashMap<String, List<Int>>()
-    private var statsType: Int = 0
 
     var formatters: DateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
 
@@ -74,33 +74,35 @@ class ResultsGraphFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        selectStatsType()
+
         barChart = mBinding.barChart
 
         val formacion: MutableCollection<Athlet> = arrayListOf()
         val altoRendimiento: MutableCollection<Athlet> = arrayListOf()
         //paintGraphics()
-        selectStatsType()
         paintAltoRendimineto()
         // loadList()
 
     }
 
-    private fun selectStatsType() {
-        mBinding.textView.text = vmEstadisticas.name
-        //when by vmEstadisticas.statsType.value
-        when (vmEstadisticas.name) {
-            "Esfuerzo" -> {
-                statsType = 0
-            }
-            "Resultados" -> {
-                statsType = 1
-            }
-            "Motivacion" -> {
-                statsType = 2
-            }
-            "Cansancio" -> {
-                statsType = 3
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun loadList() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val snapshots =
+                FireBaseReferencies.mAtletasRef.get()
+                    .await()
+
+            snapshots.children.forEach {
+                val atleta = it.getValue(Athlet::class.java)
+                if (atleta != null) {
+                    if (atleta.group == "Formacion") {
+                        formacion.add(atleta)
+                    } else {
+                        altoRendimiento.add(atleta)
+
+                    }
+                }
+                datosCargados.datosCargados.postValue(true)
             }
         }
     }
@@ -114,7 +116,7 @@ class ResultsGraphFragment : Fragment() {
         vmEstadisticas.mapaSumatorio.value!!.forEach() { key, value ->
             fechas.add(key)
             cont += 1
-            val dataEntry = BarEntry(cont.toFloat(), value[statsType].toFloat())
+            val dataEntry = BarEntry(cont.toFloat(), value[1].toFloat())
             data.add(dataEntry)
         }
 
@@ -183,6 +185,72 @@ class ResultsGraphFragment : Fragment() {
 
     }
 
+/*
+    inner class MyAxisFormatter : IndexAxisValueFormatter() {
+
+        override fun getAxisLabel(value: Float, axis: AxisBase?): String {
+            val index = value.toInt()
+            Log.d(TAG, "getAxisLabel: index $index")
+            return if (index <  vmEstadisticas.mapaSumatorio.value!!.size) {
+                fechas[index]
+            } else {
+                ""
+            }
+        }
+    }*/
+
+
+    /* @RequiresApi(Build.VERSION_CODES.O)
+    private fun paintAltoRendimineto() {
+
+        // el id del mapa es el dia de la medida, y cada valor es la lista es la respues a cada pregunta, si quiero saber respuesta a una pregunta, miro solo un valor de la lista
+
+        //vamos a mostrar solo una grafica
+        vmEstadisticas.mapaSumatorio.value!!.forEach() { key, value ->
+            val dataEntry = ValueDataEntry(key,value[1])
+            data.add(dataEntry)
+        }
+
+        val column = cartesian.column(data)
+        column.tooltip()
+            .background("#FFF")
+            .position(Position.LEFT_BOTTOM)
+            .anchor(Anchor.CENTER_BOTTOM)
+            .offsetX(0.0)
+            .offsetY(5.0)
+
+            .fontColor("#5c5c5c")
+            .fontSize(12.0)
+
+        cartesian.animation(true)
+        cartesian.yScale().minimum(0.0)
+        cartesian.yScale().maximum(5.0)
+        cartesian.yAxis(0).labels().format("{%Value}{groupsSeparator: }")
+        cartesian.tooltip().positionMode(TooltipPositionMode.CHART)
+        cartesian.interactivity().hoverMode(HoverMode.BY_X)
+        *//* cartesian.xAxis(0).title("Product")
+         cartesian.yAxis(0).title("Revenue")*//*
+        anyChartView.setChart(cartesian)
+
+    }*/
+
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun crearHashMap(): HashMap<String, List<Int>> {
+        val tamanio: Int = 14
+
+        var fecha = LocalDate.of(2022, 4, 6)
+        //fehcita.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+
+        for (i in 0..tamanio) {
+            val fechaInsertar = fecha.minusDays(i.toLong())
+
+            //var fechaFormateada = fecha.format(formatters)
+            mapaSumatorio[fechaInsertar.toString()] = arrayListOf()
+            //Random().nextInt(6-1)+1,Random().nextInt(6-1)+1,Random().nextInt(6-1)+1,Random().nextInt(6-1)+1,Random().nextInt(6-1)+1
+        }
+        return mapaSumatorio
+    }
 
 }
 
