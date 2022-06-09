@@ -2,6 +2,7 @@ package com.finde.android.traincheck.Fragments.training
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -20,8 +21,10 @@ import com.finde.android.traincheck.ViewModel.FireBaseReferencies
 import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mGruposRef
 import com.finde.android.traincheck.ViewModel.GrupoSeleccionado
 import com.finde.android.traincheck.ViewModel.SelectedTraining
+import com.finde.android.traincheck.ViewModel.UserType
 import com.finde.android.traincheck.databinding.FragmentTrainingBinding
 import com.finde.android.traincheck.databinding.ItemEntrenamientoBinding
+import com.firebase.ui.auth.data.model.User
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.android.material.snackbar.Snackbar
@@ -49,9 +52,17 @@ class TrainingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setListener()
+        setUI()
         setupAdapter()
         setExample()
         setupRecyclerView()
+
+    }
+
+    private fun setUI() {
+        if (UserType.type == "Atleta"){
+            mBinding.fab.visibility = View.GONE
+        }
     }
 
     private fun setListener() {
@@ -214,7 +225,11 @@ class TrainingFragment : Fragment() {
                     navigation.navigate(R.id.action_trainingFragment_to_trainingDetailsFragment)
                 }
                 setOnLongClickListener {
-                    deleteEntrenamiento(entrenamiento)
+                    if (UserType.type == "Entrenador"){
+                        deleteEntrenamiento(entrenamiento)
+                    }
+
+
                     true
                 }
             }

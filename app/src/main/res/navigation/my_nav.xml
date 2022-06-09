@@ -84,5 +84,6 @@
     <fragment
         android:id="@+id/resultsGraphFragment"
         android:name="com.finde.android.traincheck.Fragments.stats.ResultsGraphFragment"
-        android:label="ResultsGraphFragment" />
+        android:label="ResultsGraphFragment"
+        tools:layout="@layout/activity_chart_common2" />
 </navigation>

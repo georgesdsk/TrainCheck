@@ -8,10 +8,7 @@ import com.google.firebase.storage.StorageReference
 
 class UserType {
     companion object{
-        lateinit var type: String
+         var type: String = "Atleta"
 
-        fun create(){
-            type = "Atleta"
-        }
     }
 }

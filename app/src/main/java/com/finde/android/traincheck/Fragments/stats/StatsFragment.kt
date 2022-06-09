@@ -45,9 +45,12 @@ class StatsFragment : Fragment() {
         mBinding.btnLogout.setOnClickListener{
             singOut()
         }
-        mBinding.stats.setOnClickListener { navigation.navigate(R.id.action_statsFragment_to_graphicsFragment) }
 
-        mBinding.cardView2.setOnClickListener { navigation.navigate(R.id.action_statsFragment_to_resultsGraphFragment) }
+        mBinding.esfuerzo.setOnClickListener { navigation.navigate(R.id.action_statsFragment_to_graphicsFragment) }
+        mBinding.resultados.setOnClickListener { navigation.navigate(R.id.action_statsFragment_to_resultsGraphFragment) }
+        mBinding.motivacion.setOnClickListener { navigation.navigate(R.id.action_statsFragment_to_resultsGraphFragment) }
+        mBinding.cansancio.setOnClickListener { navigation.navigate(R.id.action_statsFragment_to_resultsGraphFragment) }
+
 
 
     }

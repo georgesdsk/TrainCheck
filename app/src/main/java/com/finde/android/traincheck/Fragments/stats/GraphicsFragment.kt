@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.anychart.AnyChart
 import com.anychart.AnyChartView
@@ -38,7 +39,7 @@ class GraphicsFragment : Fragment() {
     private lateinit var mBinding: ActivityChartCommonBinding
     private val grupoSeleccionado: GrupoSeleccionado by viewModels()
     private val datosCargados: TriggerDatosCargados by viewModels()
-    private val vmEstadisticas: VmEstadisticas by viewModels()
+    private val vmEstadisticas: VmEstadisticas by activityViewModels()
 
     private lateinit var cartesian: Cartesian
     private val data: MutableList<DataEntry> = ArrayList<DataEntry>()

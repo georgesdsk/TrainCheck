@@ -99,7 +99,7 @@
                 android:backgroundTint="@color/secondaryDarkColor"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="40dp"
-                app:layout_constraintStart_toEndOf="@id/stats"
+                app:layout_constraintStart_toEndOf="@id/motivacion"
                 app:layout_constraintTop_toTopOf="parent"
                 app:strokeColor="@color/primaryColor">
 
@@ -124,7 +124,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/stats"
+                android:id="@+id/motivacion"
                 android:layout_width="160dp"
                 android:layout_height="100dp"
                 android:layout_margin="30dp"
@@ -134,7 +134,7 @@
                 android:focusable="true"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="40dp"
-                app:layout_constraintEnd_toStartOf="@+id/cardView2"
+                app:layout_constraintEnd_toStartOf="@+id/cansancio"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/esfuerzo"
                 app:strokeColor="@color/cardview_shadow_start_color">
@@ -160,7 +160,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardView2"
+                android:id="@+id/cansancio"
                 android:layout_width="160dp"
                 android:layout_height="100dp"
                 android:layout_margin="30dp"

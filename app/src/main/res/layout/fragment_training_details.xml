@@ -65,7 +65,7 @@
             android:textSize="20dp"
             android:layout_marginTop="30dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imagen" />
+            app:layout_constraintTop_toBottomOf="@+id/lafotico" />
 
         <TextView
             android:id="@+id/grupo"
@@ -80,15 +80,24 @@
             app:layout_constraintBottom_toBottomOf="@+id/tituloGrupo"
             app:layout_constraintStart_toEndOf="@+id/tituloGrupo" />
 
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/lafotico"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" >
         <com.ortiz.touchview.TouchImageView
             android:id="@+id/imagen"
-            android:layout_width="0dp"
-            android:minHeight="500dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/ic_launcher_round"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

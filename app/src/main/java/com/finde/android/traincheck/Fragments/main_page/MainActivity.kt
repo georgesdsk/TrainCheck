@@ -24,6 +24,7 @@ import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mDat
 import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mEntrenadoresRef
 import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mFirebaseAuth
 import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mGruposRef
+import com.finde.android.traincheck.ViewModel.UserType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -32,9 +33,6 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    //todo
-    /*override fun onChildAdded(dataSnapshot: DataSnapshot, previousChildName: String?) {
-                          Log.d(TAG, "onChildAdded:" + dataSnapshot.key!!)*/
 
     private val RC_SIGN_IN = 21
     private lateinit var mBinding: ActivityMainBinding
@@ -42,25 +40,25 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private val grupoSeleccionado: GrupoSeleccionado by viewModels<GrupoSeleccionado>()
     var isEntrenador: Boolean = false
-    var entrenadores = mutableListOf<String>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
-        FireBaseReferencies.create()
-
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
         //setAthlets()
+
+        FireBaseReferencies.create()
 
         if(grupoSeleccionado.currentGroup.value==null){
             grupoSeleccionado.currentGroup.value = "AltoRendimiento"
         }
 
         signIn()
-        setupAuth()
+        setupAuthListeners()
         if (!isEntrenador) {
+            UserType.type = "Atleta"
             findGroup()
         }
         setupNavigationBar()
@@ -105,7 +103,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun setupAuth() {
+    private fun setupAuthListeners() {
         //necesitas un listener por si sales en cualquier momento
         val entrenadorListener = object : ValueEventListener {
             override fun onDataChange(snapshots: DataSnapshot) {
@@ -118,9 +116,10 @@ class MainActivity : AppCompatActivity() {
                     }
                     if (isEntrenador) {
                         grupoSeleccionado.currentGroup.value = "Formacion"
-
+                        UserType.type = "Entrenador"
                     } else {
                         iniciarAlumno()
+                        UserType.type = "Atleta"
                     }
                 }
             }
