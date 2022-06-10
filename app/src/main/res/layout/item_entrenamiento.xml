@@ -2,13 +2,12 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="500dp"
+    android:layout_height="400dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginTop="@dimen/common_padding_min"
-    android:layout_marginHorizontal="@dimen/common_padding_min"
+    android:layout_marginTop="@dimen/common_padding_default"
+    android:layout_marginHorizontal="@dimen/common_padding_default"
     app:cardCornerRadius="30dp"
     app:cardElevation="15dp"
-
     app:strokeColor="@color/cardview_shadow_start_color"
     >
 
@@ -39,6 +38,7 @@
             android:paddingLeft="20dp"
             android:text="Tipo entrenamiento"
             android:textColor="@android:color/background_light"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"

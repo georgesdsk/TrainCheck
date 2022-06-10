@@ -31,9 +31,10 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val nombreCompleto: String = vmAtleta.athletSeleccionado.name + vmAtleta.athletSeleccionado.surname
+        val nombreCompleto: String = vmAtleta.athletSeleccionado.name+" " + vmAtleta.athletSeleccionado.surname
 
-        mBinding.tituloNombre.text = nombreCompleto
+        mBinding.tvNombre.text = nombreCompleto
+        mBinding.numFaltas.text = vmAtleta.athletSeleccionado.listAbsence.size.toString()
 
         Glide.with(this)
             .load(vmAtleta.athletSeleccionado.photoUrl)

@@ -21,11 +21,13 @@
             android:id="@+id/tvNombre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/common_padding_default"
+            android:layout_marginTop="12dp"
             android:text="Francicso Franco"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:layout_marginTop="@dimen/common_padding_default"
-            android:textSize="20dp"
-            app:layout_constraintStart_toStartOf="@+id/tituloGrupo"
+            android:textColor="@color/primaryDarkColor"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/tituloEntrenamiento"
             app:layout_constraintTop_toBottomOf="@+id/grupo" />
 
 
@@ -37,8 +39,9 @@
 
             android:layout_marginTop="12dp"
             android:text="Faltas ultimo mes"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/purple_700"
+            android:textColor="@color/primaryDarkColor"
+            android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/fechaEntrenamiento"
             app:layout_constraintTop_toBottomOf="@+id/tvNombre" />
 
@@ -47,10 +50,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Fecha de subida"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:textSize="20dp"
+            android:textSize="@dimen/common_padding_default"
+            android:textColor="@color/primaryDarkColor"
             app:layout_constraintBottom_toBottomOf="@+id/fechaTitulo"
-            app:layout_constraintStart_toStartOf="@+id/tvNombre"
+            app:layout_constraintStart_toStartOf="@+id/tituloGrupo"
             app:layout_constraintTop_toTopOf="@+id/fechaTitulo" />
 
 
@@ -59,13 +62,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/common_padding_default"
-            android:text="Grupo"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textColor="@color/secondaryDarkColor"
-            android:textSize="20dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="24dp"
+            android:text="Grupo:"
+            android:textColor="@color/primaryDarkColor"
+            android:textSize="@dimen/common_padding_default"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lafotico" />
+
+        <TextView
+            android:id="@+id/tituloEntrenamiento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Entrenamiento:"
+            android:textColor="@color/primaryDarkColor"
+            android:textSize="@dimen/common_padding_default"
+            app:layout_constraintBottom_toBottomOf="@+id/tvNombre"
+            app:layout_constraintStart_toStartOf="@+id/tituloGrupo" />
 
         <TextView
             android:id="@+id/grupo"
@@ -74,9 +86,9 @@
             android:layout_marginLeft="@dimen/common_padding_default"
             android:text="Tecnificacion"
 
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textColor="@color/cardview_dark_background"
-            android:textSize="20dp"
+            android:textColor="@color/primaryDarkColor"
+            android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/tituloGrupo"
             app:layout_constraintStart_toEndOf="@+id/tituloGrupo" />
 
@@ -84,13 +96,13 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/lafotico"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_height="450dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" >
         <com.ortiz.touchview.TouchImageView
             android:id="@+id/imagen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:src="@mipmap/ic_launcher_round"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -19,9 +19,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/common_padding_default"
-            android:text="Nombre"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/teal_200"
+            android:text="Nombre:"
+            android:textSize="@dimen/common_padding_default"
+            android:textColor="@color/primaryDarkColor"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tituloGrupo" />
 
@@ -32,8 +32,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/common_padding_default"
             android:text="Francicso Franco"
-            android:textSize="20dp"
-
+            android:textColor="@color/primaryDarkColor"
+            android:textSize="20sp"
+            android:textStyle="bold"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             app:layout_constraintBottom_toBottomOf="@+id/tituloNombre"
             app:layout_constraintStart_toEndOf="@id/tituloNombre" />
@@ -43,23 +44,24 @@
             android:id="@+id/fechaTitulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/teal_200"
-
+            android:textSize="@dimen/common_padding_default"
+            android:textColor="@color/primaryDarkColor"
             android:layout_margin="@dimen/common_padding_default"
             android:layout_marginStart="28dp"
-            android:text="Faltas ultimo mes"
+            android:text="Faltas ultimo mes:"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tituloNombre" />
 
         <TextView
-            android:id="@+id/fechaEntrenamiento"
+            android:id="@+id/numFaltas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/common_padding_default"
             android:text="3"
-            android:textSize="20dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="@color/primaryDarkColor"
+            android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/fechaTitulo"
             app:layout_constraintStart_toEndOf="@+id/fechaTitulo" />
 
@@ -69,10 +71,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/common_padding_default"
-            android:text="Grupo"
+            android:text="Grupo:"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textColor="#84977C"
-            android:textSize="16dp"
+            android:textSize="@dimen/common_padding_default"
+            android:textColor="@color/primaryDarkColor"
             android:layout_marginTop="30dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imagen" />
@@ -83,9 +85,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/common_padding_default"
             android:text="Tecnificacion"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textColor="@color/cardview_dark_background"
-            android:textSize="16dp"
+            android:textColor="@color/primaryDarkColor"
+            android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/tituloGrupo"
             app:layout_constraintStart_toEndOf="@+id/tituloGrupo" />
 
