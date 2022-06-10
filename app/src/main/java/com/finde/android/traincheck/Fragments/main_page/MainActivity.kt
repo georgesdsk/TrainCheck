@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
-import com.cursosant.android.traincheck.Entities.Group
 import com.finde.android.traincheck.Entities.Athlet
 import com.finde.android.traincheck.login.SignInActivity
 import com.finde.android.traincheck.R
@@ -18,16 +17,11 @@ import com.firebase.ui.auth.IdpResponse
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.finde.android.traincheck.ViewModel.FireBaseReferencies
-import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mAtletasRef
-import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mDatabaseRef
-import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mEntrenadoresRef
-import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mFirebaseAuth
-import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mGruposRef
+import com.finde.android.traincheck.DAL.FireBaseReferencies
+import com.finde.android.traincheck.DAL.FireBaseReferencies.Companion.mAtletasRef
+import com.finde.android.traincheck.DAL.FireBaseReferencies.Companion.mEntrenadoresRef
+import com.finde.android.traincheck.DAL.FireBaseReferencies.Companion.mFirebaseAuth
 import com.finde.android.traincheck.ViewModel.UserType
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import java.util.*
 
 

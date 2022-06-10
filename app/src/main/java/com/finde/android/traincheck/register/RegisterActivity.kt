@@ -1,22 +1,10 @@
 package com.finde.android.traincheck.register
 
-import android.content.ContentValues.TAG
-import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils
-import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.doOnTextChanged
-import androidx.navigation.fragment.NavHostFragment
-import com.finde.android.traincheck.Fragments.main_page.MainActivity
-import com.finde.android.traincheck.R
-import com.finde.android.traincheck.ViewModel.FireBaseReferencies
-import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mFirebaseAuth
 import com.finde.android.traincheck.ViewModel.RegistrationViewModel
 import com.finde.android.traincheck.databinding.RegistryActivityBinding
 import com.google.android.material.tabs.TabLayout
-import com.google.firebase.ktx.Firebase
 
 class RegisterActivity : AppCompatActivity() {
 

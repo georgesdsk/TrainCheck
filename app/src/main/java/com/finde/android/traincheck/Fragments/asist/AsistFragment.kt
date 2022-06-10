@@ -19,21 +19,17 @@ import com.finde.android.traincheck.databinding.ItemAtletaBinding
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import java.util.*
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
-import com.finde.android.traincheck.HomeAux
 import com.finde.android.traincheck.R
-import com.finde.android.traincheck.ViewModel.FireBaseReferencies
+import com.finde.android.traincheck.DAL.FireBaseReferencies
 import com.finde.android.traincheck.ViewModel.GrupoSeleccionado
 import java.text.SimpleDateFormat
 
 
-class AsistFragment : Fragment(), HomeAux {
+class AsistFragment : Fragment(){
 
     private lateinit var mBinding: FragmentAsistBinding
     private lateinit var mFirebaseAdapter: FirebaseRecyclerAdapter<Athlet, AtletaHolder>
@@ -109,6 +105,7 @@ class AsistFragment : Fragment(), HomeAux {
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .centerCrop()
                         .into(binding.imgAtleta)
+                    binding.numFaltas.text = atleta.listAbsence.size.toString()
                 }
             }
 
@@ -146,9 +143,6 @@ class AsistFragment : Fragment(), HomeAux {
         mFirebaseAdapter.stopListening()
     }
 
-    override fun goToTop() {
-        mBinding.recyclerView.smoothScrollToPosition(0)
-    }
 
     private fun deleteAtleta(athlet: Athlet) {
         FireBaseReferencies.mAtletasRef.child(athlet.id).removeValue()

@@ -12,14 +12,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.finde.android.traincheck.Entities.Athlet
 import com.finde.android.traincheck.Fragments.main_page.MainActivity
 import com.finde.android.traincheck.R
-import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mFirebaseAuth
-import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mGruposRef
+import com.finde.android.traincheck.DAL.FireBaseReferencies.Companion.mFirebaseAuth
+import com.finde.android.traincheck.DAL.FireBaseReferencies.Companion.mGruposRef
 import com.finde.android.traincheck.ViewModel.RegistrationViewModel
 import com.finde.android.traincheck.databinding.FragmentRegister2Binding
 import com.google.firebase.database.DataSnapshot
@@ -28,10 +27,9 @@ import com.google.firebase.database.ValueEventListener
 
 
 //async
-import com.finde.android.traincheck.ViewModel.FireBaseReferencies
-import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mAtletasRef
+import com.finde.android.traincheck.DAL.FireBaseReferencies
+import com.finde.android.traincheck.DAL.FireBaseReferencies.Companion.mAtletasRef
 import com.finde.android.traincheck.ViewModel.GrupoSeleccionado
-import com.google.android.gms.auth.api.Auth
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.UserProfileChangeRequest
 import kotlinx.coroutines.CoroutineScope
@@ -58,10 +56,7 @@ class Register2 : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         mBinding = FragmentRegister2Binding.inflate(inflater, container, false)
-        //checkInputText()
-
         return mBinding.root
     }
 
@@ -77,12 +72,12 @@ class Register2 : Fragment() {
             mail = registrationViewModel.mail.value.toString(),
 
         )
-        checkAthlet(atleta, password, password2)
+        checkInputTextsAndRegister(atleta, password, password2)
 
     }
 
-    private fun checkAthlet(athlet: Athlet, password: String?, password2: String?)  {
-        var check = false
+
+    private fun checkInputTextsAndRegister(athlet: Athlet, password: String?, password2: String?)  {
         if (athlet.name.isEmpty() || athlet.surname.isEmpty() ||
             athlet.group.isEmpty() || athlet.mail.isEmpty() ||
             password!!.isEmpty() || password2!!.isEmpty()
@@ -92,7 +87,7 @@ class Register2 : Fragment() {
             if (password == password2) { // check the group
                 if (checkMail(athlet.mail)) {
                     athlet.photoUrl = mPhotoSelectedUri2.toString()
-                    checkGroup(athlet, password)
+                    checkGroupAndRegister(athlet, password)
                 }
             } else {
                 Toast.makeText(
@@ -105,7 +100,7 @@ class Register2 : Fragment() {
 
     // muy acoplado, pero no deja esperar hasta un onDataChange, asi que el codigo sigue y no deja comprobar
     // si el grupo existe o no
-    private fun checkGroup(athlet: Athlet, password: String) {
+    private fun checkGroupAndRegister(athlet: Athlet, password: String) {
 
         val gruposListener = object : ValueEventListener {
             override fun onDataChange(snapshots: DataSnapshot) {
@@ -130,7 +125,7 @@ class Register2 : Fragment() {
             }
             override fun onCancelled(error: DatabaseError) {}
         }
-        mGruposRef.addListenerForSingleValueEvent(gruposListener) // callbackm // se setea el listener a los grupos
+        mGruposRef.addListenerForSingleValueEvent(gruposListener)
     }
 
 
@@ -143,7 +138,6 @@ class Register2 : Fragment() {
                 athlet.photoUrl
                 createUserOnDatabase(athlet, mFirebaseAuth.currentUser!!.uid)
             } else {
-                // If sign in fails, display a message to the user.
                 Log.w(ContentValues.TAG, "createUserWithEmail:failure", task.exception)
                 Toast.makeText(
                     requireActivity(), "Authentication failed.",
@@ -156,12 +150,13 @@ class Register2 : Fragment() {
 
     private fun createUserOnDatabase(athlet: Athlet, uid: String) {
         //Añadir las cosas en la base de datos general
-        mAtletasRef.child(uid).setValue(athlet).addOnSuccessListener {
-            Toast.makeText(requireActivity(), "User created" + athlet.group, Toast.LENGTH_SHORT)
-                .show()
-            reload()
-        }
+        createUserOnRealtimeDatabase(athlet, uid)
+        setMoreInfoIntoFirebaseAuth(athlet)
         //Añadir las cosas en la base de datos de auth
+
+    }
+
+    private fun setMoreInfoIntoFirebaseAuth(athlet: Athlet) {
         mFirebaseAuth.currentUser?.let { user ->
             val profileUpdates = UserProfileChangeRequest.Builder()
                 .setDisplayName(athlet.name + " " + athlet.surname)
@@ -180,6 +175,14 @@ class Register2 : Fragment() {
                     }
                 }
             }
+        }
+    }
+
+    private fun createUserOnRealtimeDatabase(athlet: Athlet, uid: String) {
+        mAtletasRef.child(uid).setValue(athlet).addOnSuccessListener {
+            Toast.makeText(requireActivity(), "User created" + athlet.group, Toast.LENGTH_SHORT)
+                .show()
+            reload()
         }
     }
 
@@ -234,12 +237,6 @@ class Register2 : Fragment() {
         }
     }
 
-  /*  private fun guardarFoto(key: String, url: String, title: String, selectGroup: String){
-        FireBaseReferencies.mDatabaseRef.child("Grupos").child(selectGroup).child("Fotos").child(key).setValue(Foto)
-    }*/
-
-
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK){
@@ -263,7 +260,7 @@ class Register2 : Fragment() {
             if(!key.isNullOrBlank()){
                 registAthlet()
             }else{
-                Snackbar.make(mBinding.root, "Suba una foro anteriormente",
+                Snackbar.make(mBinding.root, "Suba una foto anteriormente",
                     Snackbar.LENGTH_SHORT).show()
             }
 

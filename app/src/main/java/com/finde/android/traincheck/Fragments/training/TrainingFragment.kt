@@ -2,7 +2,6 @@ package com.finde.android.traincheck.Fragments.training
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,20 +16,18 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.finde.android.traincheck.Entities.Entrenamiento
 import com.finde.android.traincheck.R
-import com.finde.android.traincheck.ViewModel.FireBaseReferencies
-import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mGruposRef
+import com.finde.android.traincheck.DAL.FireBaseReferencies.Companion.mGruposRef
 import com.finde.android.traincheck.ViewModel.GrupoSeleccionado
 import com.finde.android.traincheck.ViewModel.SelectedTraining
 import com.finde.android.traincheck.ViewModel.UserType
 import com.finde.android.traincheck.databinding.FragmentTrainingBinding
 import com.finde.android.traincheck.databinding.ItemEntrenamientoBinding
-import com.firebase.ui.auth.data.model.User
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.DatabaseError
 import java.text.SimpleDateFormat
-import java.util.*
+
 //todo meter el delete cuando ingrese nuevos entrenamientos
 class TrainingFragment : Fragment() {
 
@@ -38,6 +35,7 @@ class TrainingFragment : Fragment() {
     private lateinit var mBinding: FragmentTrainingBinding
     private lateinit var mFirebaseAdapter: FirebaseRecyclerAdapter<Entrenamiento, TrainingFragment.TrainingHolder>
     private lateinit var mLayoutManager: RecyclerView.LayoutManager
+
     private val grupoSeleccionado: GrupoSeleccionado by activityViewModels()
     private val selectedTraining: SelectedTraining by activityViewModels()
 
@@ -54,13 +52,13 @@ class TrainingFragment : Fragment() {
         setListener()
         setUI()
         setupAdapter()
-        setExample()
+        //setExample()
         setupRecyclerView()
 
     }
 
     private fun setUI() {
-        if (UserType.type == "Atleta"){
+        if (UserType.type == "Atleta") {
             mBinding.fab.visibility = View.GONE
         }
     }
@@ -79,7 +77,6 @@ class TrainingFragment : Fragment() {
             //mFirebaseAdapter.notifyDataSetChanged()
         })
         mBinding.fab.setOnClickListener {
-
             Navigation.findNavController(mBinding.root).navigate(R.id.navigateToAdd)
         }
 
@@ -89,15 +86,12 @@ class TrainingFragment : Fragment() {
     private fun setupAdapter() {
 
         val grupo = grupoSeleccionado.currentGroup.value!!
-        Toast.makeText(activity, grupo, Toast.LENGTH_SHORT).show()
 
         val options =
             FirebaseRecyclerOptions.Builder<Entrenamiento>().setQuery(
                 mGruposRef.child(grupo).child("Entrenamientos"),
                 Entrenamiento::class.java
-            )
-                .build()
-
+            ).build()
 
         mFirebaseAdapter = object :
             FirebaseRecyclerAdapter<Entrenamiento, TrainingFragment.TrainingHolder>(options) {
@@ -178,7 +172,29 @@ class TrainingFragment : Fragment() {
             .removeValue()
     }
 
-    private fun setExample() {
+    //todo al hacer el click largo podamos modificar al atleta
+    inner class TrainingHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val binding = ItemEntrenamientoBinding.bind(view)
+        val navigation = Navigation.findNavController(mBinding.root)
+
+        fun setListener(entrenamiento: Entrenamiento) {
+            with(binding.root) {
+                setOnClickListener {
+                    selectedTraining.selectedTraining = entrenamiento
+                    navigation.navigate(R.id.action_trainingFragment_to_trainingDetailsFragment)
+                }
+                setOnLongClickListener {
+                    if (UserType.type == "Entrenador") {
+                        deleteEntrenamiento(entrenamiento)
+                    }
+                    true
+                }
+            }
+
+        }
+    }
+
+    /*private fun setExample() {
         Toast.makeText(this.context, grupoSeleccionado.currentGroup.value!!, Toast.LENGTH_SHORT)
             .show()
         FireBaseReferencies.mGruposRef.child(grupoSeleccionado.currentGroup.value!!)
@@ -212,30 +228,6 @@ class TrainingFragment : Fragment() {
                     fecha = Date()            )
             )
     }
-
-    //todo al hacer el click largo podamos modificar al atleta
-    inner class TrainingHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val binding = ItemEntrenamientoBinding.bind(view)
-        val navigation = Navigation.findNavController(mBinding.root)
-
-        fun setListener(entrenamiento: Entrenamiento) {
-            with(binding.root) {
-                setOnClickListener {
-                    selectedTraining.selectedTraining = entrenamiento
-                    navigation.navigate(R.id.action_trainingFragment_to_trainingDetailsFragment)
-                }
-                setOnLongClickListener {
-                    if (UserType.type == "Entrenador"){
-                        deleteEntrenamiento(entrenamiento)
-                    }
-
-
-                    true
-                }
-            }
-
-        }
-    }
-
+*/
 
 }

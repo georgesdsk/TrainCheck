@@ -1,10 +1,9 @@
-package com.finde.android.traincheck.ViewModel
+package com.finde.android.traincheck.DAL
 
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
@@ -30,10 +29,5 @@ class FireBaseReferencies() {
             mAltoRendimientoRef = mDatabaseRef.child("Grupos").child("AltoRendimiento")
             mStorageRef = FirebaseStorage.getInstance().reference
         }
-
-
-
     }
-
-
 }

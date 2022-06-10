@@ -1,23 +1,13 @@
 package com.finde.android.traincheck.register
 
-import android.content.ContentValues
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.text.set
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment
-import com.finde.android.traincheck.Fragments.main_page.MainActivity
 import com.finde.android.traincheck.R
-import com.finde.android.traincheck.ViewModel.FireBaseReferencies
 import com.finde.android.traincheck.ViewModel.RegistrationViewModel
 import com.finde.android.traincheck.databinding.FragmentRegister1Binding
 

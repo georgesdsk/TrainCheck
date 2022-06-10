@@ -4,12 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.finde.android.traincheck.R
-import com.finde.android.traincheck.ViewModel.FireBaseReferencies
+import com.finde.android.traincheck.DAL.FireBaseReferencies
 import com.finde.android.traincheck.databinding.FragmentEncuestaBinding
 import com.google.android.material.radiobutton.MaterialRadioButton
 import java.text.SimpleDateFormat
@@ -29,7 +28,6 @@ class EncuestaFragment : Fragment() {
     var contador: Int = 0
     private val format = SimpleDateFormat("yyyy-MM-dd")
     private lateinit var mBinding: FragmentEncuestaBinding
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

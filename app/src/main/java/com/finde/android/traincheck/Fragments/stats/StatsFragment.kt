@@ -2,6 +2,9 @@ package com.finde.android.traincheck.Fragments.stats
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
+import android.util.Log.INFO
+import android.util.Log.WARN
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,11 +16,12 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.anychart.chart.common.dataentry.DataEntry
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.finde.android.traincheck.Entities.Athlet
 import com.finde.android.traincheck.R
-import com.finde.android.traincheck.ViewModel.FireBaseReferencies
+import com.finde.android.traincheck.DAL.FireBaseReferencies
 import com.finde.android.traincheck.ViewModel.GrupoSeleccionado
-import com.finde.android.traincheck.ViewModel.TriggerDatosCargados
 import com.finde.android.traincheck.ViewModel.VmEstadisticas
 import com.finde.android.traincheck.databinding.FragmentStatsBinding
 import com.firebase.ui.auth.AuthUI
@@ -26,15 +30,15 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
 import java.time.LocalDate
 import java.util.*
+import java.util.logging.Level.INFO
+import kotlin.collections.HashMap
 
 
 class StatsFragment : Fragment() {
 
     private lateinit var navigation: NavController
     private val grupoSeleccionado: GrupoSeleccionado by viewModels()
-    private val datosCargados: TriggerDatosCargados by viewModels()
 
-    private val data: MutableList<DataEntry> = ArrayList<DataEntry>()
     private val formacion: MutableCollection<Athlet> = arrayListOf()
     private var altoRendimiento: MutableCollection<Athlet> = arrayListOf()
     private var mapaSumatorio = HashMap<String, List<Int>>()
@@ -55,22 +59,33 @@ class StatsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        saveAthlets()
+        setUiInformation()
+
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun saveAthlets() {
         GlobalScope.launch(Dispatchers.IO) {
             altoRendimiento = loadList()
+            Log.d("ALTORENDIMIETNO", altoRendimiento.toString())
             withContext(Dispatchers.Main) {
                 createStatsSumation(altoRendimiento)
             }
         }
-
-        setUiInformation()
-
-        val formacion: MutableCollection<Athlet> = arrayListOf()
-        val altoRendimiento: MutableCollection<Athlet> = arrayListOf()
-
-
     }
 
     private fun setUiInformation() {
+        var photo = FireBaseReferencies.mFirebaseAuth.currentUser?.photoUrl
+
+       if (photo != null) {
+            Glide.with(this)
+                .load(photo)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .circleCrop()
+                .into(mBinding.imageButton)
+        }
+
         mBinding.tvName.text = FirebaseAuth.getInstance().currentUser?.displayName
         mBinding.tvEmail.text = FirebaseAuth.getInstance().currentUser?.email
         navigation = Navigation.findNavController(mBinding.root)
@@ -86,40 +101,44 @@ class StatsFragment : Fragment() {
         }
         mBinding.esfuerzo.setOnClickListener {
             vmEstadisticas.name = "Esfuerzo"
-            navigation.navigate(R.id.action_statsFragment_to_resultsGraphFragment) }
+            navigation.navigate(R.id.action_statsFragment_to_resultsGraphFragment)
+        }
 
         mBinding.resultados.setOnClickListener {
             vmEstadisticas.name = "Resultados"
-            navigation.navigate(R.id.action_statsFragment_to_resultsGraphFragment) }
+            navigation.navigate(R.id.action_statsFragment_to_resultsGraphFragment)
+        }
 
         mBinding.motivacion.setOnClickListener {
             vmEstadisticas.name = "Motivación"
-            navigation.navigate(R.id.action_statsFragment_to_resultsGraphFragment) }
+            navigation.navigate(R.id.action_statsFragment_to_resultsGraphFragment)
+        }
 
         mBinding.cansancio.setOnClickListener {
             vmEstadisticas.name = "Cansancio"
-            navigation.navigate(R.id.action_statsFragment_to_resultsGraphFragment) }
+            navigation.navigate(R.id.action_statsFragment_to_resultsGraphFragment)
+        }
     }
 
 
     @RequiresApi(Build.VERSION_CODES.O)
     private suspend fun loadList(): MutableCollection<Athlet> {
-            val snapshots =
-                FireBaseReferencies.mAtletasRef.get()
-                    .await()
+        val snapshots =
+            FireBaseReferencies.mAtletasRef.get()
+                .await()
+            formacion.clear()
+            altoRendimiento.clear()
+        snapshots.children.forEach {
+            val atleta = it.getValue(Athlet::class.java)
+            if (atleta != null) {
 
-            snapshots.children.forEach {
-                val atleta = it.getValue(Athlet::class.java)
-                if (atleta != null) {
-
-                    if (atleta.group == "Formacion") {
-                        formacion.add(atleta)
-                    } else {
-                        altoRendimiento.add(atleta)
-                    }
+                if (atleta.group == "Formacion") {
+                    formacion.add(atleta)
+                } else {
+                    altoRendimiento.add(atleta)
                 }
-                datosCargados.datosCargados.postValue(true)
             }
+        }
         return altoRendimiento
     }
 
@@ -131,19 +150,35 @@ class StatsFragment : Fragment() {
         altoRendimiento.forEach() { atleta ->
             mapaSumatorio.keys.forEach { key ->
 
-                if (atleta.listStats.containsKey(key)) {
-                    var lista = mutableListOf<Int>()
-                    for (i in 0 until atleta.listStats[key]!!.size) {
-                        var final =
-                            mapaSumatorio[key]!!.get(i) + atleta.listStats[key]!!.get(i).toInt()
-                        lista.set(i, final)
+                try {
+                    if (atleta.listStats.containsKey(key)) {
+                        var lista = mutableListOf<Int>()
+                        //Log.d("LISTADO_STATS", atleta.listStats.toString())
+                        for (i in 0 until atleta.listStats[key]!!.size) {
+                            Log.d("Vuelta " + i, mapaSumatorio[key]?.size!!.toString())
+
+                            var final =
+                                if (mapaSumatorio[key]?.size!! < i+1) atleta.listStats[key]!!.get(i) else atleta.listStats[key]!!.get(
+                                    i
+                                ) + mapaSumatorio[key]!!.get(i)
+
+                            lista.add(i, final)
+                        }
+                        mapaSumatorio.put(key, lista)
                     }
-                    mapaSumatorio.put(key, lista)
+                } catch (e: Exception) {
+                    e.printStackTrace()
                 }
             }
         }
+        Log.d("crear sumasion11111", mapaSumatorio.toString())
 
-        vmEstadisticas.mapaSumatorio.postValue(mapaSumatorio)
+        var sortedMap =  mapaSumatorio.toSortedMap()
+        mapaSumatorio =  sortedMap.toMap(mapaSumatorio)
+
+        Log.d("crear sumasion2", mapaSumatorio.toString())
+
+        vmEstadisticas.mapaSumatorio.postValue( sortedMap)
     }
 
 
@@ -151,7 +186,7 @@ class StatsFragment : Fragment() {
     private fun crearHashMap(): HashMap<String, List<Int>> {
         val tamanio: Int = 14
 
-        var fecha = LocalDate.of(2022, 4, 6)
+        var fecha = LocalDate.of(2022, 6, 4)
         //fehcita.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
 
         for (i in 0..tamanio) {
@@ -159,14 +194,15 @@ class StatsFragment : Fragment() {
 
             //var fechaFormateada = fecha.format(formatters)
             mapaSumatorio[fechaInsertar.toString()] = arrayListOf(
-                Random().nextInt(6 - 1) + 1,
-                Random().nextInt(6 - 1) + 1,
-                Random().nextInt(6 - 1) + 1,
-                Random().nextInt(6 - 1) + 1,
-                Random().nextInt(6 - 1) + 1
+                /* Random().nextInt(6 - 1) + 1,
+                 Random().nextInt(6 - 1) + 1,
+                 Random().nextInt(6 - 1) + 1,
+                 Random().nextInt(6 - 1) + 1,
+                 Random().nextInt(6 - 1) + 1*/
             )
 
         }
+        Log.d("crear hash mapa", mapaSumatorio.toString())
         return mapaSumatorio
     }
 

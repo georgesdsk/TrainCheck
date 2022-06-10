@@ -8,16 +8,12 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.finde.android.traincheck.Entities.Entrenamiento
 import com.finde.android.traincheck.R
-import com.finde.android.traincheck.ViewModel.FireBaseReferencies
-import com.finde.android.traincheck.ViewModel.FireBaseReferencies.Companion.mDatabaseRef
+import com.finde.android.traincheck.DAL.FireBaseReferencies
 import com.finde.android.traincheck.databinding.FragmentAddBinding
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.database.DatabaseReference
-import java.text.DateFormat.getDateInstance
 import java.util.*
 
 class AddFragment : Fragment() {
