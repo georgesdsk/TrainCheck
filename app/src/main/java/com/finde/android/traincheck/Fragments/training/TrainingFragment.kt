@@ -24,6 +24,7 @@ import com.finde.android.traincheck.databinding.FragmentTrainingBinding
 import com.finde.android.traincheck.databinding.ItemEntrenamientoBinding
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.DatabaseError
 import java.text.SimpleDateFormat
@@ -168,8 +169,19 @@ class TrainingFragment : Fragment() {
     }
 
     private fun deleteEntrenamiento(entrenamiento: Entrenamiento) {
-        mGruposRef.child(grupoSeleccionado.currentGroup.value!!).child(entrenamiento.id)
-            .removeValue()
+
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Borrar el siguiente entrenamiento?")
+            .setNeutralButton("cancelar") { dialog, which ->
+                // nada
+            }
+            .setPositiveButton("ok") { dialog, which ->
+                mGruposRef.child(grupoSeleccionado.currentGroup.value!!).child("Entrenamientos").child(entrenamiento.id)
+                    .removeValue()
+            }
+
+            .show()
+
     }
 
     //todo al hacer el click largo podamos modificar al atleta

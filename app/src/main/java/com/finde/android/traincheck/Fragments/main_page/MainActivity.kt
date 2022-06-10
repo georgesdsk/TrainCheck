@@ -45,24 +45,29 @@ class MainActivity : AppCompatActivity() {
 
         FireBaseReferencies.create()
         signIn()
+        setupValues()
+        setupUI()
+        setupAuthListeners()
+
+        Toast.makeText(this, grupoSeleccionado.currentGroup.value, Toast.LENGTH_SHORT).show()
+        // insertarGrupos() // y cambiar al entrenador
+    }
+
+    private fun setupUI() {
+        setupNavigationBar()
+        setupHeaderNav()
+    }
+
+    private fun setupValues() {
         if(grupoSeleccionado.currentGroup.value==null){
-            grupoSeleccionado.currentGroup.value = "AltoRendimiento"
+            grupoSeleccionado.currentGroup.value = "Formacion"
         }
-
-
 
         if (!isEntrenador) {
             UserType.type = "Atleta"
             findGroup()
         }
-        setupNavigationBar()
-        setupHeaderNav()
-        findGroup()
-        setupAuthListeners()
 
-
-        Toast.makeText(this, grupoSeleccionado.currentGroup.value, Toast.LENGTH_SHORT).show()
-        // insertarGrupos() // y cambiar al entrenador
     }
 
     private fun setupHeaderNav() {
@@ -192,7 +197,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setAthlets() {
-
 
         var atleta = Athlet(
             name = "Maria",

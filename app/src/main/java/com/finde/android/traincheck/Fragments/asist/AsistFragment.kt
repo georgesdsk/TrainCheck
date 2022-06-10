@@ -26,6 +26,7 @@ import androidx.navigation.Navigation
 import com.finde.android.traincheck.R
 import com.finde.android.traincheck.DAL.FireBaseReferencies
 import com.finde.android.traincheck.ViewModel.GrupoSeleccionado
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.text.SimpleDateFormat
 
 
@@ -145,7 +146,20 @@ class AsistFragment : Fragment(){
 
 
     private fun deleteAtleta(athlet: Athlet) {
-        FireBaseReferencies.mAtletasRef.child(athlet.id).removeValue()
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Borrar el siguiente atleta?")
+            .setNeutralButton("cancelar") { dialog, which ->
+                // nada
+            }
+            .setPositiveButton("ok") { dialog, which ->
+                FireBaseReferencies.mAtletasRef.child(athlet.id).removeValue()
+
+            }
+
+            .show()
+
+
+
     }
 
     //FirebaseAuth.getInstance().currentUser!!.uid

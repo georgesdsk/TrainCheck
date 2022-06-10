@@ -3,9 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/b51"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.finde.android.traincheck.Fragments.stats.StatsFragment">
+
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
@@ -13,7 +15,7 @@
         android:layout_height="300dp"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="16dp"
-        app:cardBackgroundColor="#CEDED1"
+        android:background="@drawable/img"
         app:cardCornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,20 +69,48 @@
     <androidx.core.widget.NestedScrollView
         android:id="@+id/horizontalScrollView"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="0dp"
         android:scrollbarAlwaysDrawVerticalTrack="true"
         android:layout_marginTop="40dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="65dp"
         app:layout_constraintTop_toBottomOf="@+id/tvEmail">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity=""
             >
+            <androidx.cardview.widget.CardView
+                android:layout_margin="10dp"
+                android:id="@+id/resumen"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:backgroundTint="@color/purple_500"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="40dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:strokeColor="@color/cardview_shadow_start_color">
 
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Resumen de la termporada"
+                        android:textColor="@color/secondaryTextColor"
+                        android:textSize="18dp">
+                    </TextView>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
                 android:id="@+id/esfuerzo"
                 android:layout_width="140dp"
@@ -116,12 +146,13 @@
                 android:id="@+id/resultados"
                 android:layout_width="140dp"
                 android:layout_height="100dp"
+                android:layout_marginTop="@dimen/common_padding_default"
                 android:layout_marginLeft="30dp"
                 android:backgroundTint="@color/secondaryDarkColor"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="20dp"
                 app:layout_constraintStart_toEndOf="@id/esfuerzo"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/resumen"
                 app:strokeColor="@color/primaryColor">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
@@ -271,34 +302,39 @@
             </androidx.cardview.widget.CardView>
 
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEncuesta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="Realizar encuesta"
+
+                app:icon="@drawable/fui_ic_anonymous_white_24dp"
+                app:layout_constraintTop_toBottomOf="@id/recuperacion"
+                app:layout_constraintStart_toStartOf="@id/recuperacion"
+                app:layout_constraintEnd_toEndOf="@id/asistencia"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnLogout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_padding_min"
+                android:layout_marginBottom="50dp"
+                android:text="Cerrar sesion"
+                app:icon="@drawable/ic_exit_to_app"
+                app:layout_constraintTop_toBottomOf="@id/btnEncuesta"
+                app:layout_constraintStart_toStartOf="@id/recuperacion"
+                app:layout_constraintEnd_toEndOf="@id/asistencia"
+                />
+
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnLogout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cerrar sesión"
-        android:elevation="@dimen/common_padding_min"
-        app:icon="@drawable/ic_exit_to_app"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnEncuesta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:text="Realizar encuesta"
-        android:visibility="gone"
-        app:icon="@drawable/fui_ic_anonymous_white_24dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnLogout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
