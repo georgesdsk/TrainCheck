@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.finde.android.traincheck.Entities.Entrenamiento
+import com.finde.android.traincheck.Entities.Training
 import com.finde.android.traincheck.R
 import com.finde.android.traincheck.DAL.FireBaseReferencies.Companion.mGruposRef
 import com.finde.android.traincheck.ViewModel.GrupoSeleccionado
@@ -34,7 +34,7 @@ class TrainingFragment : Fragment() {
 
 
     private lateinit var mBinding: FragmentTrainingBinding
-    private lateinit var mFirebaseAdapter: FirebaseRecyclerAdapter<Entrenamiento, TrainingFragment.TrainingHolder>
+    private lateinit var mFirebaseAdapter: FirebaseRecyclerAdapter<Training, TrainingFragment.TrainingHolder>
     private lateinit var mLayoutManager: RecyclerView.LayoutManager
 
     private val grupoSeleccionado: GrupoSeleccionado by activityViewModels()
@@ -69,9 +69,9 @@ class TrainingFragment : Fragment() {
             Toast.makeText(getActivity(), grupoSeleccionado.currentGroup.value, Toast.LENGTH_SHORT)
             val grupo = grupoSeleccionado.currentGroup.value!!
             val options =
-                FirebaseRecyclerOptions.Builder<Entrenamiento>().setQuery(
+                FirebaseRecyclerOptions.Builder<Training>().setQuery(
                     mGruposRef.child(grupo).child("Entrenamientos"),
-                    Entrenamiento::class.java
+                    Training::class.java
                 )
                     .build()
             mFirebaseAdapter.updateOptions(options)
@@ -89,13 +89,13 @@ class TrainingFragment : Fragment() {
         val grupo = grupoSeleccionado.currentGroup.value!!
 
         val options =
-            FirebaseRecyclerOptions.Builder<Entrenamiento>().setQuery(
+            FirebaseRecyclerOptions.Builder<Training>().setQuery(
                 mGruposRef.child(grupo).child("Entrenamientos"),
-                Entrenamiento::class.java
+                Training::class.java
             ).build()
 
         mFirebaseAdapter = object :
-            FirebaseRecyclerAdapter<Entrenamiento, TrainingFragment.TrainingHolder>(options) {
+            FirebaseRecyclerAdapter<Training, TrainingFragment.TrainingHolder>(options) {
             private lateinit var mContext: Context
 
             override fun onCreateViewHolder(
@@ -113,7 +113,7 @@ class TrainingFragment : Fragment() {
             override fun onBindViewHolder(
                 holder: TrainingFragment.TrainingHolder,
                 position: Int,
-                model: Entrenamiento
+                model: Training
             ) {
                 val entrenamiento = getItem(position)
                 val sdf = SimpleDateFormat("dd/MM/yyyy")
@@ -168,7 +168,7 @@ class TrainingFragment : Fragment() {
         mBinding.recyclerView.smoothScrollToPosition(0)
     }
 
-    private fun deleteEntrenamiento(entrenamiento: Entrenamiento) {
+    private fun deleteEntrenamiento(training: Training) {
 
         MaterialAlertDialogBuilder(requireContext())
             .setTitle("Borrar el siguiente entrenamiento?")
@@ -176,7 +176,7 @@ class TrainingFragment : Fragment() {
                 // nada
             }
             .setPositiveButton("ok") { dialog, which ->
-                mGruposRef.child(grupoSeleccionado.currentGroup.value!!).child("Entrenamientos").child(entrenamiento.id)
+                mGruposRef.child(grupoSeleccionado.currentGroup.value!!).child("Entrenamientos").child(training.id)
                     .removeValue()
             }
 
@@ -189,15 +189,15 @@ class TrainingFragment : Fragment() {
         val binding = ItemEntrenamientoBinding.bind(view)
         val navigation = Navigation.findNavController(mBinding.root)
 
-        fun setListener(entrenamiento: Entrenamiento) {
+        fun setListener(training: Training) {
             with(binding.root) {
                 setOnClickListener {
-                    selectedTraining.selectedTraining = entrenamiento
+                    selectedTraining.selectedTraining = training
                     navigation.navigate(R.id.action_trainingFragment_to_trainingDetailsFragment)
                 }
                 setOnLongClickListener {
                     if (UserType.type == "Entrenador") {
-                        deleteEntrenamiento(entrenamiento)
+                        deleteEntrenamiento(training)
                     }
                     true
                 }

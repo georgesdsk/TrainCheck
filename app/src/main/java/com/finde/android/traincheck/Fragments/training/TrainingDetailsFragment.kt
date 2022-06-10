@@ -1,6 +1,5 @@
 package com.finde.android.traincheck.Fragments.training
 
-import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,16 +11,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
-import com.finde.android.traincheck.Entities.Entrenamiento
-import com.finde.android.traincheck.R
-import com.finde.android.traincheck.ViewModel.AtletaSeleccionado
 import com.finde.android.traincheck.ViewModel.SelectedTraining
-import com.finde.android.traincheck.databinding.FragmentAtletaDetallesBinding
 import com.finde.android.traincheck.databinding.FragmentTrainingDetailsBinding
-import com.firebase.ui.database.FirebaseRecyclerAdapter
-import java.lang.String.format
-import java.text.DateFormat
-import java.text.MessageFormat.format
 import java.text.SimpleDateFormat
 
 //todo anhadir boton atras

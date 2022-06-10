@@ -1,9 +1,8 @@
 package com.finde.android.traincheck.ViewModel
 
 import androidx.lifecycle.ViewModel
-import com.finde.android.traincheck.Entities.Athlet
-import com.finde.android.traincheck.Entities.Entrenamiento
+import com.finde.android.traincheck.Entities.Training
 
 class SelectedTraining : ViewModel() {
-     var selectedTraining: Entrenamiento = Entrenamiento()
+     var selectedTraining: Training = Training()
 }

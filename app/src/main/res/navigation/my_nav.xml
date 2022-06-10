@@ -31,9 +31,6 @@
             android:id="@+id/actionEncuesta"
             app:destination="@id/encuestaFragment" />
         <action
-            android:id="@+id/action_statsFragment_to_graphicsFragment"
-            app:destination="@id/graphicsFragment" />
-        <action
             android:id="@+id/action_statsFragment_to_resultsGraphFragment"
             app:destination="@id/resultsGraphFragment" />
     </fragment>
@@ -65,22 +62,13 @@
         android:name="com.finde.android.traincheck.Fragments.asist.DetailsFragment"
         android:label="fragment_atleta_detalles"
         tools:layout="@layout/fragment_atleta_detalles" />
-    <activity
-        android:id="@+id/signInActivity"
-        android:name="com.finde.android.traincheck.login.SignInActivity"
-        android:label="activity_sign_in"
-        tools:layout="@layout/activity_sign_in" />
     <fragment
         android:id="@+id/trainingDetailsFragment"
         android:name="com.finde.android.traincheck.Fragments.training.TrainingDetailsFragment"
-        android:label="TrainingDetailsFragment" />
-    <fragment
-        android:id="@+id/graphicsFragment"
-        android:name="com.finde.android.traincheck.Fragments.stats.GraphicsFragment"
-        android:label="GraphicsFragment"
-        tools:layout="@layout/activity_chart_common" >
+        android:label="TrainingDetailsFragment"
+        tools:layout="@layout/fragment_training_details"
+        />
 
-    </fragment>
     <fragment
         android:id="@+id/resultsGraphFragment"
         android:name="com.finde.android.traincheck.Fragments.stats.ResultsGraphFragment"

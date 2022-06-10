@@ -9,7 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.finde.android.traincheck.Entities.Entrenamiento
+import com.finde.android.traincheck.Entities.Training
 import com.finde.android.traincheck.R
 import com.finde.android.traincheck.DAL.FireBaseReferencies
 import com.finde.android.traincheck.databinding.FragmentAddBinding
@@ -94,7 +94,7 @@ class AddFragment : Fragment() {
     }
 
     private fun guardarEntrenamiento(key: String, url: String, title: String, selectGroup: String){
-        val entrenamiento = Entrenamiento( id = key, urlEntrenamiento = url, nombre = title, group = selectGroup, fecha = Date())// ,
+        val entrenamiento = Training( id = key, urlEntrenamiento = url, nombre = title, group = selectGroup, fecha = Date())// ,
         FireBaseReferencies.mDatabaseRef.child("Grupos").child(selectGroup).child("Entrenamientos").child(key).setValue(entrenamiento)
     }
 

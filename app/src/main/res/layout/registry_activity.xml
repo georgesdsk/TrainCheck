@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/b5"
+    android:background="@drawable/b51"
     tools:context=".register.RegisterActivity">
 
 
@@ -17,7 +17,7 @@
         android:gravity="left"
         android:text="Registro"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textColor="#45654A"
+        android:textColor="@color/secondaryTextColor"
         android:textSize="35dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,6 +28,7 @@
         android:id="@+id/headerNav"
         android:layout_width="match_parent"
         android:layout_height="4dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@+id/signin"
         android:outlineSpotShadowColor="@color/black"
         app:tabIndicatorColor="@color/white"
@@ -49,139 +50,7 @@
             />
 
     </com.google.android.material.tabs.TabLayout>
-<!--
 
-    <EditText
-        android:id="@+id/name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:background="@drawable/rounded_edit"
-        android:drawableLeft="@drawable/fui_ic_mail_white_24dp"
-        android:drawablePadding="20dp"
-        android:hint="Nombre"
-        android:elevation="20dp"
-        android:padding="20dp"
-        android:textColor="#45654A"
-        android:textColorHint="#45654A"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signin" />
-
-    <EditText
-        android:id="@+id/surname"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:background="@drawable/rounded_edit"
-        android:drawableLeft="@drawable/fui_ic_mail_white_24dp"
-        android:drawablePadding="20dp"
-        android:hint="Apellidos"
-        android:padding="20dp"
-        android:textColor="#45654A"
-        android:textColorHint="#45654A"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/name"
-        app:layout_constraintTop_toBottomOf="@id/signin" />
-
-
-    <EditText
-        android:id="@+id/datePicker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:background="@drawable/rounded_edit2"
-        android:drawableRight="@drawable/fui_ic_mail_white_24dp"
-        android:drawablePadding="20dp"
-        android:hint="Birthday"
-        android:padding="20dp"
-        android:textColor="#45654A"
-        android:textColorHint="#45654A"
-        app:layout_constraintBottom_toBottomOf="@+id/group"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/group" />
-
-    <EditText
-        android:id="@+id/group"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:background="@drawable/rounded_edit"
-        android:drawableLeft="@drawable/fui_ic_mail_white_24dp"
-        android:drawablePadding="20dp"
-        android:hint="Nº grupo"
-        android:padding="20dp"
-        android:textColor="#45654A"
-        android:textColorHint="#45654A"
-        app:layout_constraintEnd_toStartOf="@+id/datePicker"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/name" />
-
-    <EditText
-        android:id="@+id/mail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:background="@drawable/rounded_edit"
-        android:drawableLeft="@drawable/fui_ic_mail_white_24dp"
-        android:drawablePadding="20dp"
-        android:hint="Mail adress"
-        android:inputType="textEmailAddress"
-        android:padding="20dp"
-        android:textColor="#45654A"
-        android:textColorHint="#45654A"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/group" />
-
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:background="@drawable/rounded_edit"
-        android:drawableLeft="@drawable/ic_exit_to_app"
-        android:drawablePadding="20dp"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:padding="20dp"
-        android:textColor="#45654A"
-        android:textColorHint="#45654A"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mail" />
-
-    <EditText
-        android:id="@+id/password2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:drawablePadding="20dp"
-        android:hint="Repeat Password"
-        android:inputType="textPassword"
-        android:padding="20dp"
-        android:textColor="#45654A"
-        android:textColorHint="#45654A"
-        android:background="@drawable/rounded_edit2"
-        app:layout_constraintStart_toEndOf="@id/password"
-        app:layout_constraintTop_toBottomOf="@id/mail"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
-
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/password2"
-        android:layout_centerHorizontal="true"
-        android:backgroundTint="#45654A"
-        android:elevation="10dp"
-        android:paddingHorizontal="35dp"
-        android:layout_margin="20dp"
-        android:text="Next step"
-        app:cornerRadius="60dp"
-        app:layout_constraintEnd_toEndOf="@+id/password2"
-        app:layout_constraintStart_toStartOf="@+id/password2"
-        app:layout_constraintTop_toBottomOf="@+id/password2" />
--->
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/registryContainer"

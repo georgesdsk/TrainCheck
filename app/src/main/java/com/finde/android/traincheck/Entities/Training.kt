@@ -7,7 +7,7 @@ import com.google.type.Date
 import java.text.DateFormat
 
 @IgnoreExtraProperties
-data class Entrenamiento(
+data class Training(
     var id: String = "",
     var urlEntrenamiento: String = "",
     var nombre: String = "",
