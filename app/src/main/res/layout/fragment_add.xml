@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="25dp"
+
     android:paddingHorizontal="@dimen/common_padding_default"
     android:paddingVertical="@dimen/common_padding_min"
-    tools:context="com.finde.android.traincheck.AddFragment">
+    android:background="@drawable/b5"
+    tools:context="com.finde.android.traincheck.Fragments.training.AddFragment">
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -60,18 +61,44 @@
             android:maxLines="20" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <RadioGroup
+        android:id="@+id/rb_groups"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/btnPost"
+        app:layout_constraintStart_toStartOf="@+id/tvMessage"
+        app:layout_constraintTop_toBottomOf="@+id/tilTitle">
+
+        <RadioButton
+            android:id="@+id/formacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:text="Formación" />
+
+        <RadioButton
+            android:id="@+id/alto_rendimiento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:text="Alto rendimiento" />
+
+    </RadioGroup>
+
+
     <ImageView
         android:id="@+id/imgPhoto"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/common_padding_min"
-        android:background="@color/common_google_signin_btn_text_dark_default"
+        android:background="@drawable/rounded_edit"
         android:importantForAccessibility="no"
         android:scaleType="centerCrop"
         app:layout_constraintDimensionRatio="H, 4:3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tilTitle" />
+        app:layout_constraintTop_toBottomOf="@id/rb_groups" />
 
     <ImageButton
         android:id="@+id/btnSelect"
@@ -83,6 +110,8 @@
         app:layout_constraintBottom_toBottomOf="@id/imgPhoto"
         app:layout_constraintEnd_toEndOf="@id/imgPhoto"
         app:layout_constraintStart_toStartOf="@id/imgPhoto"
-        app:layout_constraintTop_toTopOf="@id/imgPhoto" />
+        app:layout_constraintTop_toTopOf="@id/imgPhoto"
+      />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

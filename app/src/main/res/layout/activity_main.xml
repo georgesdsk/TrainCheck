@@ -4,41 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.finde.android.traincheck.MainActivity"
+    tools:context="com.finde.android.traincheck.Fragments.main_page.MainActivity"
     android:id="@+id/containerMain">
 
 
 
-    <!--
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNav"
-        android:layout_width="0dp"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/headerNav"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:menu="@menu/botom__nav_menu"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
--->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/topNav"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:menu="@menu/head_nav_menu"
-        style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        style="@style/Widget.MaterialComponents.TabLayout.Colored"
+
+        >
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Formación"
+            />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alto rendimiento"
+            />
+
+    </com.google.android.material.tabs.TabLayout>
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
-        android:layout_width="0dp"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
-        app:menu="@menu/botom__nav_menu"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:layout_marginBottom="16dp"
         android:elevation="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        android:background="@drawable/nav_background_curved"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/botom__nav_menu" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
@@ -49,8 +58,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topNav"
-        app:navGraph="@navigation/my_nav" />
+        app:layout_constraintTop_toBottomOf="@id/headerNav"
+        app:navGraph="@navigation/my_nav"
+
+        />
 
     <!--    <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView2"

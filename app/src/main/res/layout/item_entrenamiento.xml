@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="400dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginTop="@dimen/common_padding_min"
-    android:layout_marginHorizontal="@dimen/common_padding_min"
-    app:cardCornerRadius="20dp"
+    android:layout_marginTop="@dimen/common_padding_default"
+    android:layout_marginHorizontal="@dimen/common_padding_default"
+    app:cardCornerRadius="30dp"
     app:cardElevation="15dp"
-    app:strokeWidth="1dp"
     app:strokeColor="@color/cardview_shadow_start_color"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:backgroundTint="@color/black">
 
         <ImageView
             android:id="@+id/imgStore"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -30,29 +31,36 @@
             android:id="@+id/tvName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Tipo entrenamiento"
-            android:background="#2196F3"
-            android:maxLines="1"
+            android:background="@color/primaryDarkColor"
             android:ellipsize="end"
-            android:paddingLeft="16dp"
-            android:padding="6dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:maxLength="25"
+            android:maxLines="1"
+            android:paddingVertical="8dp"
+            android:paddingLeft="20dp"
+            android:text="Tipo entrenamiento"
+            android:textColor="@android:color/background_light"
+            android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            />
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imgStore" />
 
         <TextView
-            android:id="@+id/tvPrecio"
+            android:id="@+id/fecha"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/common_padding_default"
             android:ellipsize="end"
             android:maxLines="1"
-            android:layout_marginRight="@dimen/common_padding_min"
             android:padding="4dp"
+            android:textColor="@android:color/background_light"
             android:text="Fecha"
+            android:textSize="16sp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintBottom_toBottomOf="@+id/tvName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvName" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

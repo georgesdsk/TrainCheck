@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/b51"
+    tools:context=".register.Register1">
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+
+        android:background="@drawable/rounded_edit"
+        android:maxWidth="200dp"
+        android:drawableLeft="@drawable/ic_person"
+        android:drawablePadding="20dp"
+        android:hint="Nombre"
+        android:elevation="20dp"
+        android:padding="20dp"
+        android:textColor="#45654A"
+        android:textColorHint="#45654A"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/surname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:maxWidth="200dp"
+        android:background="@drawable/rounded_edit"
+        android:drawableLeft="@drawable/ic_person"
+        android:drawablePadding="20dp"
+        android:hint="Apellidos"
+        android:padding="20dp"
+        android:textColor="#45654A"
+        android:textColorHint="#45654A"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/name"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <EditText
+        android:id="@+id/datePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/rounded_edit2"
+        android:drawableRight="@drawable/ic_date"
+        android:drawablePadding="20dp"
+        android:maxWidth="200dp"
+        android:hint="Birthday"
+        android:focusable="false"
+        android:padding="20dp"
+        android:textColor="@color/secondaryTextColor"
+        android:textColorHint="@color/white"
+        android:inputType="date"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/group"
+        app:layout_constraintStart_toEndOf="@+id/group"
+        app:layout_constraintTop_toTopOf="@+id/group" />
+
+    <EditText
+        android:id="@+id/group"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:maxWidth="200dp"
+        android:background="@drawable/rounded_edit"
+        android:drawableLeft="@drawable/ic_group"
+        android:drawablePadding="20dp"
+        android:hint="Nº grupo"
+        android:padding="20dp"
+        android:textColor="#45654A"
+        android:textColorHint="#45654A"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/name" />
+
+    <EditText
+        android:id="@+id/mail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_edit"
+        android:drawableLeft="@drawable/fui_ic_mail_white_24dp"
+        android:drawablePadding="20dp"
+        android:hint="Correo electrónico"
+        android:layout_margin="20dp"
+        android:padding="20dp"
+        android:textColor="#45654A"
+        android:textColorHint="#45654A"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/group" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/rounded_edit2"
+        android:drawableLeft="@drawable/ic_exit_to_app"
+        android:drawablePadding="20dp"
+        android:maxWidth="200dp"
+        android:hint="Password"
+        app:endIconMode="clear_text"
+        android:inputType="textPassword"
+        android:padding="20dp"
+        android:textColor="@color/secondaryTextColor"
+        android:textColorHint="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mail" />
+
+    <EditText
+        android:id="@+id/password2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:drawablePadding="20dp"
+        android:maxWidth="200dp"
+
+        android:hint="Repeat Password"
+        android:inputType="textPassword"
+        android:padding="20dp"
+        app:endIconMode="clear_text"
+        android:background="@drawable/rounded_edit2"
+        android:textColor="@color/secondaryTextColor"
+        android:textColorHint="@color/white"
+        app:layout_constraintStart_toEndOf="@id/password"
+        app:layout_constraintTop_toBottomOf="@id/mail"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_next"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/password2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="28dp"
+        android:backgroundTint="#45654A"
+        app:icon="@drawable/ic_next"
+        android:elevation="10dp"
+        android:paddingHorizontal="35dp"
+        android:text="Next step"
+        app:cornerRadius="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

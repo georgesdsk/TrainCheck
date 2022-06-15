@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/my_nav"
-    app:startDestination="@id/trainingFragment">
+    app:startDestination="@id/statsFragment">
     <fragment
         android:id="@+id/addFragment"
-        android:name="com.finde.android.traincheck.AddFragment"
+        android:name="com.finde.android.traincheck.Fragments.training.AddFragment"
         android:label="fragment_add"
         tools:layout="@layout/fragment_add" >
         <action
@@ -15,39 +15,63 @@
     </fragment>
     <fragment
         android:id="@+id/asistFragment"
-        android:name="com.finde.android.traincheck.AsistFragment"
+        android:name="com.finde.android.traincheck.Fragments.asist.AsistFragment"
         android:label="fragment_asist"
-        tools:layout="@layout/fragment_asist" />
+        tools:layout="@layout/fragment_asist" >
+        <action
+            android:id="@+id/actionAthletDetails"
+            app:destination="@id/detailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/statsFragment"
-        android:name="com.finde.android.traincheck.StatsFragment"
+        android:name="com.finde.android.traincheck.Fragments.stats.StatsFragment"
         android:label="fragment_stats"
         tools:layout="@layout/fragment_stats" >
         <action
             android:id="@+id/actionEncuesta"
             app:destination="@id/encuestaFragment" />
+        <action
+            android:id="@+id/action_statsFragment_to_resultsGraphFragment"
+            app:destination="@id/resultsGraphFragment" />
     </fragment>
     <fragment
         android:id="@+id/trainingFragment"
-        android:name="com.finde.android.traincheck.TrainingFragment"
+        android:name="com.finde.android.traincheck.Fragments.training.TrainingFragment"
         android:label="fragment_training"
         tools:layout="@layout/fragment_training" >
         <action
             android:id="@+id/navigateToAdd"
             app:destination="@id/addFragment" />
+        <action
+            android:id="@+id/action_trainingFragment_to_trainingDetailsFragment"
+            app:destination="@id/trainingDetailsFragment"
+            app:enterAnim="@anim/fui_slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/encuestaFragment"
-        android:name="com.finde.android.traincheck.EncuestaFragment"
+        android:name="com.finde.android.traincheck.Fragments.stats.EncuestaFragment"
         android:label="fragment_encuesta"
-        tools:layout="@layout/fragment_encuesta" />
-    <fragment
-        android:id="@+id/inicioFragment"
-        android:name="com.finde.android.traincheck.InicioFragment"
-        android:label="fragment_inicio"
-        tools:layout="@layout/fragment_inicio" >
+        tools:layout="@layout/fragment_encuesta" >
         <action
-            android:id="@+id/actionInicio"
-            app:destination="@id/actionInicio" />
+            android:id="@+id/action_encuestaFragment_to_statsFragment"
+            app:destination="@id/statsFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.finde.android.traincheck.Fragments.asist.DetailsFragment"
+        android:label="fragment_atleta_detalles"
+        tools:layout="@layout/fragment_atleta_detalles" />
+    <fragment
+        android:id="@+id/trainingDetailsFragment"
+        android:name="com.finde.android.traincheck.Fragments.training.TrainingDetailsFragment"
+        android:label="TrainingDetailsFragment"
+        tools:layout="@layout/fragment_training_details"
+        />
+
+    <fragment
+        android:id="@+id/resultsGraphFragment"
+        android:name="com.finde.android.traincheck.Fragments.stats.ResultsGraphFragment"
+        android:label="ResultsGraphFragment"
+        tools:layout="@layout/activity_chart_common2" />
 </navigation>

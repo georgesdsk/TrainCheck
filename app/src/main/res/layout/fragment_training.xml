@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
-    android:padding="@dimen/common_padding_default"
-    tools:context="com.finde.android.traincheck.TrainingFragment">
+    tools:context="com.finde.android.traincheck.Fragments.training.TrainingFragment">
 
 
 
@@ -14,10 +13,12 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:elevation="1000dp"
+        android:elevation="10dp"
         android:layout_marginBottom="20dp"
+        android:layout_marginRight="@dimen/common_padding_min"
         android:src="@drawable/ic_add_photo_alternate"
-        app:backgroundTint="#673AB7"
+        app:backgroundTint="@color/secondaryTextColor"
+        app:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="@id/recyclerView"
         app:layout_constraintEnd_toEndOf="@id/recyclerView" />
 
@@ -44,12 +45,11 @@
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="45dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         tools:listitem="@layout/item_entrenamiento" />

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/b5"
+    tools:context=".Fragments.asist.DetailsFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/common_padding_min">
+
+
+        <TextView
+            android:id="@+id/tvNombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/common_padding_default"
+            android:layout_marginTop="12dp"
+            android:text="Francicso Franco"
+            android:textColor="@color/primaryDarkColor"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/tituloEntrenamiento"
+            app:layout_constraintTop_toBottomOf="@+id/grupo" />
+
+
+        <TextView
+            android:id="@+id/fechaTitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/common_padding_default"
+
+            android:layout_marginTop="12dp"
+            android:text="Faltas ultimo mes"
+            android:textColor="@color/primaryDarkColor"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/fechaEntrenamiento"
+            app:layout_constraintTop_toBottomOf="@+id/tvNombre" />
+
+        <TextView
+            android:id="@+id/fechaEntrenamiento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fecha de subida"
+            android:textSize="@dimen/common_padding_default"
+            android:textColor="@color/primaryDarkColor"
+            app:layout_constraintBottom_toBottomOf="@+id/fechaTitulo"
+            app:layout_constraintStart_toStartOf="@+id/tituloGrupo"
+            app:layout_constraintTop_toTopOf="@+id/fechaTitulo" />
+
+
+        <TextView
+            android:id="@+id/tituloGrupo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/common_padding_default"
+            android:layout_marginTop="24dp"
+            android:text="Grupo:"
+            android:textColor="@color/primaryDarkColor"
+            android:textSize="@dimen/common_padding_default"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lafotico" />
+
+        <TextView
+            android:id="@+id/tituloEntrenamiento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Entrenamiento:"
+            android:textColor="@color/primaryDarkColor"
+            android:textSize="@dimen/common_padding_default"
+            app:layout_constraintBottom_toBottomOf="@+id/tvNombre"
+            app:layout_constraintStart_toStartOf="@+id/tituloGrupo" />
+
+        <TextView
+            android:id="@+id/grupo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/common_padding_default"
+            android:text="Tecnificacion"
+
+            android:textColor="@color/primaryDarkColor"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tituloGrupo"
+            app:layout_constraintStart_toEndOf="@+id/tituloGrupo" />
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/lafotico"
+            android:layout_width="match_parent"
+            android:layout_height="450dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" >
+        <com.ortiz.touchview.TouchImageView
+            android:id="@+id/imagen"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_launcher_round"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
+</androidx.core.widget.NestedScrollView>
